@@ -22,6 +22,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@redux*": ["./src/app/redux/*"],
+      "@styles*": ["./src/styles/*"],
 
     }
   },
