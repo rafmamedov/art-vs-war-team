@@ -1,16 +1,17 @@
 import { Open_Sans } from "next/font/google";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-import "./globals.scss";
+import ReduxProvider from "@redux/redux-provider";
+
+import "../styles/globals.scss";
 
 const kyivFont = localFont({
-   src: './fonts/KyivTypeSans-Regular-.woff',
-   weight: '400',
-   style: 'normal',
-   variable: '--font-kyiv',
-   display: "swap",
-   });
-
+  src: "../fonts/KyivTypeSans-Regular-.woff",
+  weight: "400",
+  style: "normal",
+  variable: "--font-kyiv",
+  display: "swap",
+});
 
 const openSansFont = Open_Sans({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSansFont.variable} ${kyivFont.variable}`}>
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );
