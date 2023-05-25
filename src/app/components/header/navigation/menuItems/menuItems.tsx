@@ -2,34 +2,28 @@ import Link from "next/link";
 
 import style from "./menuItems.module.scss";
 
-export const MenuItems = () => {
+type Props = {
+  className?: string;
+};
+
+export const MenuItems: React.FC<Props> = ({ className }) => {
   return (
-    <>
+    <ul className={`${style.list}`}>
       <li>
-        <Link href={"/gallery"} className={style.items}>
-          Gallery
-        </Link>
+        <Link href={"/gallery"}>Gallery</Link>
       </li>
       <li>
-        <a href={"/#about"} className={style.items}>
-          About
-        </a>
+        <a href={"/#about"}>About</a>
       </li>
       <li>
-        <a href={"/artists"} className={style.items}>
-          Artists
-        </a>
+        <a href={"/artists"}>Artists</a>
       </li>
       <li>
-        <a href={"/delivery"} className={style.items}>
-          Donation
-        </a>
+        <a href={"/delivery"}>Donation</a>
       </li>
       <li>
-        <a href={"/#contacts"} className={style.items}>
-          Contacts
-        </a>
+        <a href={"/#contacts"}>Contacts</a>
       </li>
-    </>
+    </ul>
   );
 };

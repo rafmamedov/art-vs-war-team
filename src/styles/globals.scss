@@ -5,6 +5,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -13,11 +15,7 @@ body {
     margin: 0 auto;
     max-width: 1600px;
   }
-
-  padding: 0;
-  margin: 0;
-  background-color: $color-background;
-  scroll-behavior: smooth;
+  background-color: $gray-100;
   font-family: $font-text;
 }
 
@@ -39,4 +37,7 @@ a {
 
 p {
   font-family: $font-text;
+  font-weight: $font-weight-regular;
+  line-height: 150%;
 }
+
