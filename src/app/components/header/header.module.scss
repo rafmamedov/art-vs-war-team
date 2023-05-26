@@ -1,7 +1,137 @@
-@import '@styles/mixins.scss';
-@import '@styles/vars.scss';
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
 
 .header {
-  background-color: $color-background;
-  color: aquamarine;
+  @include set-flex(row, space-between, center);
+
+  padding: 0 22px;
+  height: 56px;
+  background-color: $gray-100;
+
+  @include laptop {
+    height: 96px;
+  }
+
+  &__mobileElement {
+    @include laptop {
+      display: none;
+    }
+  }
+}
+
+.cart__container {
+  @include set-flex(row, center, center);
+
+  gap: 40px;
+}
+
+.cart {
+  position: relative;
+  cursor: pointer;
+
+  &__circle {
+    @include set-flex(row, center, center);
+    @include set-square(16px);
+
+    position: absolute;
+    left: 55%;
+    bottom: 60%;
+    border-radius: 100%;
+    background-color: $gray-0;
+    color: $gray-100;
+    font-size: $font-size-sm;
+  }
+}
+
+.price {
+  display: none;
+  color: $gray-0;
+  gap: 5px;
+  cursor: pointer;
+
+  @include laptop {
+    @include set-flex(column);
+  }
+
+  &__title {
+    color: $gray-10;
+    font-size: $font-size-sm;
+  }
+
+  &__amount {
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.logo {
+  @include set-size(176px, 48px);
+
+  position: relative;
+  cursor: pointer;
+}
+
+.loginDesktop {
+  display: none;
+
+  @include laptop {
+    display: flex;
+  }
+}
+
+.loginMobile {
+  @include laptop {
+    display: none;
+  }
+}
+
+.navigation {
+  display: none;
+
+  @include laptop {
+    display: block;
+  }
+}
+
+.mobileNavigation {
+  @include set-flex(column, space-between, center);
+  @include set-size(100vw, 80%);
+
+  position: fixed;
+  z-index: 100;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 500ms;
+
+  @include laptop {
+    display: none;
+  }
+}
+
+.showMobileNavigation {
+  left: 0;
+}
+
+.hideMobileNavigation {
+  left: -100%;
+}
+
+.line {
+  @include set-size(100%, 1px);
+
+  background-color: $gray-50;
+}
+
+.contacts {
+  @include set-flex(column, center, center);
+
+  gap: 24px;
+
+  &__title {
+    color: $gray-0;
+  }
+
+  &__icons {
+    @include set-flex(row, center, center);
+
+    gap: 20px;
+  }
 }
