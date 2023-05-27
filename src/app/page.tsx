@@ -1,7 +1,13 @@
+"use client"
+import React from 'react';
+import { Hero } from './components/home/hero/hero';
+import { About } from './components/home/about/about';
+
 export default function Home() {
   return (
     <main>
-      <h1>ART vs WAR</h1>
+      <Hero />
+      <About />
     </main>
   )
 }
