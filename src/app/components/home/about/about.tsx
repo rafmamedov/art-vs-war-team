@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './about.module.scss';
 
-export const About = () => {
+const About = () => {
   const [screenWidth, setScreenWidth] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const About = () => {
   return screenWidth > 639
     ? (
       <section className={styles.about}>
-        <h1 className={styles.title}>Art</h1>
+        <h2 className={styles.title}>Art</h2>
         <div className={styles.ornament}>
           <div className={styles.button}>Donate</div>
           <Image
@@ -34,15 +34,15 @@ export const About = () => {
         </div>
         <div className={styles.container}>
           <div className={styles.lines}>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
+            <div className={styles.line} />
+            <div className={styles.line} />
+            <div className={styles.line} />
+            <div className={styles.line} />
           </div>
     
           <div className={styles.content}>
-            <h1 className={styles.title}>vs War</h1>
-    
+            <h2 className={styles.title}>vs War</h2>
+
             <div className={styles.text}>
               Our project dedicated to supporting Ukrainian artists and creatives
               who have been displaced abroad due to the war in Ukraine. We offer
@@ -74,3 +74,5 @@ export const About = () => {
       </section>
     );
 };
+
+export default About;

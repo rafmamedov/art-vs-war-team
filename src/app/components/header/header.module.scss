@@ -2,11 +2,6 @@
 @import "@styles/vars.scss";
 
 .header {
-<<<<<<< HEAD
-  background-color: black;
-  color: aquamarine;
-}
-=======
   @include set-flex(row, space-between, center);
 
   padding: 0 22px;
@@ -140,4 +135,3 @@
     gap: 20px;
   }
 }
->>>>>>> d1b125d7fe7c7721648b05e161f38c15e3f0c94f
