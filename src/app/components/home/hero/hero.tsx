@@ -121,8 +121,9 @@ const Hero = () => {
     ) : (
       <section className={styles.mobile}>
         <h1 className={styles.mobile__title}>
-          <span>Buy Art</span>
-          <span>Help Ukraine</span>
+          Buy Art
+          <br />
+          Help Ukraine
         </h1>
 
         <Image
