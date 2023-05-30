@@ -19,7 +19,7 @@ const SocialNetworkIcons: React.FC<Props> = ({ className }) => {
           target="_blank"
           rel="noreferrer noopener"
           title={iconContact.title}
-          className={style.icons}
+          className={className}
         >
           {iconContact.icon}
         </Link>

@@ -10,11 +10,22 @@ const Footer = () => {
         <div className={`${style.line} ${style.line_2}`}></div>
         <div className={`${style.line} ${style.line_3}`}></div>
       </div>
-      <div className={style.container}>
-        <button className={style.button}>Contact Us</button>
-        <MenuItems className={style.menuItems} />
-        <div className={style.icons}>
-          <SocialNetworkIcons className={style.icons__wrapper} />
+      <div className={style.content}>
+        <div className={style.wrapper}>
+          <button className={style.button}>Contact Us</button>
+          <MenuItems className={style.menuItems} />
+          <div className={style.listContent}>
+            <ul className={style.list}>
+              <li>Payment</li>
+              <li>Delivery</li>
+              <li>FAQ</li>
+              <li>Terms of use</li>
+              <li>Payment</li>
+            </ul>
+            <div className={style.icons}>
+              <SocialNetworkIcons className={style.icon} />
+            </div>
+          </div>
         </div>
         <div className={style.license}>
           <p>

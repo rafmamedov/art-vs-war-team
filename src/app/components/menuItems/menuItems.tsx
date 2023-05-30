@@ -11,10 +11,10 @@ export const MenuItems: React.FC<Props> = ({ className }) => {
         <Link href={"/gallery"}>Gallery</Link>
       </li>
       <li>
-        <a href={"/#about"}>About</a>
+        <a href={"/artists"}>Artists</a>
       </li>
       <li>
-        <a href={"/artists"}>Artists</a>
+        <a href={"/#about"}>About</a>
       </li>
       <li>
         <a href={"/delivery"}>Donation</a>
