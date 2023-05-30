@@ -1,3 +1,5 @@
+import { MenuItems } from "../menuItems/menuItems";
+import SocialNetworkIcons from "../social-network/social-network";
 import style from "./footer.module.scss";
 
 const Footer = () => {
@@ -10,6 +12,17 @@ const Footer = () => {
       </div>
       <div className={style.container}>
         <button className={style.button}>Contact Us</button>
+        <MenuItems className={style.menuItems} />
+        <div className={style.icons}>
+          <SocialNetworkIcons className={style.icons__wrapper} />
+        </div>
+        <div className={style.license}>
+          <p>
+            © This work is licensed under the terms of the GNU General Public
+            License 2.0
+          </p>
+          <p>Created by Art vs War Team in 2023</p>
+        </div>
       </div>
     </footer>
   );
