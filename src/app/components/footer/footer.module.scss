@@ -1,14 +1,9 @@
 @import "@styles/mixins.scss";
 @import "@styles/vars.scss";
 
-.footer {
-  background-color: $gray-100;
-}
-
 .lines {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  @include set-flex(column);
+
   gap: 12px;
 }
 
@@ -35,15 +30,15 @@
   padding: 0 22px 16px;
 
   @include tablet {
-    padding: 48px 22px 16px;
+    padding-top: 48px;
   }
 }
 
 .wrapper {
   @include tablet {
+    @include set-flex(row, space-between, center);
+
     width: 100%;
-    @include set-flex(row, space-around, center);
-    justify-content: space-between;
   }
 }
 
@@ -80,6 +75,7 @@
   }
 
   @include tablet {
+    align-items: flex-start;
     margin-top: 0;
     order: -1;
   }
@@ -93,6 +89,7 @@
 
   @include tablet {
     @include set-flex(row, flex-start, flex-start);
+
     margin-top: 40px;
   }
 }
@@ -103,14 +100,12 @@
   }
 }
 
-.listContent {
-}
-
 .list {
   display: none;
 
   @include tablet {
     @include set-flex(column, flex-end, flex-end);
+
     list-style: none;
     gap: 24px;
   }
@@ -118,12 +113,21 @@
 
 .license {
   @include set-flex(column, center, center);
+
   text-align: center;
   margin-top: 36px;
   gap: 8px;
   font-size: $font-size-md;
 
   @include tablet {
+    @include set-flex(row, space-between);
+
     margin-top: 24px;
+    width: 100%;
+    text-align: start;
+  }
+
+  &__text {
+    width: 352px;
   }
 }

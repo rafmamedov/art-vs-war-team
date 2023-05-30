@@ -4,7 +4,7 @@ import style from "./footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer className={style.footer}>
+    <footer>
       <div className={style.lines}>
         <div className={`${style.line} ${style.line_1}`}></div>
         <div className={`${style.line} ${style.line_2}`}></div>
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className={style.wrapper}>
           <button className={style.button}>Contact Us</button>
           <MenuItems className={style.menuItems} />
-          <div className={style.listContent}>
+          <div>
             <ul className={style.list}>
               <li>Payment</li>
               <li>Delivery</li>
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={style.license}>
-          <p>
+          <p className={style.license__text}>
             © This work is licensed under the terms of the GNU General Public
             License 2.0
           </p>
