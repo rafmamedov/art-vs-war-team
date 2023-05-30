@@ -1,0 +1,37 @@
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
+
+.footer {
+  background-color: $gray-100;
+}
+
+.lines {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.line {
+  background-color: $gray-5;
+}
+
+.line_1 {
+  height: 12px;
+}
+
+.line_2 {
+  height: 24px;
+}
+.line_3 {
+  height: 48px;
+}
+
+.container {
+  margin-top: 12px;
+  background-color: $gray-5;
+}
+
+.button {
+
+}
