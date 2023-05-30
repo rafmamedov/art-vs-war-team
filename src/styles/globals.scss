@@ -9,12 +9,22 @@
   scroll-behavior: smooth;
 }
 
+header {
+  position: sticky;
+  top: 0;
+
+  @include laptop {
+    position: static;
+  }
+}
+
 html,
 body {
   @include desktopHD {
     margin: 0 auto;
     max-width: 1600px;
   }
+
   background-color: $gray-100;
   font-family: $font-text;
 }

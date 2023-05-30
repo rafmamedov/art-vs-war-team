@@ -1,7 +1,6 @@
 export const defaultContacts = {
   instagram: "https://www.instagram.com/",
   facebookMessenger: "https://facebook.com",
-  telegram: "https://t.me/",
   whatsapp: "https://www.whatsapp.com/",
 };
 
@@ -20,10 +19,5 @@ export const iconContacts = [
     title: "Whatsapp",
     link: defaultContacts.whatsapp,
     icon: "/assets/icons/social/whatsapp.svg",
-  },
-  {
-    title: "Telegram",
-    link: defaultContacts.telegram,
-    icon: "/assets/icons/social/telegram.svg",
   },
 ];
