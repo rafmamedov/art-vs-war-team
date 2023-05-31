@@ -5,6 +5,7 @@ import "@styles/globals.scss";
 
 import ReduxProvider from "@redux/redux-provider";
 import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 const kyivFont = localFont({
   src: "../fonts/KyivTypeSans-Regular-.woff",
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className={`${openSansFont.variable} ${kyivFont.variable}`}>
         <Header />
         <ReduxProvider>{children}</ReduxProvider>
+        <Footer />
       </body>
     </html>
   );

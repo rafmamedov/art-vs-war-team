@@ -1,0 +1,20 @@
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
+
+.data {
+  @include set-flex(column, center, center);
+
+  padding: 80px 22px 30px;
+  color: $gray-5;
+}
+
+.ornament {
+  @include set-flex(column, center, center);
+  overflow: hidden;
+}
+
+.image {
+  transform: translateY(50%);
+  width: 1000px;
+  height: 1000px;
+}

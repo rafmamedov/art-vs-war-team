@@ -1,9 +1,9 @@
-import Footer from "./components/footer/footer";
+import DataInfo from "./components/home/dataInfo-section/dataInfo-section";
 
 export default function Home() {
   return (
     <main>
-      <Footer />
+      <DataInfo />
     </main>
   )
 }
