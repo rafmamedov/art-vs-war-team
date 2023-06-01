@@ -135,3 +135,39 @@
     gap: 20px;
   }
 }
+
+.menuItems {
+  @include set-flex(column, center, center);
+
+  color: $gray-0;
+  list-style: none;
+  gap: 32px;
+  list-style: none;
+
+  @include laptop {
+    @include set-flex(row);
+    gap: 40px;
+  }
+
+  :first-child {
+    margin-top: 32px;
+
+    @include laptop {
+      margin-top: 0;
+    }
+  }
+
+  & li {
+    @include laptop {
+      padding: 10px 0;
+    }
+  }
+
+  li:last-child {
+    display: none;
+
+    @include laptop {
+      display: block;
+    }
+  }
+}

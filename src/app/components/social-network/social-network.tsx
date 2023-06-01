@@ -1,9 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import style from "./social-network.module.scss";
+
 import { iconContacts } from "./contacts/default-contacts";
 
-const SocialNetworkIcons = () => {
+type Props = {
+  className?: string;
+};
+
+const SocialNetworkIcons: React.FC<Props> = ({ className }) => {
   return (
     <>
       {iconContacts.map((iconContact, index) => (
@@ -13,13 +19,9 @@ const SocialNetworkIcons = () => {
           target="_blank"
           rel="noreferrer noopener"
           title={iconContact.title}
+          className={className}
         >
-          <Image
-            src={iconContact.icon}
-            alt="messenger icon"
-            width={35}
-            height={35}
-          />
+          {iconContact.icon}
         </Link>
       ))}
     </>
