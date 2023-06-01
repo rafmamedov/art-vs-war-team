@@ -3,9 +3,8 @@
 
 .dataInfo {
   @include laptop {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
+    @include set-flex(row-reverse, space-around);
+
     gap: 60px;
     padding: 80px 40px;
   }
@@ -33,12 +32,10 @@
   }
 
   @include desktop {
-    gap: 48px;
     width: 395px;
   }
 
   @include desktopHD {
-    gap: 48px;
     width: 600px;
   }
 }
@@ -84,18 +81,12 @@
   @include desktop {
     font-size: $font-size-xl;
   }
-
-  @include desktopHD {
-    font-size: $font-size-xl;
-  }
 }
 
 .wrapper {
   @include set-flex(column);
 
   @include laptop {
-    height: 100%;
-    // width: 100%;
     position: relative;
   }
 }
@@ -108,40 +99,34 @@
 
   @include laptop {
     margin-top: 0;
-    height: 100%;
-    width: 100%;
   }
 }
 
-.imageMob {
+.imageMobile {
+  @include set-square(100%);
+
+  transform: translateY(48%);
+
   @include laptop {
     display: none;
   }
-
-  transform: translateY(48%);
-  width: 100%;
-  height: 100%;
 }
 
-.imageDesk {
+.imageDesktop {
   display: none;
 
   @include laptop {
+    @include set-size(555px, 580px);
+
     display: block;
-    width: 100%;
-    height: 100%;
-    width: 580px;
-    height: 555px;
   }
 
   @include desktop {
-    width: 768px;
-    height: 801px;
+    @include set-size(770px, 800px);
   }
 
   @include desktopHD {
-    width: 882px;
-    height: 920px;
+    @include set-size(820px, 855px);
   }
 }
 
@@ -157,6 +142,7 @@
   border-color: $gray-5;
   border-width: 1px;
   border-style: solid;
+  cursor: pointer;
 
   @include tabletXL {
     width: 456px;
@@ -164,14 +150,14 @@
 
   @include laptop {
     @include set-square(140px);
-    margin: 0;
 
-    color: $gray-100;
-    background-color: $gray-5;
     position: absolute;
+    margin: 0;
     top: 50%;
     transform: translateY(-50%);
     border-radius: 50%;
+    color: $gray-100;
+    background-color: $gray-5;
   }
 
   @include desktop {

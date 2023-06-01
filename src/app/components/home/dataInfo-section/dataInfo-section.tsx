@@ -11,24 +11,40 @@ const DataInfo = () => {
       <div className={style.data}>
         <div className={style.info}>
           <h4 className={style.quantity}>
-            <CountUp start={0} end={45} duration={2} decimals={0} />
+            <CountUp
+              start={1}
+              end={45}
+              duration={4}
+              decimals={0}
+              enableScrollSpy={true}
+              scrollSpyOnce={true}
+            />
           </h4>
           <p className={style.text}>ARTISTS IN COMMUNITY</p>
         </div>
         <div className={style.info}>
           <h4 className={style.quantity}>
-            <CountUp start={0} end={567} duration={3} decimals={0} />
+            <CountUp
+              start={1}
+              end={567}
+              duration={5}
+              decimals={0}
+              enableScrollSpy={true}
+              scrollSpyOnce={true}
+            />
           </h4>
           <p className={style.text}>PAINTINGS IN DATABASE</p>
         </div>
         <div className={style.info}>
           <h4 className={style.quantity}>
             <CountUp
-              start={0}
+              start={1}
               end={1000000}
-              duration={4}
+              duration={6}
               decimals={0}
               suffix=" €"
+              enableScrollSpy={true}
+              scrollSpyOnce={true}
             />
           </h4>
           <p className={style.text}>RAISED FUNDS</p>
@@ -42,14 +58,14 @@ const DataInfo = () => {
             alt="Ukrainian gallery ornament"
             width={1000}
             height={1000}
-            className={style.imageMob}
+            className={style.imageMobile}
           />
           <Image
             src="/assets/dataInfoDesk.webp"
             alt="Ukrainian gallery ornament"
             width={1000}
             height={1000}
-            className={style.imageDesk}
+            className={style.imageDesktop}
           />
         </div>
       </div>
