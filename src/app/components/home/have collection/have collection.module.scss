@@ -1,0 +1,98 @@
+@import '@styles/mixins.scss';
+@import '@styles/vars.scss';
+
+.collection {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.top {
+  display: none;
+
+  @include laptop {
+    @include set-flex(column, center, center);
+    gap: 24px;
+  }
+
+  .line {
+    &:last-child {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.content {
+  @include set-flex(column, center, center);
+  margin: 0 auto;
+  padding: 48px 22px;
+  gap: 24px;
+  background-color: $gray-5;
+  color: $gray-100;
+  text-align: center;
+
+  @include laptop {
+    padding: 64px 0;
+  }
+
+  @include desktop {
+    padding: 64px 0;
+    gap: 48px;
+  }
+
+  .title {
+    font-size: $font-size-xxl;
+    line-height: $line-height-xxl;
+
+    @include laptop {
+      font-size: $font-size-huge;
+      line-height: $line-height-huge;
+    }
+  }
+
+  .subtitle {
+    font-family: $font-text;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+
+    @include laptop {
+      font-size: $font-size-lg;
+      line-height: $line-height-base;
+    }
+  }
+
+  .button {
+    @include set-square(140px);
+    @include set-flex(row, center, center);
+    border-radius: 50%;
+    background-color: $gray-90;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $gray-0;
+
+    @include desktop {
+      @include set-square(208px);
+      font-size: $font-size-lg;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-100;
+    }
+  }
+}
+
+.bottom {
+  @include set-flex(column, center, center);
+    gap: 12px;
+
+    @include laptop {
+      gap: 24px;
+    }
+
+    .line {
+      &:first-child {
+        margin-top: 24px;
+      }
+    }
+}
