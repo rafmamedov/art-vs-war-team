@@ -1,10 +1,8 @@
 "use client"
 
 import React from 'react';
-import Hero from './components/home/hero/hero';
-import About from './components/home/about/about';
 
-import Footer from "./components/footer/footer";
+import DataInfo from "./components/home/dataInfo-section/dataInfo-section";
 import HaveCollection from './components/home/have collection/have collection';
 import Artist from './components/home/artist/artist';
 
@@ -13,7 +11,7 @@ export default function Home() {
     <main>
       <HaveCollection />
       <Artist />
-      <Footer />
+      <DataInfo />
     </main>
-  )
+  );
 }
