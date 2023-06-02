@@ -11,8 +11,6 @@ import Artist from './components/home/artist/artist';
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <About />
       <HaveCollection />
       <Artist />
       <Footer />
