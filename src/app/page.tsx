@@ -6,6 +6,7 @@ import About from './components/home/about/about';
 
 import Footer from "./components/footer/footer";
 import HaveCollection from './components/home/have collection/have collection';
+import Artist from './components/home/artist/artist';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <About />
       <HaveCollection />
+      <Artist />
       <Footer />
     </main>
   )

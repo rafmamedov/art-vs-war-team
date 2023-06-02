@@ -5,37 +5,9 @@ import Image from 'next/image';
 const HaveCollection = () => (
   <section className={styles.collection}>
     <div className={styles.top}>
-      <Image
-        className={styles.line}
-        src="/assets/lines/1.svg"
-        alt="line 1"
-        height={2}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/2.svg"
-        alt="line 2"
-        height={12}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/3.svg"
-        alt="line 3"
-        height={24}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/4.svg"
-        alt="line 4"
-        height={48}
-        width={1600}
-      />
+      <div className={styles.line} />
+      <div className={styles.line} />
+      <div className={styles.line} />
     </div>
 
     <div className={styles.content}>
@@ -45,37 +17,9 @@ const HaveCollection = () => (
     </div>
 
     <div className={styles.bottom}>
-      <Image
-        className={styles.line}
-        src="/assets/lines/4.svg"
-        alt="line 4"
-        height={48}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/3.svg"
-        alt="line 3"
-        height={24}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/2.svg"
-        alt="line 2"
-        height={12}
-        width={1600}
-      />
-
-      <Image
-        className={styles.line}
-        src="/assets/lines/1.svg"
-        alt="line 1"
-        height={2}
-        width={1600}
-      />
+      <div className={styles.line} />
+      <div className={styles.line} />
+      <div className={styles.line} />
     </div>
   </section>
 );
