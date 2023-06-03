@@ -12,7 +12,6 @@
 
   .top {
     margin: 0 auto;
-    max-width: 1400px;
     display: flex;
     gap: 128px;
     justify-content: space-between;
@@ -25,19 +24,14 @@
       margin-top: 24px;
       width: 656px;
       text-align: right;
-      font-weight: 350;
-      font-size: $font-size-giant;
-      line-height: $line-height-giant;
+      font-size: $font-size-huge;
+      line-height: $line-height-huge;
+      $font-weight-regular;
       color: $gray-0;
 
-      @media (max-width: 1392px) {
-        font-size: 82px;
-        width: 60%;
-      }
-
-      @media (max-width: 1164px) {
-        font-size: $font-size-huge;
-        line-height: $font-size-huge;
+      @include desktop {
+        font-size: $font-size-giant;
+        line-height: $font-size-giant;
       }
     }
 
@@ -138,65 +132,4 @@
 
 .inside-container-picture {
   width: 100%;
-}
-
-.mobile {
-  display: none;
-  position: relative;
-  height: calc(100vh - 56px);
-  margin: 0 auto;
-  padding: 16px 22px 24px;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 1;
-  }
-
-  @include mobile {
-    @include set-flex(column, space-between, center);
-  }
-
-  &__background{
-    z-index: 0;
-  }
-
-  &__title {
-    position: relative;
-    top: 15%;
-    text-align: center;
-    font-size: 50px;
-    line-height: 64px;
-    font-weight: $font-weight-regular;
-    color: $gray-0;
-    z-index: 2;
-  }
-
-  &__button {
-    @include set-flex(row, center, center);
-    position: relative;
-    bottom: 5%;
-    margin: 0 auto;
-    width: 100%;
-    height: 48px;
-    border-radius: 24px;
-    z-index: 2;
-
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    font-weight: $font-weight-regular;
-    background-color: $gray-5;
-    color: $gray-100;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $gray-0;
-    }
-  }
 }
