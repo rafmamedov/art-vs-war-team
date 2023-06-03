@@ -77,7 +77,6 @@
   @include set-size(100%, 370px);
 
   position: relative;
-
   @include tabletXL {
     @include set-size(50%, 470px);
   }
