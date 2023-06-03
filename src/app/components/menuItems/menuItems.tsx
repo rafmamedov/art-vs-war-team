@@ -1,14 +1,12 @@
 import Link from "next/link";
 
-import style from "./menuItems.module.scss";
-
 type Props = {
   className?: string;
 };
 
 export const MenuItems: React.FC<Props> = ({ className }) => {
   return (
-    <ul className={`${style.list}`}>
+    <ul className={className}>
       <li>
         <Link href={"/gallery"}>Gallery</Link>
       </li>

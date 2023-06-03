@@ -8,7 +8,7 @@ import { Cart } from "@/app/icons/cart";
 import { MobileMenu } from "@/app/icons/menu";
 import { CloseMobileMenu } from "@/app/icons/close";
 import { Logo } from "../logo/logo";
-import { MenuItems } from "./navigation/menuItems/menuItems";
+import { MenuItems } from "../menuItems/menuItems";
 import LoginButton from "./navigation/login-button/login-button";
 import SocialNetworkIcons from "../social-network/social-network";
 
@@ -47,7 +47,7 @@ const Header = () => {
         )}
         <Logo className={style.logo} />
         <nav className={style.navigation}>
-          <MenuItems />
+          <MenuItems className={style.menuItems} />
         </nav>
         <div className={style.cart__container}>
           <div className={style.cart}>
@@ -72,7 +72,7 @@ const Header = () => {
       >
         <div>
           <LoginButton className={style.loginMobile} />
-          <MenuItems />
+          <MenuItems className={style.menuItems} />
         </div>
         <div className={style.contacts}>
           <p className={style.contacts__title}>Contacts</p>
