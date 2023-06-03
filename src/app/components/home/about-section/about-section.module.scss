@@ -1,0 +1,162 @@
+@import '@styles/mixins.scss';
+@import '@styles/vars.scss';
+
+.about {
+  margin: 112px auto 0;
+  padding-left: 56px;
+  height: 816px;
+  max-width: 1456px;
+  position: relative;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.title {
+  font-weight: $font-weight-light;
+  font-size: $font-size-huge;
+  line-height: $line-height-huge;
+  margin-left: 276px;
+  color: $gray-0;
+  padding-top: 92px;
+}
+
+.container {
+  @include set-flex(row, flex-start, center);
+  position: relative;
+  height: 480px;
+  gap: 24px;
+  z-index: 1;
+}
+
+.content {
+  padding: 0 120px 72px 96px;
+  height: 100%;
+  width: 74%;
+  max-width: 644px;
+  background-color: $gray-5;
+
+  .title {
+    color: $gray-100;
+    margin-left: 0;
+    padding-top: 0;
+  }
+}
+
+.text {
+  margin-top: 20px;
+  color: $gray-100;
+}
+
+.lines {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+
+  .line {
+    height: 100%;
+    background-color: $gray-5;
+  }
+
+  div {
+    &:nth-child(1) {
+      width: 2px;
+    }
+  
+    &:nth-child(2) {
+      width: 12px;
+    }
+  
+    &:nth-child(3) {
+      width: 24px;
+    }
+  
+    &:nth-child(4) {
+      width: 48px;
+    }
+  }
+}
+
+.ornament {
+  @include set-flex(row, center, center);
+  @include set-square(816px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 56px;
+  margin: auto;
+}
+
+.image {
+  position: absolute;
+  z-index: 0;
+}
+
+.button {
+  @include set-flex(row, center, center);
+  @include set-square(144px);
+  position: absolute;
+  color: $gray-80;
+  background-color: $gray-5;
+  border-radius: 50%;
+  z-index: 2;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $gray-0;
+  }
+}
+
+.mobile {
+  margin: 20px auto 0;
+  width: calc(100% - 40px);
+  padding: 20px;
+  height: 408px;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  font-weight: $font-weight-regular;
+  background-color: $gray-5;
+  color: $gray-100;
+
+  @include tablet {
+    display: none;
+  }
+
+  &__title {
+    width: 100%;
+    font-size: $font-size-xxl;
+    line-height: $line-height-xxl;
+    font-weight: 350;
+    text-align: start;
+  }
+
+  &__content {
+    margin-top: 24px;
+    width: 100%;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+  }
+
+  &__button {
+    margin-top: 24px;
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    background-color: $gray-90;
+    color: $gray-0;
+    flex-shrink: 0;
+
+    @include set-flex(row, center, center);
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-100;
+    }
+
+    &:active {
+      background-color: $gray-90;
+    }
+  }
+}
