@@ -1,0 +1,91 @@
+@import '@styles/mixins.scss';
+@import '@styles/vars.scss';
+
+.tablet {
+  margin: 36px auto 0;
+  padding: 0 20px;
+
+  display: none;
+
+  @include tablet {
+    @include set-flex(row, center, flex-start);
+    gap: 24px;
+  }
+
+  @include tabletXL {
+    display: none;
+  }
+
+  &__left {
+    width: 392px;
+
+    .left {
+      &__title {
+        font-size: 48px;
+        line-height: 56px;
+        text-align: start;
+        color: $gray-0;
+      }
+  
+      &__images {
+        margin-top: 50px;
+        @include set-flex(row, center, center);
+        width: 100%;
+        gap: 24px;
+      }
+    }
+  }
+
+  &__right {
+    @include set-flex(column, center, center);
+    width: 184px;
+    gap: 24px;
+
+    .button {
+      @include set-flex(row, center,center);
+      width: 100%;
+      height: 48px;
+      border-radius: 24px;
+      background-color: $gray-5;
+      color: $gray-100;
+      font-family: $font-text;
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      font-weight: $font-weight-regular;
+    }
+  }
+
+  .images {
+    &__container {
+      @include set-flex(column, center, center);
+      width: 184px;
+      gap: 24px;
+
+      .square {
+        margin: 0;
+        position: relative;
+        @include set-square(184px);
+      }
+    }
+  }
+
+  .container {
+    &__4x3 {
+      position: relative;
+      width: 100%;
+      height: 138px;
+    }
+
+    &__2x1 {
+      position: relative;
+      width: 100%;
+      height: 82px;
+    }
+
+    &__2x3 {
+      position: relative;
+      width: 100%;
+      height: 275px;
+    }
+  }
+}

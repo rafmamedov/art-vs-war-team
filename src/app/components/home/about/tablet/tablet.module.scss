@@ -1,0 +1,83 @@
+@import '@styles/mixins.scss';
+@import '@styles/vars.scss';
+
+.tablet {
+  display: none;
+  margin: 72px auto 0;
+  width: 100%;
+  height: 814px;
+
+  @include tablet {
+    display: block;
+  }
+
+  @include tabletXL {
+    margin: 80px auto 0;
+    height: 910px;
+  }
+
+  @include laptop {
+    display: none;
+  }
+
+  .title {
+    &__white {
+      font-size: $font-size-huge;
+      line-height: $line-height-huge;
+      text-align: center;
+      color: $gray-0;
+    }
+
+    &__black {
+      font-size: $font-size-huge;
+      line-height: $line-height-huge;
+      text-align: center;
+      color: $gray-100;
+    }
+  }
+
+  .content {
+    position: relative;
+    padding: 0 48px 48px;
+    background-color: $gray-5;
+    z-index: 1;
+  }
+
+  .text {
+    margin-top: 20px;
+    font-size: $font-size-base;
+    color: $gray-100;
+  }
+
+  .ornament {
+    position: relative;
+    bottom: 208px;
+    margin: 0 auto;
+    @include set-square(600px);
+    @include set-flex(row, center, center);
+    z-index: 0;
+
+    @include tabletXL {
+      @include set-square(696px);
+    }
+  }
+
+  .button {
+    @include set-flex(row, center, center);
+    @include set-square(144px);
+    position: absolute;
+    color: $gray-80;
+    background-color: $gray-5;
+    border-radius: 50%;
+    z-index: 2;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-0;
+    }
+  }
+
+  .image {
+
+  }
+}
