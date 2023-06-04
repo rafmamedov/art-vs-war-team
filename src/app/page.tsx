@@ -11,9 +11,9 @@ export default function Home() {
     <main>
       <Hero />
       <About />
+      <DataInfo />
       <HaveCollection />
       <Artist />
-      <DataInfo />
     </main>
   );
 }
