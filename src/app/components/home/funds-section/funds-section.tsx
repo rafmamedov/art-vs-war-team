@@ -19,7 +19,7 @@ const Funds = () => {
       <div className={style.container}>
         <div className={style.imageWrapper}>
           <Image
-            src="/assets/markHamill.webp"
+            src="/assets/mark_Hamill.webp"
             alt="Mark Hamill United24 Ambassador"
             fill
             sizes="100vw"

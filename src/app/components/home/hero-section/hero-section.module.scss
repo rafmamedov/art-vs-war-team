@@ -1,5 +1,5 @@
-@import '@styles/mixins.scss';
-@import '@styles/vars.scss';
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
 
 .hero {
   margin: 0 auto;
@@ -90,7 +90,7 @@
             border-radius: 24px;
             background-color: $gray-5;
             color: $gray-100;
-          
+
             &:hover {
               cursor: pointer;
               background-color: $gray-0;
@@ -115,7 +115,7 @@
         border-radius: 50%;
         background-color: $gray-5;
         color: $gray-100;
-      
+
         &:hover {
           cursor: pointer;
           background-color: $gray-0;
@@ -163,7 +163,7 @@
     @include set-flex(column, space-between, center);
   }
 
-  &__background{
+  &__background {
     z-index: 0;
   }
 

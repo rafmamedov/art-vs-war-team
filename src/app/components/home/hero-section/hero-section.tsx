@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import styles from './hero.module.scss';
+import styles from './hero-section.module.scss';
 
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(0);
