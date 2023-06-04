@@ -12,10 +12,8 @@ const DataInfo = () => {
         <div className={style.info}>
           <h4 className={style.quantity}>
             <CountUp
-              start={1}
               end={45}
               duration={4}
-              decimals={0}
               enableScrollSpy={true}
               scrollSpyOnce={true}
             />
@@ -25,10 +23,8 @@ const DataInfo = () => {
         <div className={style.info}>
           <h4 className={style.quantity}>
             <CountUp
-              start={1}
               end={567}
               duration={5}
-              decimals={0}
               enableScrollSpy={true}
               scrollSpyOnce={true}
             />
@@ -38,10 +34,8 @@ const DataInfo = () => {
         <div className={style.info}>
           <h4 className={style.quantity}>
             <CountUp
-              start={1}
               end={1000000}
               duration={6}
-              decimals={0}
               suffix=" €"
               enableScrollSpy={true}
               scrollSpyOnce={true}

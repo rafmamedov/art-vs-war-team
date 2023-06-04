@@ -23,6 +23,7 @@
       "@/*": ["./src/*"],
       "@redux*": ["./src/app/redux/*"],
       "@styles*": ["./src/styles/*"],
+      "@home*": ["./src/app/components/home*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

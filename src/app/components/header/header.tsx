@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import style from "./header.module.scss";
 
@@ -18,6 +18,14 @@ const Header = () => {
   const handleShowMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      showMobileMenu
+        ? (document.body.style.overflow = "hidden")
+        : (document.body.style.overflow = "auto");
+    }
+  }, [showMobileMenu]);
 
   return (
     <header>

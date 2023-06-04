@@ -1,6 +1,4 @@
-import React from 'react';
-import styles from './have collection.module.scss';
-import Image from 'next/image';
+import styles from './collection-section.module.scss';
 
 const HaveCollection = () => (
   <section className={styles.collection}>
