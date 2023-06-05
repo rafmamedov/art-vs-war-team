@@ -1,0 +1,541 @@
+@import '@styles/mixins.scss';
+@import '@styles/vars.scss';
+
+.hero {
+  margin: 0 auto;
+  @include laptop {
+    width: calc(930px + 96px);
+  }
+
+  @include desktop {
+    width: calc(1328px + 96px);
+  }
+
+  @include desktopHD {
+    width: calc(1520px + 96px);
+  }
+
+  .mobile {
+    position: relative;
+    height: calc(100vh - 56px);
+    margin: 0 auto;
+    padding: 16px 22px 24px;
+  
+    @include set-flex(column, center, center);
+    gap: 40px;
+  
+    @include tablet {
+      display: none;
+    }
+  
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.5;
+      z-index: 1;
+    }
+  
+  
+    &__background{
+      z-index: 0;
+      object-fit: cover;
+    }
+  
+    &__title {
+      text-align: center;
+      font-size: 50px;
+      line-height: 64px;
+      font-weight: $font-weight-regular;
+      color: $gray-0;
+      z-index: 2;
+    }
+  
+    &__button {
+      @include set-flex(row, center, center);
+      @include set-square(144px);
+      margin: 0 auto;
+      border-radius: 50%;
+      z-index: 2;
+  
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      font-weight: $font-weight-regular;
+      background-color: $gray-5;
+      color: $gray-100;
+  
+      &:hover {
+        cursor: pointer;
+        background-color: $gray-0;
+      }
+    }
+  }
+
+  .tablet {
+    display: none;
+    margin: 36px auto 0;
+    padding: 0 20px;
+
+    @include tablet {
+      @include set-flex(row, center, flex-start);
+      gap: 24px;
+    }
+
+    @include laptop {
+      display: none;
+    }
+
+    &__left {
+      width: 392px;
+
+      @include tabletXL {
+        width: 456px;
+      }
+
+      .left {
+        &__title {
+          font-size: 48px;
+          line-height: 56px;
+          text-align: start;
+          color: $gray-0;
+
+          @include tabletXL {
+            font-size: $font-size-huge;
+            line-height: $line-height-huge;
+          }
+        }
+    
+        &__images {
+          margin-top: 50px;
+          @include set-flex(row, center, center);
+          width: 100%;
+          gap: 24px;
+
+          @include tabletXL {
+            margin-top: 42px;
+          }
+        }
+      }
+    }
+
+    &__right {
+      @include set-flex(column, center, center);
+      width: 184px;
+      gap: 24px;
+
+      @include tabletXL {
+        width: 216px;
+      }
+
+      .button {
+        @include set-flex(row, center,center);
+        width: 100%;
+        height: 48px;
+        border-radius: 24px;
+        background-color: $gray-5;
+        color: $gray-100;
+        font-family: $font-text;
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        font-weight: $font-weight-regular;
+      }
+    }
+
+    .images {
+      &__container {
+        @include set-flex(column, center, center);
+        width: 184px;
+        gap: 24px;
+
+        @include tabletXL {
+          display: none;
+        }
+
+        &_tabletXl {
+          display: none;
+          width: 216px;
+          gap: 24px;
+
+          @include tabletXL {
+            @include set-flex(column, center, center);
+          }
+        }
+      }
+    }
+
+    .container {
+      &__2x1 {
+        position: relative;
+        width: 100%;
+        height: 82px;
+      }
+      
+      &__2x3 {
+        position: relative;
+        width: 100%;
+        height: 275px;
+
+        @include tabletXL {
+          height: 324px;
+        }
+      }
+
+      &__3x4 {
+        position: relative;
+        width: 100%;
+        height: 243px;
+      }
+
+      &__4x3 {
+        position: relative;
+        width: 100%;
+        height: 138px;
+
+        @include tabletXL {
+          height: 162px;
+        }
+      }
+
+      &__5x4 {
+        position: relative;
+        width: 100%;
+        height: 143px;
+      }
+    }
+
+    .square {
+      margin: 0;
+      position: relative;
+      @include set-square(184px);
+
+      @include tabletXL {
+        @include set-square(216px);
+      }
+    }
+  }
+
+  .desktop {
+    display: none;
+    margin: 0 auto;
+    padding: 48px 48px 0;
+
+    @include laptop {
+      display: block;
+    }
+
+    @include desktop {
+      padding: 48px 20px 0;
+    }
+
+    .top {
+      margin: 0 auto;
+      width: 100%;
+      @include set-flex(row, center, center);
+      gap: 56px;
+      height: 164px;
+
+      @include desktop {
+        height: 240px;
+        gap: 128px;
+      }
+
+      @include desktopHD {
+        height: 276px;
+        gap: 144px;
+      }
+
+      &__title {
+        margin-right: 40px;
+        width: 458px;
+        text-align: right;
+        font-size: $font-size-huge;
+        line-height: $line-height-huge;
+        font-weight: $font-weight-regular;
+        color: $gray-0;
+
+        @include desktop {
+          margin-right: 0;
+          width: 656px;
+          font-size: $font-size-giant;
+          line-height: $line-height-giant;
+        }
+
+        @include desktopHD {
+          width: 752px;
+        }
+      }
+
+      &__container2x1 {
+        display: none;
+        position: relative;
+        width: 544px;
+        height: 240px;
+
+        @include desktop {
+          display: block;
+        }
+
+        @include desktopHD {
+          width: 624px;
+          height: 276px;
+        }
+      }
+
+      &__square {
+        position: relative;
+        @include set-square(164px);
+
+        @include desktop {
+          display: none;
+        }
+      }
+    }
+
+    .middle {
+      margin: 52px auto 0;
+      width: 100%;
+      height: 598px;
+
+      @include desktop {
+        margin-top: 96px;
+        height: 816px;
+        @include set-flex(row-reverse, center, center);
+        gap: 128px;
+      }
+
+      @include desktopHD {
+        margin-top: 72px;
+        height: 852px;
+        gap: 144px;
+      }
+    }
+
+    .right {
+      width: 100%;
+      height: 178px;
+      @include set-flex(row-reverse, space-between, center);
+      gap: 30px;
+
+      @include desktop {
+        @include set-flex(column, center, space-between);
+        gap: 96px;
+        width: 208px;
+        height: 100%;
+      }
+
+      @include desktopHD {
+        width: 240px;
+        gap: 72px;
+      }
+
+      &__container2x1 {
+        position: relative;
+        width: 410px;
+        height: 178px;
+
+        @include desktop {
+          display: none;
+        }
+      }
+
+      &__container4x3 {
+        position: relative;
+        width: 290px;
+        height: 100%;
+
+        @include desktop {
+          display: none;
+        }
+      }
+
+      .button {
+        @include set-flex(row, center, center);
+        @include set-square(140px); 
+        border-radius: 50%;
+        background-color: $gray-5;
+        color: $gray-100;
+
+        @include desktop {
+          @include set-square(208px);
+        }
+
+        @include desktopHD {
+          @include set-square(240px);
+        }
+      
+        &:hover {
+          cursor: pointer;
+          background-color: $gray-0;
+        }
+      }
+    }
+
+    .left {
+      margin-top: 42px;
+      width: 100%;
+      height: 338px;
+
+      @include desktop {
+        margin-top: 0;
+        width: 992px;
+        height: 100%;
+      }
+
+      @include desktopHD {
+        width: 1136px;
+      }
+
+      &__top {
+        display: none;
+
+        @include desktop {
+          @include set-flex(row, space-between, center);
+          gap: 128px;
+        }
+
+        @include desktopHD {
+          gap: 144px;
+        }
+      }
+
+      &__bottom {
+        @include set-flex(row, space-between, center);
+        gap: 30px;
+        
+        @include desktop {
+          margin-top: 96px;
+        }
+
+        @include desktopHD {
+          margin-top: 72px;
+        }
+
+        .button {
+          @include set-flex(row, center, center);
+          margin-top: 50px;
+          width: 100%;
+          height: 48px;
+          border-radius: 24px;
+          background-color: $gray-5;
+          color: $gray-100;
+
+          @include desktop {
+            margin-top: 72px;
+          }
+
+          @include desktopHD {
+            margin-top: 44px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: $gray-0;
+          }
+        }
+      }
+    }
+
+    .container {
+      &__2x1 {
+        display: none;
+        position: relative;
+        width: 544px;
+        height: 240px;
+
+        @include desktop {
+          display: block;
+        }
+    
+        @include desktopHD {
+          width: 624px;
+          height: 276px;
+        }
+      }
+    
+      &__3x4 {
+        position: relative;
+        width: 320px;
+        height: 360px;
+    
+        @include desktopHD {
+          width: 368px;
+          height: 414px;
+        }
+    
+        &__desktop {
+          display: none;
+          position: relative;
+          width: 320px;
+          height: 360px;
+
+          @include desktop {
+            display: block;
+          }
+    
+          @include desktopHD {
+            display: none;
+          }
+        }
+      }
+
+      &__4x3_big {
+        position: relative;
+        width: 450px;
+        height: 238px;
+
+        @include desktop {
+          display: none;
+        }
+      }
+    
+      &__5x4 {
+        position: relative;
+        width: 544px;
+        height: 360px;
+
+        @include desktopHD {
+          width: 624px;
+          height: 412px;
+        }
+
+        &__laptop {
+          position: relative;
+          width: 450px;
+          height: 338px;
+
+          @include desktop {
+            display: none;
+          }
+        }
+      }
+    
+      &__square {
+        display: none;
+    
+        @include desktopHD {
+          display: block;
+          position: relative;
+          @include set-square(368px);
+        }
+      }
+    }
+    
+    .square {
+      display: none;
+      position: relative;
+
+      @include desktop {
+        display: block;
+        @include set-square(208px);
+      }
+    
+      @include desktopHD {
+        @include set-square(240px);
+      }
+    }
+  }
+}
