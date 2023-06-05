@@ -3,85 +3,267 @@
 
 .hero {
   margin: 0 auto;
-  max-width: 100%;
-  padding: 48px 56px 24px;
-
-  @include mobile {
-    display: none;
+  @include laptop {
+    width: calc(930px + 96px);
   }
 
-  .top {
+  @include desktop {
+    width: calc(1328px + 96px);
+  }
+
+  @include desktopHD {
+    width: calc(1520px + 96px);
+  }
+
+  .mobile {
+    position: relative;
+    height: calc(100vh - 56px);
     margin: 0 auto;
-    max-width: 1400px;
-    display: flex;
-    gap: 128px;
-    justify-content: space-between;
-
-    @media (max-width: 1164px) {
-      gap: 64px;
+    padding: 16px 22px 24px;
+  
+    @include set-flex(column, center, center);
+    gap: 40px;
+  
+    @include tablet {
+      display: none;
     }
-
+  
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.5;
+      z-index: 1;
+    }
+  
+  
+    &__background{
+      z-index: 0;
+      object-fit: cover;
+    }
+  
     &__title {
-      margin-top: 24px;
-      width: 656px;
-      text-align: right;
-      font-weight: 350;
-      font-size: $font-size-giant;
-      line-height: $line-height-giant;
+      text-align: center;
+      font-size: 50px;
+      line-height: 64px;
+      font-weight: $font-weight-regular;
       color: $gray-0;
-
-      @media (max-width: 1392px) {
-        font-size: 82px;
-        width: 60%;
-      }
-
-      @media (max-width: 1164px) {
-        font-size: $font-size-huge;
-        line-height: $font-size-huge;
-      }
+      z-index: 2;
     }
-
-    &__container2x1 {
-      width: 41%;
+  
+    &__button {
+      @include set-flex(row, center, center);
+      @include set-square(144px);
+      margin: 0 auto;
+      border-radius: 50%;
+      z-index: 2;
+  
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      font-weight: $font-weight-regular;
+      background-color: $gray-5;
+      color: $gray-100;
+  
+      &:hover {
+        cursor: pointer;
+        background-color: $gray-0;
+      }
     }
   }
 
-  .middle {
-    margin: 0 auto;
-    max-width: 1400px;
-    margin-top: 72px;
-    display: grid;
-    grid-template-columns: repeat((6, 1fr));
+  .tablet {
+    display: none;
+    margin: 36px auto 0;
+    padding: 0 20px;
+
+    @include tablet {
+      @include set-flex(row, center, flex-start);
+      gap: 24px;
+    }
+
+    @include laptop {
+      display: none;
+    }
 
     &__left {
-      margin-right: 10%;
-      max-width: 992px;
-      height: auto;
-      grid-column: 1/6;
+      width: 392px;
 
-      .top {
-        @include set-flex(space-between);
+      @include tabletXL {
+        width: 456px;
+      }
 
-        &__container3x4 {
-          width: 32%;
+      .left {
+        &__title {
+          font-size: 48px;
+          line-height: 56px;
+          text-align: start;
+          color: $gray-0;
+
+          @include tabletXL {
+            font-size: $font-size-huge;
+            line-height: $line-height-huge;
+          }
+        }
+    
+        &__images {
+          margin-top: 50px;
+          @include set-flex(row, center, center);
+          width: 100%;
+          gap: 24px;
+
+          @include tabletXL {
+            margin-top: 42px;
+          }
+        }
+      }
+    }
+
+    &__right {
+      @include set-flex(column, center, center);
+      width: 184px;
+      gap: 24px;
+
+      @include tabletXL {
+        width: 216px;
+      }
+
+      .button {
+        @include set-flex(row, center,center);
+        width: 100%;
+        height: 48px;
+        border-radius: 24px;
+        background-color: $gray-5;
+        color: $gray-100;
+        font-family: $font-text;
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        font-weight: $font-weight-regular;
+      }
+    }
+
+    .images {
+      &__container {
+        @include set-flex(column, center, center);
+        width: 184px;
+        gap: 24px;
+
+        @include tabletXL {
+          display: none;
         }
 
-        &__container5x4 {
-          width: 54%;
+        &_tabletXl {
+          display: none;
+          width: 216px;
+          gap: 24px;
+
+          @include tabletXL {
+            @include set-flex(column, center, center);
+          }
+        }
+      }
+    }
+
+    .container {
+      &__2x1 {
+        position: relative;
+        width: 100%;
+        height: 82px;
+      }
+      
+      &__2x3 {
+        position: relative;
+        width: 100%;
+        height: 275px;
+
+        @include tabletXL {
+          height: 324px;
         }
       }
 
-      .bottom {
-        @include set-flex(row, space-between);
-        margin-top: 10%;
+      &__3x4 {
+        position: relative;
+        width: 100%;
+        height: 243px;
+      }
 
-        &__container {
-          width: 54%;
+      &__4x3 {
+        position: relative;
+        width: 100%;
+        height: 138px;
 
-          &__2x1 {
-            width: 100%;
-          }
+        @include tabletXL {
+          height: 162px;
+        }
+      }
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
+      &__5x4 {
+        position: relative;
+        width: 100%;
+        height: 143px;
+      }
+    }
+
+    .square {
+      margin: 0;
+      position: relative;
+      @include set-square(184px);
+
+      @include tabletXL {
+        @include set-square(216px);
+      }
+    }
+  }
+
+  .desktop {
+    display: none;
+    margin: 0 auto;
+    padding: 48px 48px 0;
+
+    @include laptop {
+      display: block;
+    }
+
+    @include desktop {
+      padding: 48px 20px 0;
+    }
+
+    .top {
+      margin: 0 auto;
+      width: 100%;
+      @include set-flex(row, center, center);
+      gap: 56px;
+      height: 164px;
+
+      @include desktop {
+        height: 240px;
+        gap: 128px;
+      }
+
+      @include desktopHD {
+        height: 276px;
+        gap: 144px;
+      }
+
+      &__title {
+        margin-right: 40px;
+        width: 458px;
+        text-align: right;
+        font-size: $font-size-huge;
+        line-height: $line-height-huge;
+        font-weight: $font-weight-regular;
+        color: $gray-0;
+
+        @include desktop {
+          margin-right: 0;
+          width: 656px;
+          font-size: $font-size-giant;
+          line-height: $line-height-giant;
+=======
           .button {
             @include set-flex(row, center, center);
             margin-top: 70px;
@@ -96,107 +278,290 @@
               background-color: $gray-0;
             }
           }
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
         }
 
-        &__container3x4 {
-          width: 32%;
+        @include desktopHD {
+          width: 752px;
+        }
+      }
+
+      &__container2x1 {
+        display: none;
+        position: relative;
+        width: 544px;
+        height: 240px;
+
+        @include desktop {
+          display: block;
+        }
+
+        @include desktopHD {
+          width: 624px;
+          height: 276px;
+        }
+      }
+
+      &__square {
+        position: relative;
+        @include set-square(164px);
+
+        @include desktop {
+          display: none;
         }
       }
     }
 
+    .middle {
+      margin: 52px auto 0;
+      width: 100%;
+      height: 598px;
+
+      @include desktop {
+        margin-top: 96px;
+        height: 816px;
+        @include set-flex(row-reverse, center, center);
+        gap: 128px;
+      }
+
+      @include desktopHD {
+        margin-top: 72px;
+        height: 852px;
+        gap: 144px;
+      }
+    }
+
     .right {
-      grid-column: 6 / 7;
-      max-width: 208px;
+      width: 100%;
+      height: 178px;
+      @include set-flex(row-reverse, space-between, center);
+      gap: 30px;
+
+      @include desktop {
+        @include set-flex(column, center, space-between);
+        gap: 96px;
+        width: 208px;
+        height: 100%;
+      }
+
+      @include desktopHD {
+        width: 240px;
+        gap: 72px;
+      }
+
+      &__container2x1 {
+        position: relative;
+        width: 410px;
+        height: 178px;
+
+        @include desktop {
+          display: none;
+        }
+      }
+
+      &__container4x3 {
+        position: relative;
+        width: 290px;
+        height: 100%;
+
+        @include desktop {
+          display: none;
+        }
+      }
 
       .button {
         @include set-flex(row, center, center);
-        width: 100%;
-        height: 25%;
+        @include set-square(140px); 
         border-radius: 50%;
         background-color: $gray-5;
         color: $gray-100;
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
+        @include desktop {
+          @include set-square(208px);
+        }
+
+        @include desktopHD {
+          @include set-square(240px);
+        }
+      
+=======
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
         &:hover {
           cursor: pointer;
           background-color: $gray-0;
         }
       }
     }
-  }
-}
 
-.square {
-  width: 100%;
-  margin-top: 46%;
-  max-width: 208px;
-}
+    .left {
+      margin-top: 42px;
+      width: 100%;
+      height: 338px;
 
-.image {
-  width: 100%;
-  height: 100%;
-}
+      @include desktop {
+        margin-top: 0;
+        width: 992px;
+        height: 100%;
+      }
 
-.inside-container-picture {
-  width: 100%;
-}
+      @include desktopHD {
+        width: 1136px;
+      }
 
-.mobile {
-  display: none;
-  position: relative;
-  height: calc(100vh - 56px);
-  margin: 0 auto;
-  padding: 16px 22px 24px;
+      &__top {
+        display: none;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 1;
-  }
+        @include desktop {
+          @include set-flex(row, space-between, center);
+          gap: 128px;
+        }
 
-  @include mobile {
-    @include set-flex(column, space-between, center);
-  }
+        @include desktopHD {
+          gap: 144px;
+        }
+      }
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
+      &__bottom {
+        @include set-flex(row, space-between, center);
+        gap: 30px;
+        
+        @include desktop {
+          margin-top: 96px;
+        }
+=======
   &__background {
     z-index: 0;
   }
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
 
-  &__title {
-    position: relative;
-    top: 15%;
-    text-align: center;
-    font-size: 50px;
-    line-height: 64px;
-    font-weight: $font-weight-regular;
-    color: $gray-0;
-    z-index: 2;
-  }
+        @include desktopHD {
+          margin-top: 72px;
+        }
 
-  &__button {
-    @include set-flex(row, center, center);
-    position: relative;
-    bottom: 5%;
-    margin: 0 auto;
-    width: 100%;
-    height: 48px;
-    border-radius: 24px;
-    z-index: 2;
+        .button {
+          @include set-flex(row, center, center);
+          margin-top: 50px;
+          width: 100%;
+          height: 48px;
+          border-radius: 24px;
+          background-color: $gray-5;
+          color: $gray-100;
 
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    font-weight: $font-weight-regular;
-    background-color: $gray-5;
-    color: $gray-100;
+          @include desktop {
+            margin-top: 72px;
+          }
 
-    &:hover {
-      cursor: pointer;
-      background-color: $gray-0;
+          @include desktopHD {
+            margin-top: 44px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: $gray-0;
+          }
+        }
+      }
+    }
+
+    .container {
+      &__2x1 {
+        display: none;
+        position: relative;
+        width: 544px;
+        height: 240px;
+
+        @include desktop {
+          display: block;
+        }
+    
+        @include desktopHD {
+          width: 624px;
+          height: 276px;
+        }
+      }
+    
+      &__3x4 {
+        position: relative;
+        width: 320px;
+        height: 360px;
+    
+        @include desktopHD {
+          width: 368px;
+          height: 414px;
+        }
+    
+        &__desktop {
+          display: none;
+          position: relative;
+          width: 320px;
+          height: 360px;
+
+          @include desktop {
+            display: block;
+          }
+    
+          @include desktopHD {
+            display: none;
+          }
+        }
+      }
+
+      &__4x3_big {
+        position: relative;
+        width: 450px;
+        height: 238px;
+
+        @include desktop {
+          display: none;
+        }
+      }
+    
+      &__5x4 {
+        position: relative;
+        width: 544px;
+        height: 360px;
+
+        @include desktopHD {
+          width: 624px;
+          height: 412px;
+        }
+
+        &__laptop {
+          position: relative;
+          width: 450px;
+          height: 338px;
+
+          @include desktop {
+            display: none;
+          }
+        }
+      }
+    
+      &__square {
+        display: none;
+    
+        @include desktopHD {
+          display: block;
+          position: relative;
+          @include set-square(368px);
+        }
+      }
+    }
+    
+    .square {
+      display: none;
+      position: relative;
+
+      @include desktop {
+        display: block;
+        @include set-square(208px);
+      }
+    
+      @include desktopHD {
+        @include set-square(240px);
+      }
     }
   }
 }

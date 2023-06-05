@@ -1,143 +1,292 @@
+<<<<<<< HEAD:src/app/components/home/hero/hero.tsx
+=======
 'use client'
 
 import { useEffect, useState } from 'react';
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.tsx
 import Image from 'next/image';
 import styles from './hero-section.module.scss';
 
-const Hero = () => {
-  const [screenWidth, setScreenWidth] = useState(0);
+const Hero = () => (
+  <section className={styles.hero}>
+    <div className={styles.mobile}>
+      <h1 className={styles.mobile__title}>
+        Buy Art
+        <br />
+        Help Ukraine
+      </h1>
 
-  useEffect(() => {
-    if (window) {
-      setScreenWidth(window.innerWidth);
-    }
+      <Image
+        src="/assets/images/Rectangle 7.png"
+        className={styles.mobile__background}
+        alt="background"
+        fill
+      />
 
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+      <div className={styles.mobile__button}>Explore</div>
+    </div>
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return screenWidth > 639
-    ? (
-      <section className={styles.hero}>
-        <div className={styles.top}>
-          <h1 className={styles.top__title}>
-            Buy Art
-            <br />
-            Help Ukraine
-          </h1>
-
-          <div className={styles.top__container2x1}>
-            <Image
-              src="/assets/images/Rectangle4.png"
-              className={styles.image}
-              alt="rectangle"
-              width={544}
-              height={240}
-            />
-          </div>
-        </div>
-
-        <div className={styles.middle}>
-          <div className={styles.middle__left}>
-            <div className={styles.top}>
-              <div className={styles.top__container3x4}>
-                <Image
-                  src="/assets/images/hero-layout-cards.png"
-                  className={styles.image}
-                  alt="rectangle"
-                  width={320}
-                  height={360}
-                />
-              </div>
-
-              <div className={styles.top__container5x4}>
-                <Image
-                  src="/assets/images/Rectangle 7.png"
-                  className={styles.image}
-                  alt="rectangle"
-                  width={544}
-                  height={360}
-                />
-              </div>
-            </div>
-
-            <div className={styles.bottom}>
-              <div className={styles.bottom__container}>
-                <div className={styles.bottom__container__2x1}>
-                  <Image
-                    src="/assets/images/Rectangle4.png"
-                    className={styles.image}
-                    alt="rectangle"
-                    width={544}
-                    height={240}
-                  />
-                </div>
-
-                <div className={styles.button}>More artworks</div>
-              </div>
-
-              <div className={styles.bottom__container3x4}>
-                <Image
-                  src="/assets/images/Rectangle 5.png"
-                  className={styles.image}
-                  alt="rectangle"
-                  width={320}
-                  height={360}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.right}>
-            <div className={styles.button}>Explore</div>
-
-            <div className={styles.square}>
-              <Image
-                src="/assets/images/Rectangle 8.png"
-                className={styles.image}
-                alt="rectangle"
-                width={208}
-                height={208}
-              />
-            </div>
-
-            <div className={styles.square}>
-              <Image
-                src="/assets/images/Rectangle 8.png"
-                className={styles.image}
-                alt="rectangle"
-                width={208}
-                height={208}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-    ) : (
-      <section className={styles.mobile}>
-        <h1 className={styles.mobile__title}>
+    <div className={styles.tablet}>
+      <div className={styles.tablet__left}>
+        <h1 className={styles.left__title}>
           Buy Art
           <br />
           Help Ukraine
         </h1>
 
-        <Image
-          src="/assets/images/Rectangle 7.png"
-          className={styles.mobile__background}
-          alt="background"
-          fill
-        />
+        <div className={styles.left__images}>
+          <div className={styles.images__container}>
+            <div className={styles.container__2x1}>
+              <Image
+                src="/assets/images/Rectangle 4.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
 
-        <div className={styles.mobile__button}>Explore</div>
-      </section>
-    );
-};
+            <div className={styles.container__4x3}>
+              <Image
+                src="/assets/images/Rectangle 2.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+
+            <div className={styles.container__2x1}>
+              <Image
+                src="/assets/images/Rectangle 4.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+
+          <div className={styles.images__container}>
+            <div className={styles.square}>
+              <Image
+                src="/assets/images/Rectangle 6.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+
+            <div className={styles.container__4x3}>
+              <Image
+                src="/assets/images/Rectangle 2.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+
+          <div className={styles.images__container_tabletXl}>
+            <div className={styles.container__5x4}>
+              <Image
+                src="/assets/images/Rectangle 7.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+
+            <div className={styles.square}>
+              <Image
+                src="/assets/images/Rectangle 6.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+
+          <div className={styles.images__container_tabletXl}>
+            <div className={styles.container__3x4}>
+              <Image
+                src="/assets/images/Rectangle 3.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+
+            <div className={styles.container__5x4}>
+              <Image
+                src="/assets/images/Rectangle 7.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.tablet__right}>
+        <div className={styles.container__4x3}>
+          <Image
+            src="/assets/images/Rectangle 2.png"
+            className={styles.image}
+            alt="rectangle"
+            fill
+          />
+        </div>
+
+        <div className={styles.button}>Explore</div>
+
+        <div className={styles.container__2x3}>
+          <Image
+            src="/assets/images/Rectangle 3.png"
+            className={styles.image}
+            alt="rectangle"
+            fill
+          />
+        </div>
+      </div>
+    </div>
+
+    <div className={styles.desktop}>
+      <div className={styles.top}>
+        <h1 className={styles.top__title}>
+          Buy Art
+          <br />
+          Help Ukraine
+        </h1>
+        <div className={styles.top__container2x1}>
+          <Image
+            src="/assets/images/Rectangle 4.png"
+            className={styles.image}
+            alt="rectangle"
+            fill
+          />
+        </div>
+        <div className={styles.top__square}>
+          <Image
+            src="/assets/images/Rectangle 6.png"
+            className={styles.image}
+            alt="rectangle"
+            fill
+          />
+        </div>
+        <div className={styles.top__square}>
+          <Image
+            src="/assets/images/Rectangle 6.png"
+            className={styles.image}
+            alt="rectangle"
+            fill
+          />
+        </div>
+      </div>
+
+      <div className={styles.middle}>
+        <div className={styles.right}>
+          <div className={styles.button}>Explore</div>
+          <div className={styles.square}>
+            <Image
+              src="/assets/images/Rectangle 6.png"
+              className={styles.image}
+              alt="rectangle"
+              fill
+            />
+          </div>
+          <div className={styles.square}>
+            <Image
+              src="/assets/images/Rectangle 6.png"
+              className={styles.image}
+              alt="rectangle"
+              fill
+            />
+          </div>
+          <div className={styles.right__container2x1}>
+            <Image
+              src="/assets/images/Rectangle 4.png"
+              className={styles.image}
+              alt="rectangle"
+              fill
+            />
+          </div>
+          <div className={styles.right__container4x3}>
+            <Image
+              src="/assets/images/Rectangle 2.png"
+              className={styles.image}
+              alt="rectangle"
+              fill
+            />
+          </div>
+        </div>
+
+        <div className={styles.left}>
+          <div className={styles.left__top}>
+            <div className={styles.container__3x4}>
+              <Image
+                src="/assets/images/Rectangle 3.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+            <div className={styles.container__5x4}>
+              <Image
+                src="/assets/images/Rectangle 7.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+          <div className={styles.left__bottom}>
+            <div className={styles.bottom__container}>
+              <div className={styles.container__2x1}>
+                <Image
+                  src="/assets/images/Rectangle 4.png"
+                  className={styles.image}
+                  alt="rectangle"
+                  fill
+                />
+              </div>
+              <div className={styles.container__4x3_big}>
+                <Image
+                  src="/assets/images/Rectangle 4.png"
+                  className={styles.image}
+                  alt="rectangle"
+                  fill
+                />
+              </div>
+              <div className={styles.button}>More artworks</div>
+            </div>
+            <div className={styles.container__5x4__laptop}>
+              <Image
+                src="/assets/images/Rectangle 7.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+            <div className={styles.container__3x4__desktop}>
+              <Image
+                src="/assets/images/Rectangle 5.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+            <div className={styles.container__square}>
+              <Image
+                src="/assets/images/Rectangle 6.png"
+                className={styles.image}
+                alt="rectangle"
+                fill
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default Hero;
