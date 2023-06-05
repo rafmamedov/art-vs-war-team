@@ -1,30 +1,44 @@
-"use client"
+import Image from 'next/image';
+import styles from './about-section.module.scss';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+const About = () => (
+  <section className={styles.about}>
+    <div className={styles.mobile}>
+      <h1 className={styles.mobile__title}>Art vs War</h1>
 
-import styles from "./about-section.module.scss";
+      <div className={styles.mobile__content}>
+        Our project dedicated to supporting Ukrainian artists and creatives
+        who have been displaced abroad due to the war in Ukraine. Browse our collection
+        and find a painting that speaks to you. You also can donate our project without
+        purchasing a painting. Thank you for your support.
+      </div>
 
-const About = () => {
-  const [screenWidth, setScreenWidth] = useState(0);
+      <div className={styles.mobile__button}>Donate</div>
+    </div>
 
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
+    <div className={styles.tablet}>
+      <h2 className={styles.title__white}>Art</h2>
 
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+      <div className={styles.content}>
+        <h2 className={styles.title__black}>vs War</h2>
+        <p className={styles.text}>
+          Our project dedicated to supporting Ukrainian artists 
+          and creatives who have been displaced abroad due to 
+          the war in Ukraine. We offer a unique opportunity 
+          to purchase their artwork while contributing to 
+          a good cause.
+          <br />
+          <br />
+          Each painting tells a story of Ukraine&apos;s 
+          struggle for freedom and independence. By purchasing 
+          a painting, you support the artist and contribute 
+          to the victory of Ukraine and democracy. Browse our 
+          collection and find a painting that speaks to you. 
+          You also can donate our project without purchasing 
+          a painting. Thank you for your support.
+        </p>
+      </div>
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return screenWidth > 639 ? (
-    <section className={styles.about}>
-      <h2 className={styles.title}>Art</h2>
       <div className={styles.ornament}>
         <div className={styles.button}>Donate</div>
         <Image
@@ -34,7 +48,16 @@ const About = () => {
           fill
         />
       </div>
+    </div>
+
+    <div className={styles.laptop}>
       <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.title}>
+            <h2 className={styles.title__white}>Art</h2>
+            <h2 className={styles.title__black}>vs War</h2>
+          </div>
+
         <div className={styles.lines}>
           <div className={styles.line} />
           <div className={styles.line} />
@@ -42,40 +65,33 @@ const About = () => {
           <div className={styles.line} />
         </div>
 
-        <div className={styles.content}>
-          <h2 className={styles.title}>vs War</h2>
-
           <div className={styles.text}>
             Our project dedicated to supporting Ukrainian artists and creatives
-            who have been displaced abroad due to the war in Ukraine. We offer a
-            unique opportunity to purchase their artwork while contributing to a
-            good cause.
+            who have been displaced abroad due to the war in Ukraine. We offer
+            a unique opportunity to purchase their artwork while contributing
+            to a good cause.
             <br />
             <br />
-            Each painting tells a story of Ukraine&apos;s struggle for freedom
-            and independence. By purchasing a painting, you support the artist
-            and contribute to the victory of Ukraine and democracy. Browse our
-            collection and find a painting that speaks to you. You also can
-            donate our project without purchasing a painting. Thank you for your
-            support.
+            Each painting tells a story of Ukraine&apos;s struggle for freedom and
+            independence. By purchasing a painting, you support the artist and
+            contribute to the victory of Ukraine and democracy. Browse our collection
+            and find a painting that speaks to you. You also can donate our project without
+            purchasing a painting. Thank you for your support.
           </div>
         </div>
-      </div>
-    </section>
-  ) : (
-    <section className={styles.mobile}>
-      <h1 className={styles.mobile__title}>Art vs War</h1>
 
-      <div className={styles.mobile__content}>
-        Our project dedicated to supporting Ukrainian artists and creatives who
-        have been displaced abroad due to the war in Ukraine. Browse our
-        collection and find a painting that speaks to you. You also can donate
-        our project without purchasing a painting. Thank you for your support.
+        <div className={styles.ornament}>
+          <div className={styles.button}>Donate</div>
+          <Image
+            className={styles.image}
+            src="/assets/images/button&ornament.png"
+            alt="ornament"
+            fill
+          />
+        </div>
       </div>
-
-      <div className={styles.mobile__button}>Donate</div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;
