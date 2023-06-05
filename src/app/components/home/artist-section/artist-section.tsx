@@ -1,5 +1,8 @@
-import styles from './artist.module.scss';
+'use client'
+
 import Carousel from './carousel/carousel';
+
+import styles from './artist-section.module.scss';
 
 const Artist = () => {
   return (

@@ -1,6 +1,8 @@
 @import "@styles/mixins.scss";
 @import "@styles/vars.scss";
 
+
+
 .header {
   @include set-flex(row, space-between, center);
 
@@ -10,6 +12,7 @@
 
   @include laptop {
     height: 96px;
+    padding: 0 30px;
   }
 
   &__mobileElement {
@@ -93,11 +96,12 @@
 }
 
 .mobileNavigation {
-  @include set-flex(column, space-between, center);
-  @include set-size(100vw, 80%);
+  @include set-flex(column, space-around, center);
+  @include set-size(100vw, 95%);
 
   position: fixed;
-  z-index: 100;
+  z-index: $z-index-menu;
+  background-color: $gray-100;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
   transition-duration: 500ms;
 
@@ -132,7 +136,8 @@
   &__icons {
     @include set-flex(row, center, center);
 
-    gap: 20px;
+    gap: 30px;
+    padding-bottom: 40px;
   }
 }
 
@@ -150,7 +155,7 @@
   }
 
   :first-child {
-    margin-top: 32px;
+    margin-top: 72px;
 
     @include laptop {
       margin-top: 0;

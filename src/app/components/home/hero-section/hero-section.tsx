@@ -1,5 +1,11 @@
+<<<<<<< HEAD:src/app/components/home/hero/hero.tsx
+=======
+'use client'
+
+import { useEffect, useState } from 'react';
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.tsx
 import Image from 'next/image';
-import styles from './hero.module.scss';
+import styles from './hero-section.module.scss';
 
 const Hero = () => (
   <section className={styles.hero}>

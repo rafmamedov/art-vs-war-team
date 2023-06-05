@@ -1,5 +1,9 @@
+<<<<<<< HEAD:src/app/components/home/have collection/have collection.tsx
 import React from 'react';
 import styles from './have collection.module.scss';
+=======
+import styles from './collection-section.module.scss';
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/collection-section/collection-section.tsx
 
 const HaveCollection = () => (
   <section className={styles.collection}>

@@ -1,5 +1,5 @@
-@import '@styles/mixins.scss';
-@import '@styles/vars.scss';
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
 
 .hero {
   margin: 0 auto;
@@ -200,6 +200,7 @@
         }
       }
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
       &__5x4 {
         position: relative;
         width: 100%;
@@ -262,6 +263,22 @@
           width: 656px;
           font-size: $font-size-giant;
           line-height: $line-height-giant;
+=======
+          .button {
+            @include set-flex(row, center, center);
+            margin-top: 70px;
+            width: 100%;
+            height: 48px;
+            border-radius: 24px;
+            background-color: $gray-5;
+            color: $gray-100;
+
+            &:hover {
+              cursor: pointer;
+              background-color: $gray-0;
+            }
+          }
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
         }
 
         @include desktopHD {
@@ -359,6 +376,7 @@
         background-color: $gray-5;
         color: $gray-100;
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
         @include desktop {
           @include set-square(208px);
         }
@@ -367,6 +385,8 @@
           @include set-square(240px);
         }
       
+=======
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
         &:hover {
           cursor: pointer;
           background-color: $gray-0;
@@ -402,6 +422,7 @@
         }
       }
 
+<<<<<<< HEAD:src/app/components/home/hero/hero.module.scss
       &__bottom {
         @include set-flex(row, space-between, center);
         gap: 30px;
@@ -409,6 +430,11 @@
         @include desktop {
           margin-top: 96px;
         }
+=======
+  &__background {
+    z-index: 0;
+  }
+>>>>>>> 5e0b5b142eb2ebb06664d457ebf7e16531cef438:src/app/components/home/hero-section/hero-section.module.scss
 
         @include desktopHD {
           margin-top: 72px;
