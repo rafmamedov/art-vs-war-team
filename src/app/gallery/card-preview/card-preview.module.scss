@@ -1,0 +1,54 @@
+@import "@styles/vars.scss";
+@import "@styles/mixins.scss";
+
+.card {
+  @include set-flex(column);
+
+  color: $gray-5;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+    opacity: 80%;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  margin-top: 16px;
+  font-family: $font-text;
+}
+
+.artist {
+  margin-top: 5px;
+  color: $gray-10;
+}
+
+.buy {
+  @include set-flex(row, space-between, center);
+
+  margin-top: 5px;
+  width: 100%;
+
+  &__price {
+    align-self: flex-end;
+  }
+
+  &__icon {
+    @include set-flex(row, center, center);
+
+    width: 40px;
+    height: 40px;
+    background-color: $gray-0;
+    border-radius: 50%;
+
+    path {
+      fill: black;
+    }
+  }
+}

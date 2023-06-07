@@ -57,6 +57,10 @@
     margin-top: 0;
     border-radius: 50%;
   }
+
+  @include desktop {
+    @include set-square(208px);
+  }
 }
 
 .menuItems {
@@ -78,6 +82,16 @@
     align-items: flex-start;
     margin-top: 0;
     order: -1;
+  }
+
+  @include laptop {
+    font-size: $font-size-xxxl;
+    gap: 24px;
+  }
+
+  @include desktop {
+    font-size: $font-size-huge;
+    line-height: 72px;
   }
 }
 
@@ -108,6 +122,14 @@
 
     list-style: none;
     gap: 24px;
+  }
+
+  &__desktop {
+    display: none;
+
+    @include laptop {
+      display: block;
+    }
   }
 }
 

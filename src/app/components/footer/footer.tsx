@@ -16,11 +16,13 @@ const Footer = () => {
           <MenuItems className={style.menuItems} />
           <div>
             <ul className={style.list}>
+              <li className={style.list__desktop}>For collectors</li>
+              <li className={style.list__desktop}>For artists</li>
               <li>Payment</li>
               <li>Delivery</li>
               <li>FAQ</li>
               <li>Terms of use</li>
-              <li>Payment</li>
+              <li>Privacy policy</li>
             </ul>
             <div className={style.icons}>
               <SocialNetworkIcons className={style.icon} />
