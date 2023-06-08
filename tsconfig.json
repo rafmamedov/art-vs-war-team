@@ -26,6 +26,6 @@
       "@home*": ["./src/app/components/home*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/gallery/card-preview", "src/app/gallery/masonry-catalog"],
   "exclude": ["node_modules"]
 }
