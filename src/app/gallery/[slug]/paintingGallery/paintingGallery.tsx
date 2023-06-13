@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs, Mousewheel } from "swiper";
 
@@ -26,7 +28,7 @@ const slides = [
 ];
 
 const PaintingGallery = () => {
-  const [imagesNavSlider, setImagesNavSlider] = useState(null);
+  // const [imagesNavSlider, setImagesNavSlider] = useState(null);
   return (
     <div className="App">
       <section className="slider">
@@ -36,11 +38,11 @@ const PaintingGallery = () => {
 
             <div className="slider__thumbs">
               <Swiper
-                onSwiper={setImagesNavSlider}
+                // onSwiper={setImagesNavSlider}
                 direction="vertical"
                 spaceBetween={24}
                 slidesPerView={3}
-                navigation={true}
+                // navigation={true}
                 // navigation={{
                 //   nextEl: ".slider__next",
                 //   prevEl: ".slider__prev",
@@ -60,7 +62,12 @@ const PaintingGallery = () => {
                   return (
                     <SwiperSlide key={index}>
                       <div className="slider__image">
-                        <img src={slide} alt="" />
+                        <Image
+                          src={slide}
+                          alt={`image`}
+                          width={1368}
+                          height={1500}
+                        />
                       </div>
                     </SwiperSlide>
                   );
@@ -73,7 +80,7 @@ const PaintingGallery = () => {
 
           <div className="slider__images">
             <Swiper
-              thumbs={{ swiper: imagesNavSlider }}
+              // thumbs={{ swiper: imagesNavSlider }}
               direction="horizontal"
               slidesPerView={1}
               spaceBetween={32}
@@ -98,7 +105,12 @@ const PaintingGallery = () => {
                 return (
                   <SwiperSlide key={index}>
                     <div className="slider__image">
-                      <img src={slide} alt="" />
+                      <Image
+                        src={slide}
+                        alt={`image`}
+                        width={1368}
+                        height={1500}
+                      />
                     </div>
                   </SwiperSlide>
                 );
