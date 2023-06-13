@@ -4,6 +4,7 @@
 .card {
   @include set-flex(column);
 
+  width: 100%;
   color: $gray-5;
   transition: transform 0.3s ease;
   cursor: pointer;

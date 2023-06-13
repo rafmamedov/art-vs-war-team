@@ -13,7 +13,7 @@ const DataInfo = () => {
           <h4 className={style.quantity}>
             <CountUp
               end={45}
-              duration={4}
+              duration={2}
               enableScrollSpy={true}
               scrollSpyOnce={true}
             />
@@ -24,7 +24,7 @@ const DataInfo = () => {
           <h4 className={style.quantity}>
             <CountUp
               end={567}
-              duration={5}
+              duration={3}
               enableScrollSpy={true}
               scrollSpyOnce={true}
             />
@@ -35,7 +35,7 @@ const DataInfo = () => {
           <h4 className={style.quantity}>
             <CountUp
               end={1000000}
-              duration={6}
+              duration={4}
               suffix=" €"
               enableScrollSpy={true}
               scrollSpyOnce={true}

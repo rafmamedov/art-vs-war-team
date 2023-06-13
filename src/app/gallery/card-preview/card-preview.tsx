@@ -16,8 +16,8 @@ const CardPreview: React.FC<Props> = ({ image }) => {
         <Image
           src={image}
           alt={`image`}
-          width={368}
-          height={500}
+          width={1368}
+          height={1500}
           className={style.image}
         />
         <p className={style.title}>Roses</p>
