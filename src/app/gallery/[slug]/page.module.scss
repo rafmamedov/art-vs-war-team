@@ -1,0 +1,129 @@
+@import "@styles/vars.scss";
+@import "@styles/mixins.scss";
+
+.card {
+  @include set-flex(column, center);
+  padding: 24px 22px 50px;
+  color: $gray-0;
+}
+
+.title {
+  font-weight: 400;
+  font-size: $font-size-xxl;
+  line-height: 48px;
+}
+
+// .gallery {
+//   height: 700px;
+//   display: flex;
+//   flex-direction: row-reverse;
+// }
+
+.image {
+  margin-top: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.description {
+  @include set-flex(column);
+
+  gap: 16px;
+  padding: 24px 0 32px;
+  color: $gray-5;
+
+  &__block {
+    @include set-flex(row, flex-start);
+    gap: 16px;
+
+    :first-child {
+      min-width: 100px;
+    }
+
+    :last-child {
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+.button {
+  height: 48px;
+  width: 100%;
+  border-radius: 24px;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $gray-100;
+}
+
+.about {
+  &__description {
+    margin-top: 24px;
+  }
+}
+
+.subTitle {
+  margin-top: 50px;
+  font-size: $font-size-xl;
+  line-height: $font-size-xxl;
+}
+
+.more {
+  &__painting {
+    @include set-flex(row, center);
+
+    margin-top: 50px;
+    gap: 20px;
+  }
+}
+
+.buttonExplore {
+  margin-top: 50px;
+  height: 48px;
+  width: 100%;
+  border-radius: 24px;
+  background-color: $gray-100;
+  font-size: $font-size-base;
+  color: $gray-0;
+  border-color: $gray-0;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.shipping {
+  &__wrapper {
+    @include set-flex(column);
+    margin-top: 24px;
+    gap: 24px;
+  }
+
+  &__info {
+    @include set-flex(row);
+    // gap: 16px;
+
+    :first-child {
+      min-width: 140px;
+
+      @include tablet {
+        min-width: 185px;
+
+      }
+    }
+
+    :last-child {
+      font-weight: $font-weight-semibold;
+    }
+
+    &__title {
+    }
+  }
+}
+
+.question {
+  &__info {
+    margin-top: 16px;
+  }
+
+  &__help {
+    color: $system-info;
+  }
+}

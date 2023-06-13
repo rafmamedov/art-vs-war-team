@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   className: string;
@@ -6,13 +9,16 @@ type Props = {
 
 export const Logo: React.FC<Props> = ({ className }) => {
 
+
   return (
     <div className={className}>
-      <Image
-        src="/assets/logo.png"
-        alt="Art gallery logo"
-        fill
-      />
+      <Link href={"/"}>
+        <Image
+          src="/assets/logo.png"
+          alt="Art gallery logo"
+          fill
+        />
+      </Link>
     </div>
   );
 };
