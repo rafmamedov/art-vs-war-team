@@ -27,6 +27,11 @@ const openSansFont = Open_Sans({
   display: "swap",
 });
 
+export const metadata = {
+  title: "Art vs war",
+  description: "Artists gallery",
+};
+
 export default function RootLayout({
   children,
 }: Props) {

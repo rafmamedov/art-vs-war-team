@@ -5,7 +5,6 @@ import {
   ChangeEvent,
   Dispatch,
   SetStateAction,
-  useEffect,
   useState,
 } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
