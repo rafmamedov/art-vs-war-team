@@ -51,19 +51,18 @@
     height: 550px;
   }
 }
+
 .slider__thumbs .slider__image {
   @include laptop {
-    width: 80px;
-    height: 80px;
+    @include set-square(80px);
   }
+
   @include desktop {
-    width: 96px;
-    height: 96px;
+    @include set-square(96px);
   }
 
   @include desktopHD {
-    width: 112px;
-    height: 112px;
+    @include set-square(112px);
   }
 }
 
@@ -76,11 +75,9 @@
 }
 
 .slider__images {
-  height: 350px;
-  width: 100%;
+  @include set-size(100%, 350px);
 
   @include tablet {
-    height: 100%;
     height: 450px;
   }
 
@@ -91,30 +88,31 @@
   }
 
   @include desktop {
-    max-width: 700px;
-    max-height: 450px;
     height: 450px;
+    max-height: 450px;
+    max-width: 700px;
   }
 
   @include desktopHD {
-    max-width: 800px;
     height: 550px;
     max-height: 550px;
+    max-width: 800px;
   }
 }
 
 .slider__image {
-  width: 100%;
-  height: 90%;
+  @include set-size(100%, 90%);
+
   overflow: hidden;
 }
 
 .slider__image img {
+  @include set-size(100%, 100%);
+
   display: block;
-  width: 100%;
-  height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .slider .swiper-pagination-bullet {

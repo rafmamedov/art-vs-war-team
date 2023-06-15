@@ -15,7 +15,7 @@ const kyivFont = localFont({
   display: "swap",
 });
 
-const openSansFont1 = Open_Sans({
+const openSansFont = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-openSans",
@@ -34,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${openSansFont1.variable} ${kyivFont.variable}`}>
+      <body className={`${openSansFont.variable} ${kyivFont.variable}`}>
         <Header />
         <ReduxProvider>{children}</ReduxProvider>
         <Footer />
