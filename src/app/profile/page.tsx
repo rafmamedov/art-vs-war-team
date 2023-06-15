@@ -11,7 +11,7 @@ import { NextComponentType } from "next";
 import Image from "next/image";
 import ProfileEdit from "./profile edit";
 import CreatePainting from "./create painting";
-import Loader from "./loader/Loader";
+import Loader from "./loader/loader";
 
 const AUTHOR = 'https://www.albedosunrise.com/authors/';
 const PAINTINGS = 'https://www.albedosunrise.com/paintings';
