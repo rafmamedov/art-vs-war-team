@@ -5,6 +5,11 @@ import DataInfo from "@home/dataInfo-section/dataInfo-section";
 import HaveCollection from "@/app/components/home/collection-section/collection-section";
 import Artist from "@home/artist-section/artist-section";
 
+export const metadata = {
+  title: "Art vs war",
+  description: "Artists gallery",
+};
+
 export default function Home() {
   return (
     <main>

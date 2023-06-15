@@ -4,18 +4,24 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^5.0.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "aws-amplify": "^5.2.5",
+    "axios": "^1.4.0",
+    "bulma": "^0.9.4",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.3",
+    "jwt-decode": "^3.1.2",
     "next": "13.4.3",
+    "next-cloudinary": "^4.12.0",
     "react": "18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "18.2.0",
@@ -25,6 +31,8 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "aws-crt": "^1.15.18",
+    "encoding": "^0.1.13",
     "sass": "^1.62.1"
   }
 }
