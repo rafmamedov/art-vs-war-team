@@ -7,12 +7,13 @@ import { Cart } from "@/app/icons/cart";
 
 type Props = {
   image: string;
+  className?: string;
 };
 
-const CardPreview: React.FC<Props> = ({ image }) => {
+const CardPreview: React.FC<Props> = ({ image, className }) => {
   return (
     <>
-      <div className={style.card}>
+      <div className={`${style.card} ${className}`}>
         <Image
           src={image}
           alt={`image`}

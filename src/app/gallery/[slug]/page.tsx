@@ -1,6 +1,5 @@
-// import Image from "next/image";
-
 import style from "./page.module.scss";
+
 import CardPreview from "../card-preview/card-preview";
 import PaintingGallery from "./paintingGallery/paintingGallery";
 
@@ -9,47 +8,54 @@ type Props = {
 };
 
 const PaintingCard: React.FC<Props> = ({ params }) => {
-  console.log(params);
   return (
     <section className={style.card}>
-      <h1 className={style.title}>Name of the painting</h1>
+      <h1 className={style.paintingTitle}>Painting name</h1>
 
-      <PaintingGallery />
+      <div className={style.gallery}>
+        <div className={style.gallery__slider}>
+          <PaintingGallery />
+        </div>
 
-      <div className={style.description}>
-        <div className={style.description__block}>
-          <p>Artist:</p>
-          <p className={style.info}>Margarita Dudinska</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Subject:</p>
-          <p className={style.info}>Abstract</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Style:</p>
-          <p className={style.info}>Impressionism</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Medium:</p>
-          <p className={style.info}>Acrylic</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Support:</p>
-          <p className={style.info}>Canvas</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Size:</p>
-          <p className={style.info}>17 x 18 x 2 cm</p>
-        </div>
-        <div className={style.description__block}>
-          <p>Price:</p>
-          <p className={style.info}>$ 100</p>
+        <div className={style.paintingInfo}>
+          <div className={style.description}>
+            <div className={style.description__block}>
+              <p>Artist:</p>
+              <p className={style.info}>Margarita Dudinska</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Subject:</p>
+              <p className={style.info}>Abstract</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Style:</p>
+              <p className={style.info}>Impressionism</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Medium:</p>
+              <p className={style.info}>Acrylic</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Support:</p>
+              <p className={style.info}>Canvas</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Size:</p>
+              <p className={style.info}>17 x 18 x 2 cm</p>
+            </div>
+            <div className={style.description__block}>
+              <p>Price:</p>
+              <p className={style.info}>$ 100</p>
+            </div>
+          </div>
+          <button className={style.button}>Add to cart</button>
         </div>
       </div>
 
-      <button className={style.button}>Add to cart</button>
+      <hr className={style.line} />
+
       <div className={style.about}>
-        <p className={`${style.about__title} ${style.subTitle}`}>ABOUT</p>
+        <p className={style.title}>ABOUT</p>
         <p className={style.about__description}>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum
           repellendus maiores itaque provident nobis tempore consequatur,
@@ -59,19 +65,26 @@ const PaintingCard: React.FC<Props> = ({ params }) => {
           ratione voluptatibus necessitatibus eos asperiores quam commodi porro!
         </p>
       </div>
+
+      <hr className={style.line} />
+
       <div className={style.more}>
-        <p className={`${style.more__title} ${style.subTitle}`}>
-          MORE FROM Margarita Dudinska:
-        </p>
+        <p className={style.title}>MORE FROM Margarita Dudinska:</p>
         <div className={style.more__painting}>
+          <CardPreview image={"/assets/images/Rectangle 2.png"} />
           <CardPreview image={"/assets/images/Rectangle 3.png"} />
-          <CardPreview image={"/assets/images/Rectangle 3.png"} />
+          <CardPreview image={"/assets/images/Rectangle 5.png"} />
+          <CardPreview image={"/assets/images/Rectangle 6.png"} />
+          <CardPreview image={"/assets/images/Rectangle 7.png"} />
         </div>
       </div>
+
+      <hr className={style.line} />
+
       <button className={style.buttonExplore}>Explore</button>
 
       <div className={style.shipping}>
-        <p className={`${style.shipping__title} ${style.subTitle}`}>SHIPPING</p>
+        <p className={style.title}>SHIPPING</p>
         <div className={style.shipping__wrapper}>
           <div className={style.shipping__info}>
             <p>Delivery Time:</p>
@@ -104,8 +117,11 @@ const PaintingCard: React.FC<Props> = ({ params }) => {
           </div>
         </div>
       </div>
+
+      <hr className={style.line} />
+
       <div className={style.question}>
-        <p className={`${style.question__title} ${style.subTitle}`}>
+        <p className={`${style.question__title} ${style.title}`}>
           HAVE ADDITIONAL QUESTION?
         </p>
         <p className={style.question__info}>
