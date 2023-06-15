@@ -6,6 +6,11 @@ import "@styles/globals.scss";
 import ReduxProvider from "@redux/redux-provider";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
+import AuthenticatorProvider from "./authenticator/authenticatior";
+
+interface Props {
+  children: React.ReactNode;
+}
 
 const kyivFont = localFont({
   src: "../fonts/KyivTypeSans-Regular-.woff",
@@ -22,21 +27,24 @@ const openSansFont = Open_Sans({
   display: "swap",
 });
 
-export const metadata = {
-  title: "Art vs war",
-  description: "Artists gallery",
-};
-
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Props) {
   return (
-    <html lang="en">
-      <body className={`${openSansFont.variable} ${kyivFont.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+    >
+      <body
+        className={`${openSansFont.variable} ${kyivFont.variable}`}
+        suppressHydrationWarning={true}
+      >
         <Header />
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <AuthenticatorProvider>
+            {children}
+          </AuthenticatorProvider>
+        </ReduxProvider>
         <Footer />
       </body>
     </html>

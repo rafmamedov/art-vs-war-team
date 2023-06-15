@@ -3,6 +3,7 @@
 import Carousel from './carousel/carousel';
 
 import styles from './artist-section.module.scss';
+import Link from 'next/link';
 
 const Artist = () => {
   return (
@@ -14,7 +15,7 @@ const Artist = () => {
 
         <h2 className={styles.title}>Are you an artist?</h2>
         <h6 className={styles.subtitle}>Become a part of our conscious community</h6>
-        <div className={styles.button}>Create account</div>
+        <Link href={'/profile'} className={styles.button}>Create account</Link>
       </div>
     </section>
   );
