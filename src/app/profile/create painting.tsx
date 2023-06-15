@@ -180,10 +180,6 @@ const CreatePainting: NextPage<Props> = ({ setIsFetching }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(styleIds);
-  }, [styleIds]);
-
   const onSubmit = async () => {
     if (!isAuthenticated) {
       return;
