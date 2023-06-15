@@ -1,21 +1,12 @@
-"use client"
-
 import { Open_Sans } from "next/font/google";
 import localFont from "next/font/local";
-
-import { Amplify } from "aws-amplify";
-import { Authenticator } from "@aws-amplify/ui-react";
-import awsExports from '../aws-exports';
-
-import '@aws-amplify/ui-react/styles.css';
 
 import "@styles/globals.scss";
 
 import ReduxProvider from "@redux/redux-provider";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-
-Amplify.configure(awsExports);
+import AuthenticatorProvider from "./authenticator/authenticatior";
 
 interface Props {
   children: React.ReactNode;
@@ -50,9 +41,9 @@ export default function RootLayout({
       >
         <Header />
         <ReduxProvider>
-          <Authenticator.Provider>
+          <AuthenticatorProvider>
             {children}
-          </Authenticator.Provider>
+          </AuthenticatorProvider>
         </ReduxProvider>
         <Footer />
       </body>
