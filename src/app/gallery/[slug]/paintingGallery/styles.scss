@@ -1,0 +1,128 @@
+@import "@styles/vars.scss";
+@import "@styles/mixins.scss";
+
+.slider {
+  margin-top: 24px;
+
+  @include laptop {
+    margin-top: 0;
+  }
+}
+
+.slider .swiper-container__thumbs {
+  @include set-size(100%, 90%);
+}
+
+.slider .swiper-container__image {
+  @include set-size(100%, 100%);
+}
+
+.slider__flex {
+  @include set-flex(row-reverse);
+
+  @include laptop {
+    gap: 20px;
+  }
+
+  @include desktop {
+    gap: 100px;
+  }
+}
+
+.slider__col {
+  display: none;
+  cursor: pointer;
+
+  @include laptop {
+    @include set-flex(column);
+  }
+}
+
+.slider__thumbs {
+  @include laptop {
+    height: 405px;
+  }
+
+  @include desktop {
+    height: 450px;
+  }
+
+  @include desktopHD {
+    height: 550px;
+  }
+}
+.slider__thumbs .slider__image {
+  @include laptop {
+    width: 80px;
+    height: 80px;
+  }
+  @include desktop {
+    width: 96px;
+    height: 96px;
+  }
+
+  @include desktopHD {
+    width: 112px;
+    height: 112px;
+  }
+}
+
+.slider__thumbs .slider__image:hover {
+  opacity: 1;
+}
+
+.slider__thumbs .swiper-slide-thumb-active .slider__image {
+  opacity: 0.5;
+}
+
+.slider__images {
+  height: 350px;
+  width: 100%;
+
+  @include tablet {
+    height: 100%;
+    height: 450px;
+  }
+
+  @include laptop {
+    max-width: 550px;
+    max-height: 405px;
+    height: 405px;
+  }
+
+  @include desktop {
+    max-width: 700px;
+    max-height: 450px;
+    height: 450px;
+  }
+
+  @include desktopHD {
+    max-width: 800px;
+    height: 550px;
+    max-height: 550px;
+  }
+}
+
+.slider__image {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+}
+
+.slider__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.slider .swiper-pagination-bullet {
+  background-color: $gray-0;
+}
+
+.slider .swiper-pagination {
+  @include set-flex(row, center);
+
+  gap: 15px;
+}
