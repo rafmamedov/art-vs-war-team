@@ -4,11 +4,6 @@ import { useState, useEffect } from "react";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import axios from "axios";
 
-import {
-  SecretsManagerClient,
-  GetSecretValueCommand,
-} from "@aws-sdk/client-secrets-manager";
-
 import './profile.scss'
 import 'bulma/css/bulma.css';
 
