@@ -66,8 +66,9 @@ const ProfileEdit: NextPage<Props> = ({
   };
 
   const folder = `art-app/${user.username}/author-photo`;
-  const uploadPreset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
+  const uploadPreset = 'signed-image';
+  const cloudName = 'dq415fvzp';
+  const cloudinaryApiKey = '587219262524673';
 
   useEffect(() => {
     if (author) {
@@ -112,7 +113,7 @@ const ProfileEdit: NextPage<Props> = ({
     data.append('signature', signature);
     data.append('timestamp', timestamp);
     data.append("upload_preset", uploadPreset);
-    data.append('api_key', process.env.NEXT_APP_CLOUDINARY_API_KEY!);
+    data.append('api_key', cloudinaryApiKey);
 
     try {
       console.log('data', data);
