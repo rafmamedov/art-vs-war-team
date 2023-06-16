@@ -14,7 +14,6 @@ import CreatePainting from "./create painting";
 import Loader from "./Loader/Loader";
 
 const AUTHOR = 'https://www.albedosunrise.com/authors/';
-const PAINTINGS = 'https://www.albedosunrise.com/paintings';
 
 export interface Author {
   id: string;
@@ -33,13 +32,13 @@ const Profile: NextComponentType = () => {
   const { user } = useAuthenticator((context) => [context.user]);
 
   const getAuthorById = async () => {
-    await axios.get(AUTHOR + user.username)
-      .then((response) => {
-        setAuthor(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    try {
+      const response =await axios.get(AUTHOR + user.username);
+
+      setAuthor(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
