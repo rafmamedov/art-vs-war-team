@@ -68,7 +68,7 @@ const ProfileEdit: NextPage<Props> = ({
   const folder = `art-app/${user.username}/author-photo`;
   const uploadPreset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
+  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY!;
 
   useEffect(() => {
     if (author) {
