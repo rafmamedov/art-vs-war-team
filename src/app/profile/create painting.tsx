@@ -50,7 +50,7 @@ const CreatePainting: NextPage<Props> = ({ setIsFetching }) => {
   const folder = `art-app/${user.username}/paintings`;
   const uploadPreset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
+  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY!;
   const isNumber = /^\d+$/;
 
   const handleInputChange = (
