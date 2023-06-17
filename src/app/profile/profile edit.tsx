@@ -66,9 +66,9 @@ const ProfileEdit: NextPage<Props> = ({
   };
 
   const folder = `art-app/${user.username}/author-photo`;
-  const uploadPreset = 'signed-image';
-  const cloudName = 'dq415fvzp';
-  const cloudinaryApiKey = '587219262524673';
+  const uploadPreset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
+  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
 
   useEffect(() => {
     if (author) {
@@ -103,11 +103,8 @@ const ProfileEdit: NextPage<Props> = ({
   const uploadImage = async (image: File): Promise<any> => {
     const { signature, timestamp } = await getSignature();
 
-    console.log('signature', signature);
-    console.log('timestamp', timestamp);
-
     const data = new FormData();
-    
+
     data.append("file", image);
     data.append("folder", folder);
     data.append('signature', signature);
@@ -116,8 +113,6 @@ const ProfileEdit: NextPage<Props> = ({
     data.append('api_key', cloudinaryApiKey);
 
     try {
-      console.log('data', data);
-
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
          data,
