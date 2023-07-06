@@ -7,7 +7,6 @@ import axios from "axios";
 import './profile.scss'
 import 'bulma/css/bulma.css';
 
-import { NextComponentType } from "next";
 import Image from "next/image";
 import ProfileEdit from "./profile edit";
 import CreatePainting from "./create painting";
@@ -24,7 +23,7 @@ export interface Author {
   imageUrl: string;
 };
 
-const Profile: NextComponentType = () => {
+const Profile = () => {
   const [author, setAuthor] = useState<Author | null>(null);
   const [isCreateVisible, setIsCreateVisible] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -33,7 +32,7 @@ const Profile: NextComponentType = () => {
 
   const getAuthorById = async () => {
     try {
-      const response =await axios.get(AUTHOR + user.username);
+      const response = await axios.get(AUTHOR + user.username);
 
       setAuthor(response.data);
     } catch (error) {
