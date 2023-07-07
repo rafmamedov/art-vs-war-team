@@ -89,25 +89,26 @@ const Author = () => {
       </div>
 
       <div className={style.tabs}>
-        <div
-          className={isArtworksVisible ? style.isActive : style.tab}
-          onClick={handleShowArtWorks}
-        >
-          Artworks
+        <div className={style.tabs__container}>
+          <div
+            className={isArtworksVisible ? style.isActive : style.tab}
+            onClick={handleShowArtWorks}
+          >
+            Artworks
+          </div>
+          <div className={style.tab}>Collections</div>
+          <div
+            className={isProcessVisible ? style.isActive : style.tab}
+            onClick={handleShowProcess}
+          >
+            Art Process
+          </div>
         </div>
 
-        <div className={style.tab}>Collections</div>
-
-        <div
-          className={isProcessVisible ? style.isActive : style.tab}
-          onClick={handleShowProcess}
-        >
-          Art Process
-        </div>
-
-        <button>
-          <Add className={style.add} />
+        <button className={style.add}>
+          +
         </button>
+        <div className={ style.tabsFooter } />
       </div>
 
       <div className={style.gallery}>
