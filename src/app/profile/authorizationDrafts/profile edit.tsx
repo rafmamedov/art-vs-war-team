@@ -17,7 +17,7 @@ import jwt_decode, { JwtPayload } from 'jwt-decode';
 import './profile.scss';
 import 'bulma/css/bulma.css';
 
-import { Author } from "./page";
+import { Author } from "./authorizationDraft";
 
 const AUTHOR = 'https://www.albedosunrise.com/authors/';
 const SIGNATURE = 'https://www.albedosunrise.com/images/getSignature';

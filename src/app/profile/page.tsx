@@ -1,115 +1,121 @@
 "use client"
 
-import { useState, useEffect } from "react";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
-import axios from "axios";
-
-import './profile.scss'
-import 'bulma/css/bulma.css';
-
+import { useState } from "react";
 import Image from "next/image";
-import ProfileEdit from "./profile edit";
-import CreatePainting from "./create painting";
-import Loader from "./Loader/Loader";
 
-const AUTHOR = 'https://www.albedosunrise.com/authors/';
+import style from "./page.module.scss";
 
-export interface Author {
-  id: string;
-  fullName: string;
-  country: string;
-  city: string;
-  aboutMe: string;
-  imageUrl: string;
-};
+import { Add } from "../icons/add";
+import { Location } from "../icons/location";
+import AuthorPhoto from './assets/author.png';
+import MasonryGallery from "../gallery/masonry-catalog/masonry-catalog";
+import ArtProcess from "../components/artProcess/artProcess";
 
-const Profile = () => {
-  const [author, setAuthor] = useState<Author | null>(null);
-  const [isCreateVisible, setIsCreateVisible] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
+const arr = [
+  "/assets/images/Rectangle 2.png",
+  "/assets/images/Rectangle 3.png",
+  "/assets/images/Rectangle 4.png",
+  "/assets/images/Rectangle 5.png",
+  "/assets/images/Rectangle 6.png",
+  "/assets/images/Rectangle 7.png",
+  "/assets/images/Rectangle 2.png",
+  "/assets/images/Rectangle 3.png",
+  "/assets/images/Rectangle 4.png",
+  "/assets/images/Rectangle 5.png",
+  "/assets/images/Rectangle 6.png",
+  "/assets/images/Rectangle 7.png",
+];
 
-  const { user } = useAuthenticator((context) => [context.user]);
+const Author = () => {
+  const [isArtworksVisible, setIsArtworksVisible] = useState(true);
+  const [isProcessVisible, setIsProcessVisible] = useState(false);
 
-  const getAuthorById = async () => {
-    try {
-      const response = await axios.get(AUTHOR + user.username);
-
-      setAuthor(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleShowArtWorks = () => {
+    setIsProcessVisible(false);
+    setIsArtworksVisible(true);
   };
 
-  useEffect(() => {
-    getAuthorById();
-  }, []);
+  const handleShowProcess = () => {
+    setIsArtworksVisible(false);
+    setIsProcessVisible(true);
+  };
 
   return (
-    <section className="profile">
-      <div className="container sidebar-info">
-        {author && (
-          <div className="profile-header">
-            {author.imageUrl
-              ? (
-                <Image
-                  className="author-image"
-                  src={author.imageUrl}
-                  alt="author"
-                  width={100}
-                  height={100}
-                />
-              ) : (
-                <Image
-                  className="author-image"
-                  src="https://i.etsystatic.com/17358183/r/il/7a5539/3875154600/il_794xN.3875154600_9zse.jpg"
-                  alt="author"
-                  width={100}
-                  height={100}
-                />
-              )}
+    <section className={style.author}>
+      <div className={style.container}>
+        <div className={style.author__photo}>
+          <Image
+            className={style.image}
+            src={AuthorPhoto}
+            alt="author"
+          />
+        </div>
 
-            <div className="author-info">
-              <div className="author-subtitle"><strong>{author.fullName}</strong></div>
-              <div className="author-subtitle">
-                {author.country}, {author.city}
-              </div>
-
-              <div className="author-description">
-                {author.aboutMe}
-              </div>
-
-              <button
-                className={`button ${isCreateVisible ? 'is-info' : 'is-warning' }`}
-                onClick={() => setIsCreateVisible(!isCreateVisible)}
-              >
-                {isCreateVisible ? 'Edit Profile Info' : 'Create Painting'}
-              </button>
-            </div>
+        <div className={style.author__info}>
+          <div className={style.author__name}>
+            Margarita Dudinska
           </div>
-        )}
+          <div className={style.author__styles}>
+            Style: Primitivism / Native
+          </div>
+          <div className={style.author__location}>
+            <Location />
+            Poland, Warsaw
+          </div>
+          <div className={style.author__about}>
+            Margarita Dudinska is an acclaimed artist known for her captivating and innovative artwork.
+            Born in an artistic family in [place of birth] on [date of birth], Dudinska displayed a
+            passion for creativity from an early age.
+            With a strong determination to pursue her artistic dreams, Dudinska attended
+            [name of art school/university] where she honed her skills and developed a unique style.
+            Her works often showcase a harmonious blend of vibrant colors, intricate details,
+            and thought-provoking themes.
+          </div>
 
-        {isFetching
-        ? <Loader />
-        : isCreateVisible
-          ? <CreatePainting
-              setIsFetching={setIsFetching}
-            />
-          : (
-            <ProfileEdit
-              author={author}
-              setAuthor={setAuthor}
-              setIsFetching={setIsFetching}
-            />
-        )}
+          <button
+            className={style.button__edit}
+            type="button"
+          >
+            Edit profile
+          </button>
+          <button
+            className={style.button__add}
+            type="button"
+          >
+            <Add className={style.button__icon} />
+            Add Arts
+          </button>
+        </div>
+      </div>
+
+      <div className={style.tabs}>
+        <div
+          className={isArtworksVisible ? style.isActive : style.tab}
+          onClick={handleShowArtWorks}
+        >
+          Artworks
+        </div>
+
+        <div className={style.tab}>Collections</div>
+
+        <div
+          className={isProcessVisible ? style.isActive : style.tab}
+          onClick={handleShowProcess}
+        >
+          Art Process
+        </div>
+
+        <button>
+          <Add className={style.add} />
+        </button>
+      </div>
+
+      <div className={style.gallery}>
+        {isArtworksVisible && <MasonryGallery images={arr} />}
+        {isProcessVisible && <ArtProcess />}
       </div>
     </section>
   );
 };
 
-export default function ProfilePage() {
-  return (
-    <Authenticator className="auth">
-      <Profile/>
-    </Authenticator>
-  );
-};
+export default Author;
