@@ -76,15 +76,11 @@
   }
 
   &__block {
-    @include set-flex(row, flex-start);
-    gap: 16px;
+    @include set-flex(row);
 
-    :first-child {
+    > :first-child {
       min-width: 100px;
-    }
-
-    :last-child {
-      font-weight: $font-weight-semibold;
+      color: $gray-10;
     }
   }
 }
@@ -128,32 +124,6 @@
   @include laptop {
     padding: 48px 130px;
   }
-
-  &__painting {
-    @include set-flex(row, center);
-
-    margin-top: 50px;
-    gap: 20px;
-
-    & > :nth-child(n + 3) {
-      display: none;
-    }
-
-    @include tablet {
-      > :nth-child(n + 4) {
-        display: none;
-      }
-      > :nth-child(3) {
-        display: flex;
-      }
-
-      @include laptop {
-        > * {
-          display: flex !important;
-        }
-      }
-    }
-  }
 }
 
 .buttonExplore {
@@ -195,10 +165,6 @@
   &__info {
     @include set-flex(row);
 
-    :last-child {
-      font-weight: $font-weight-semibold;
-    }
-
     :first-child {
       min-width: 140px;
 
@@ -233,9 +199,17 @@
 }
 
 .line {
+  display: none;
+
   @include laptop {
+    display: block;
     @include set-size(100%, 1px);
 
     background-color: $gray-50;
   }
+}
+
+.link {
+  text-decoration: underline;
+  text-transform: uppercase;
 }
