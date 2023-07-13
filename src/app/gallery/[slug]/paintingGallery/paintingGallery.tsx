@@ -76,7 +76,6 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                   autoScrollOffset: 2,
                 }}
                 direction="vertical"
-                spaceBetween={16}
                 slidesPerView={4}
                 loopedSlides={2}
                 className="swiper-container__thumbs"

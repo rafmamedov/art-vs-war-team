@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import style from "./morePaintings.module.scss";
 
 import CardPreview from "../../card-preview/card-preview";
+import { getMorePaintings } from "@/utils/api";
 
 export interface Painting {
   id: number;
@@ -25,12 +26,9 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
     null
   );
 
-  const getMorePaintingFromServer = async (id: string, size: number) => {
-    const response = await fetch(
-      `https://www.albedosunrise.com/paintings/additional?paintingPrettyId=${id}&size=${size}`
-    ).then((data) => data.json());
-
-    setPaintings(response);
+  const getMorePaintingsFromArtist = async (id: string, size: number) => {
+    const paintings = await getMorePaintings(id, size);
+    setPaintings(paintings);
   };
 
   const handleChangeCardQuantity = () => {
@@ -56,7 +54,7 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
     handleChangeCardQuantity();
 
     if (paintingsQuantity) {
-      getMorePaintingFromServer(prettyId, paintingsQuantity);
+      getMorePaintingsFromArtist(prettyId, paintingsQuantity);
     }
   }, [prettyId, paintingsQuantity]);
 
@@ -72,7 +70,11 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
         };
 
         return (
-          <CardPreview paintingDetails={paintingDetails} key={painting.id} />
+          <CardPreview
+            paintingDetails={paintingDetails}
+            key={painting.id}
+            className={style.cardPreview}
+          />
         );
       })}
     </div>

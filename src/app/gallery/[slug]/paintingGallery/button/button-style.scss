@@ -18,11 +18,9 @@
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
-}
 
-@media (min-width: 1200px) {
-  .cart-button {
-    width: 320px;
+  &:hover {
+    background-color: $gray-0;
   }
 }
 

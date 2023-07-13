@@ -17,13 +17,13 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
 
   return (
     <Link href={`/gallery/${prettyId}`}>
-      <div className={`${style.card} ${className}`}>
+      <div className={`${style.card}`}>
         <Image
           src={image}
           alt={`${author} - ${title}`}
           width={1368}
           height={1500}
-          className={`${style.image} imageOpacityEffect`}
+          className={`${style.image} ${className} imageOpacityEffect`}
           onLoadingComplete={(img) => (img.style.opacity = "1")}
         />
         <p className={style.title}>{title}</p>

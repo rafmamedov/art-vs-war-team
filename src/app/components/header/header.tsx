@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import style from "./header.module.scss";
 
@@ -11,12 +11,15 @@ import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
 import LoginButton from "./navigation/login-button/login-button";
 import SocialNetworkIcons from "../social-network/social-network";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const dispatch = useAppDispatch();
+  const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
 
   const handleShowMobileMenu = () => {
-    setShowMobileMenu(!showMobileMenu);
+    dispatch(setShowMobileMenu(!showMobileMenu));
   };
 
   useEffect(() => {

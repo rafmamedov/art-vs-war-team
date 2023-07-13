@@ -25,7 +25,7 @@
   }
 
   @include laptop {
-    @include set-flex(row, space-around);
+    @include set-flex(row, space-between);
 
     gap: 20px;
   }
@@ -56,7 +56,7 @@
 
   @include desktopHD {
     min-width: 450px;
-    height: 495px;
+    height: 585px;
   }
 }
 
@@ -109,8 +109,13 @@
     @include set-flex(row, flex-start);
 
     gap: 50px;
-    padding: 48px 130px;
+    padding: 48px 0;
+
+    @include desktop {
+      padding: 48px 130px;
+    }
   }
+
   &__description {
     margin-top: 24px;
 
@@ -121,7 +126,7 @@
 }
 
 .more {
-  @include laptop {
+  @include desktop {
     padding: 48px 130px;
   }
 }
@@ -138,6 +143,11 @@
   border-style: solid;
   border-width: 1px;
 
+  &:active {
+    background-color: $gray-0;
+    color: $gray-100;
+  }
+
   @include laptop {
     display: none;
   }
@@ -147,8 +157,12 @@
   @include laptop {
     @include set-flex(row);
 
-    padding: 48px 130px;
+    padding: 48px 0;
     gap: 50px;
+  }
+
+  @include desktop {
+    padding: 48px 130px;
   }
 
   &__wrapper {
@@ -181,8 +195,12 @@
   @include laptop {
     @include set-flex(row, flex-start, center);
 
-    padding: 48px 130px;
+    padding: 48px 0;
     gap: 50px;
+  }
+
+  @include desktop {
+    padding: 48px 130px;
   }
 
   &__info {

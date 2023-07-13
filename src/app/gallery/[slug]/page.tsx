@@ -1,26 +1,15 @@
+import Link from "next/link";
+
 import style from "./page.module.scss";
 
-import CardPreview from "../card-preview/card-preview";
 import PaintingGallery from "./paintingGallery/paintingGallery";
 import AddToCartButton from "./paintingGallery/button/button";
-import Link from "next/link";
-import { Medium, Style, Subject, Support } from "@/types/Painting";
 import MorePaintings from "./morePainting/morePaintings";
-import { useEffect } from "react";
-
-async function getDataFromServer(id: string) {
-  const response = await fetch(
-    `https://www.albedosunrise.com/paintings/v2/${id}`,
-    {
-      next: { revalidate: 300 },
-    }
-  ).then((data) => data.json());
-
-  return response;
-}
+import { Medium, Style, Subject, Support } from "@/types/Painting";
+import { getPainting } from "@/utils/api";
 
 const PaintingCard = async ({ params }: { params: { slug: string } }) => {
-  const paintingsList = await getDataFromServer(params.slug);
+  const paintingsList = await getPainting(params.slug);
 
   const {
     image,
@@ -37,8 +26,6 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
     mediums,
     supports,
   } = paintingsList;
-
-  console.log(paintingsList);
 
   return (
     <section className={style.card}>
