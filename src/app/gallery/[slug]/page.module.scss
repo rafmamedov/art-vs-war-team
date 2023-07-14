@@ -25,7 +25,7 @@
   }
 
   @include laptop {
-    @include set-flex(row, space-around);
+    @include set-flex(row, space-between);
 
     gap: 20px;
   }
@@ -56,7 +56,7 @@
 
   @include desktopHD {
     min-width: 450px;
-    height: 495px;
+    height: 585px;
   }
 }
 
@@ -76,15 +76,11 @@
   }
 
   &__block {
-    @include set-flex(row, flex-start);
-    gap: 16px;
+    @include set-flex(row);
 
-    :first-child {
+    > :first-child {
       min-width: 100px;
-    }
-
-    :last-child {
-      font-weight: $font-weight-semibold;
+      color: $gray-10;
     }
   }
 }
@@ -113,8 +109,13 @@
     @include set-flex(row, flex-start);
 
     gap: 50px;
-    padding: 48px 130px;
+    padding: 48px 0;
+
+    @include desktop {
+      padding: 48px 130px;
+    }
   }
+
   &__description {
     margin-top: 24px;
 
@@ -125,34 +126,8 @@
 }
 
 .more {
-  @include laptop {
+  @include desktop {
     padding: 48px 130px;
-  }
-
-  &__painting {
-    @include set-flex(row, center);
-
-    margin-top: 50px;
-    gap: 20px;
-
-    & > :nth-child(n + 3) {
-      display: none;
-    }
-
-    @include tablet {
-      > :nth-child(n + 4) {
-        display: none;
-      }
-      > :nth-child(3) {
-        display: flex;
-      }
-
-      @include laptop {
-        > * {
-          display: flex !important;
-        }
-      }
-    }
   }
 }
 
@@ -168,6 +143,11 @@
   border-style: solid;
   border-width: 1px;
 
+  &:active {
+    background-color: $gray-0;
+    color: $gray-100;
+  }
+
   @include laptop {
     display: none;
   }
@@ -177,8 +157,12 @@
   @include laptop {
     @include set-flex(row);
 
-    padding: 48px 130px;
+    padding: 48px 0;
     gap: 50px;
+  }
+
+  @include desktop {
+    padding: 48px 130px;
   }
 
   &__wrapper {
@@ -194,10 +178,6 @@
 
   &__info {
     @include set-flex(row);
-
-    :last-child {
-      font-weight: $font-weight-semibold;
-    }
 
     :first-child {
       min-width: 140px;
@@ -215,8 +195,12 @@
   @include laptop {
     @include set-flex(row, flex-start, center);
 
-    padding: 48px 130px;
+    padding: 48px 0;
     gap: 50px;
+  }
+
+  @include desktop {
+    padding: 48px 130px;
   }
 
   &__info {
@@ -233,9 +217,17 @@
 }
 
 .line {
+  display: none;
+
   @include laptop {
+    display: block;
     @include set-size(100%, 1px);
 
     background-color: $gray-50;
   }
+}
+
+.link {
+  text-decoration: underline;
+  text-transform: uppercase;
 }

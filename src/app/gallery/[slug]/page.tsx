@@ -1,54 +1,120 @@
+import Link from "next/link";
+
 import style from "./page.module.scss";
 
-import CardPreview from "../card-preview/card-preview";
 import PaintingGallery from "./paintingGallery/paintingGallery";
+import AddToCartButton from "./paintingGallery/button/button";
+import MorePaintings from "./morePainting/morePaintings";
+import { Medium, Style, Subject, Support } from "@/types/Painting";
+import { getPainting } from "@/utils/api";
 
-type Props = {
-  params: string;
-};
+const PaintingCard = async ({ params }: { params: { slug: string } }) => {
+  const paintingsList = await getPainting(params.slug);
 
-const PaintingCard: React.FC<Props> = ({ params }) => {
+  const {
+    image,
+    title,
+    prettyId,
+    price,
+    height,
+    width,
+    yearOfCreation,
+    description,
+    author,
+    subjects,
+    styles,
+    mediums,
+    supports,
+  } = paintingsList;
+
   return (
     <section className={style.card}>
-      <h1 className={style.paintingTitle}>Painting name</h1>
+      <h1 className={style.paintingTitle}>{title}</h1>
 
       <div className={style.gallery}>
         <div className={style.gallery__slider}>
-          <PaintingGallery />
+          <PaintingGallery
+            paintings={image.views}
+            title={title}
+            author={author.fullName}
+          />
         </div>
 
         <div className={style.paintingInfo}>
           <div className={style.description}>
             <div className={style.description__block}>
               <p>Artist:</p>
-              <p className={style.info}>Margarita Dudinska</p>
+              <p className={style.info}>
+                <Link
+                  href={`/artists/${author.prettyId}`}
+                  className={style.link}
+                >
+                  {author.fullName}
+                </Link>
+              </p>
             </div>
             <div className={style.description__block}>
               <p>Subject:</p>
-              <p className={style.info}>Abstract</p>
+              <div>
+                {subjects.map((subject: Subject, index: number) => (
+                  <span key={index}>
+                    {subject.name}
+                    {index !== subjects.length - 1 && `,  `}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className={style.description__block}>
               <p>Style:</p>
-              <p className={style.info}>Impressionism</p>
+              <div>
+                {styles.map((style: Style, index: number) => (
+                  <span key={index}>
+                    {style.name}
+                    {index !== styles.length - 1 && `,  `}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className={style.description__block}>
               <p>Medium:</p>
-              <p className={style.info}>Acrylic</p>
+              <div>
+                {mediums.map((medium: Medium, index: number) => (
+                  <span key={index}>
+                    {medium.name}
+                    {index !== mediums.length - 1 && `,  `}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className={style.description__block}>
               <p>Support:</p>
-              <p className={style.info}>Canvas</p>
+              <div>
+                {supports.map((support: Support, index: number) => (
+                  <span key={index}>
+                    {support.name}
+                    {index !== supports.length - 1 && `,  `}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className={style.description__block}>
+              <p>Created:</p>
+              <p className={style.info}>{yearOfCreation}</p>
             </div>
             <div className={style.description__block}>
               <p>Size:</p>
-              <p className={style.info}>17 x 18 x 2 cm</p>
+              <p
+                className={style.info}
+              >{`${width} W x ${height} H x 2 D cm`}</p>
             </div>
             <div className={style.description__block}>
               <p>Price:</p>
-              <p className={style.info}>$ 100</p>
+              <p className={style.info}>{`€ ${price}`}</p>
             </div>
           </div>
-          <button className={style.button}>Add to cart</button>
+          <div>
+            <AddToCartButton />
+          </div>
         </div>
       </div>
 
@@ -56,27 +122,22 @@ const PaintingCard: React.FC<Props> = ({ params }) => {
 
       <div className={style.about}>
         <p className={style.title}>ABOUT</p>
-        <p className={style.about__description}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum
-          repellendus maiores itaque provident nobis tempore consequatur,
-          numquam possimus doloremque consectetur incidunt eaque illum excepturi
-          natus fugit quibusdam reprehenderit sapiente optio unde minima culpa
-          at mollitia! Mollitia soluta consequatur est placeat quae, quaerat
-          ratione voluptatibus necessitatibus eos asperiores quam commodi porro!
-        </p>
+        <p className={style.about__description}>{description}</p>
       </div>
 
       <hr className={style.line} />
 
       <div className={style.more}>
-        <p className={style.title}>MORE FROM Margarita Dudinska:</p>
-        <div className={style.more__painting}>
-          <CardPreview image={"/assets/images/Rectangle 2.png"} />
-          <CardPreview image={"/assets/images/Rectangle 3.png"} />
-          <CardPreview image={"/assets/images/Rectangle 5.png"} />
-          <CardPreview image={"/assets/images/Rectangle 6.png"} />
-          <CardPreview image={"/assets/images/Rectangle 7.png"} />
-        </div>
+        <p className={style.title}>
+          {`MORE FROM `}
+          <span>
+            <Link href={`/artists/${author.prettyId}`} className={style.link}>
+              {`${author.fullName}:`}
+            </Link>
+          </span>
+        </p>
+
+        <MorePaintings prettyId={prettyId} />
       </div>
 
       <hr className={style.line} />

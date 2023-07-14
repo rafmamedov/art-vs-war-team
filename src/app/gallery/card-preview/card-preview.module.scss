@@ -3,21 +3,39 @@
 
 .card {
   @include set-flex(column);
+  transition: transform 0.3s ease;
 
   width: 100%;
   color: $gray-5;
-  transition: transform 0.3s ease;
-  cursor: pointer;
 
   &:hover {
     transform: scale(1.01);
     opacity: 80%;
+    transition: transform 0.3s ease;
+
+    .buy__icon {
+      background-color: $gray-0;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+      @keyframes pulse {
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      path {
+        fill: $gray-100;
+      }
+    }
   }
 }
 
 .image {
   width: 100%;
   height: auto;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1.5s;
 }
 
 .title {
@@ -45,11 +63,9 @@
 
     width: 40px;
     height: 40px;
-    background-color: $gray-0;
     border-radius: 50%;
-
-    path {
-      fill: black;
-    }
+    border-color: $gray-0;
+    border-width: 1px;
+    border-style: solid;
   }
 }

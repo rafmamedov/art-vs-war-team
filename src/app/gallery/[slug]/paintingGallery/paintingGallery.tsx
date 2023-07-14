@@ -1,108 +1,116 @@
 "use client";
 
 import Image from "next/image";
-
+import { useState } from "react";
 import { Swiper, SwiperSlide, SwiperClass } from "swiper/react";
 import { Navigation, Thumbs, Mousewheel, Pagination } from "swiper";
 
 import "./styles.scss";
+import "@styles/globals.scss";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
-import { useState } from "react";
+type Props = {
+  paintings: string[];
+  title: string;
+  author: string;
+};
 
-const slides = [
-  "/assets/images/Rectangle 2.png",
-  "/assets/images/Rectangle 3.png",
-  "/assets/images/Rectangle 4.png",
-  "/assets/images/Rectangle 5.png",
-  "/assets/images/Rectangle 6.png",
-  "/assets/images/Rectangle 7.png",
-];
+const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
+  const [openPhotoSwipe, setOpenPhotoSwipe] = useState(false);
+  const [imagesNav, setImagesNav] = useState<SwiperClass | null>(null);
 
-const PaintingGallery = () => {
-  const [imagesNavSlider, setImagesNavSlider] = useState<SwiperClass | null>(
-    null
-  );
+  const handleImage = () => {
+    setOpenPhotoSwipe(!openPhotoSwipe);
+  };
 
   return (
-    <div className="slider">
-      <div className="slider__flex">
-        <div className="slider__images">
-          <Swiper
-            thumbs={{
-              swiper: imagesNavSlider,
-              autoScrollOffset: 2,
-            }}
-            direction="horizontal"
-            slidesPerView={1}
-            spaceBetween={32}
-            mousewheel={true}
-            loop={true}
-            pagination={{
-              clickable: true,
-            }}
-            className="swiper-container__image"
-            modules={[Navigation, Thumbs, Mousewheel, Pagination]}
-          >
-            {slides.map((slide, index) => {
-              return (
-                <SwiperSlide key={index}>
-                  <div className="slider__image">
-                    <Image
-                      src={slide}
-                      alt={`image`}
-                      width={800}
-                      height={600}
-                      style={
-                        {
-                          objectFit: "contain",
-                        }
-                      }
-                    />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
-        <div className="slider__col">
-          <div className="slider__thumbs">
+    <>
+      <div className="slider">
+        <div className="slider__flex">
+          <div className="slider__images">
             <Swiper
-              onSwiper={setImagesNavSlider}
               thumbs={{
+                swiper: imagesNav && !imagesNav.destroyed ? imagesNav : null,
                 autoScrollOffset: 2,
               }}
-              direction="vertical"
-              spaceBetween={16}
-              slidesPerView={4}
-              loopedSlides={2}
-              className="swiper-container__thumbs"
-              breakpoints={{
-                0: {
-                  direction: "horizontal",
-                },
-                1024: {
-                  direction: "vertical",
-                },
+              direction="horizontal"
+              slidesPerView={1}
+              spaceBetween={32}
+              mousewheel={true}
+              loop={true}
+              pagination={{
+                clickable: true,
               }}
-              modules={[Navigation, Thumbs]}
+              className="swiper-container__image"
+              modules={[Navigation, Thumbs, Mousewheel, Pagination]}
             >
-              {slides.map((slide, index) => {
+              {paintings.map((slide: string, index: number) => {
                 return (
                   <SwiperSlide key={index}>
                     <div className="slider__image">
-                      <Image src={slide} alt={`image`} width={96} height={96} />
+                      <Image
+                        src={slide}
+                        alt={`art ${title} by ${author}`}
+                        width={800}
+                        height={600}
+                        style={{
+                          objectFit: "contain",
+                        }}
+                        className="imageOpacityEffect"
+                        onLoadingComplete={(img) => (img.style.opacity = "1")}
+                        onClick={handleImage}
+                      />
                     </div>
                   </SwiperSlide>
                 );
               })}
             </Swiper>
           </div>
+          <div className="slider__col">
+            <div className="slider__thumbs">
+              <Swiper
+                onSwiper={setImagesNav}
+                thumbs={{
+                  autoScrollOffset: 2,
+                }}
+                direction="vertical"
+                slidesPerView={4}
+                loopedSlides={2}
+                className="swiper-container__thumbs"
+                breakpoints={{
+                  0: {
+                    direction: "horizontal",
+                  },
+                  1024: {
+                    direction: "vertical",
+                  },
+                }}
+                modules={[Navigation, Thumbs]}
+              >
+                {paintings.map((slide: string, index: number) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <div className="slider__image">
+                        <Image
+                          src={slide}
+                          alt={`art ${title} by ${author}`}
+                          width={96}
+                          height={96}
+                          className="imageOpacityEffect"
+                          onLoadingComplete={(img) => (img.style.opacity = "1")}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
