@@ -4,17 +4,9 @@ import { useEffect, useState } from "react";
 
 import style from "./morePaintings.module.scss";
 
-import CardPreview from "../../card-preview/card-preview";
+import CardPreview from "@components/card-preview/card-preview";
 import { getMorePaintings } from "@/utils/api";
-
-export interface Painting {
-  id: number;
-  authorFullName: string;
-  prettyId: string;
-  imageUrl: string;
-  title: string;
-  price: number;
-}
+import { Painting } from "@/types/Painting";
 
 type Props = {
   prettyId: string;

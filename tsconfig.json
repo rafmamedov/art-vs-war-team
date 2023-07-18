@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/gallery/card-preview",
+    "src/app/components/card-preview",
     "src/app/components/masonry-catalog",
     "_app.js",
     "src/app/api/sign-cloudinary-params.js"

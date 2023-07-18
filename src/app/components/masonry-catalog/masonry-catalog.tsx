@@ -4,8 +4,8 @@ import Masonry from "react-masonry-css";
 
 import "@styles/masonry-catalog.scss";
 
-import CardPreview from "../../gallery/card-preview/card-preview";
 import { Painting } from "@/types/Painting";
+import CardPreview from "../card-preview/card-preview";
 
 type Props = {
   paintingsList: Painting[];
