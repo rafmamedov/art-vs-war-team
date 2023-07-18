@@ -4,17 +4,9 @@ import { useEffect, useState } from "react";
 
 import style from "./morePaintings.module.scss";
 
-import CardPreview from "../../card-preview/card-preview";
+import CardPreview from "@components/card-preview/card-preview";
 import { getMorePaintings } from "@/utils/api";
-
-export interface Painting {
-  id: number;
-  authorFullName: string;
-  prettyId: string;
-  imageUrl: string;
-  title: string;
-  price: number;
-}
+import { Painting } from "@/types/Painting";
 
 type Props = {
   prettyId: string;
@@ -60,23 +52,13 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
 
   return (
     <div className={style.more__painting}>
-      {paintings.map((painting: Painting) => {
-        const paintingDetails = {
-          prettyId: painting.prettyId,
-          image: painting.imageUrl,
-          title: painting.title,
-          author: painting.authorFullName,
-          price: painting.price,
-        };
-
-        return (
-          <CardPreview
-            paintingDetails={paintingDetails}
-            key={painting.id}
-            className={style.cardPreview}
-          />
-        );
-      })}
+      {paintings.map((painting: Painting) => (
+        <CardPreview
+          paintingDetails={painting}
+          key={painting.id}
+          className={style.cardPreview}
+        />
+      ))}
     </div>
   );
 };

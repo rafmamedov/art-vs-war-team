@@ -18,6 +18,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
     price,
     height,
     width,
+    depth,
     yearOfCreation,
     description,
     author,
@@ -105,7 +106,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
               <p>Size:</p>
               <p
                 className={style.info}
-              >{`${width} W x ${height} H x 2 D cm`}</p>
+              >{`${width} W x ${height} H x ${depth} D cm`}</p>
             </div>
             <div className={style.description__block}>
               <p>Price:</p>

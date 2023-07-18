@@ -1,6 +1,6 @@
+import MasonryGallery from "@components/masonry-catalog/masonry-catalog";
 import style from "./page.module.scss";
 
-import MasonryGallery from "./masonry-catalog/masonry-catalog";
 import { getPaintings } from "@/utils/api";
 
 const Gallery = async () => {

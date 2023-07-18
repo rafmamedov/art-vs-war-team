@@ -1,8 +1,9 @@
 export interface Painting {
+  id: number;
   prettyId: string;
-  image: string;
+  imageUrl: string;
   title: string;
-  author: string;
+  authorFullName: string;
   price: number;
 }
 
