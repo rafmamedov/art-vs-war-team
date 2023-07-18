@@ -60,7 +60,7 @@ p {
 
 .imageOpacityEffect {
   transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 0.5);
+  transition-duration: 0.5s;
   opacity: 0;
 }

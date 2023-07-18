@@ -60,23 +60,13 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
 
   return (
     <div className={style.more__painting}>
-      {paintings.map((painting: Painting) => {
-        const paintingDetails = {
-          prettyId: painting.prettyId,
-          image: painting.imageUrl,
-          title: painting.title,
-          author: painting.authorFullName,
-          price: painting.price,
-        };
-
-        return (
-          <CardPreview
-            paintingDetails={paintingDetails}
-            key={painting.id}
-            className={style.cardPreview}
-          />
-        );
-      })}
+      {paintings.map((painting: Painting) => (
+        <CardPreview
+          paintingDetails={painting}
+          key={painting.id}
+          className={style.cardPreview}
+        />
+      ))}
     </div>
   );
 };

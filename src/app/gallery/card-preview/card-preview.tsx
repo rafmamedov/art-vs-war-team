@@ -13,21 +13,21 @@ type Props = {
 };
 
 const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
-  const { prettyId, image, title, author, price } = paintingDetails;
+  const { prettyId, imageUrl, title, authorFullName, price } = paintingDetails;
 
   return (
     <Link href={`/gallery/${prettyId}`}>
       <div className={`${style.card}`}>
         <Image
-          src={image}
-          alt={`${author} - ${title}`}
+          src={imageUrl}
+          alt={`${authorFullName} - ${title}`}
           width={1368}
           height={1500}
           className={`${style.image} ${className} imageOpacityEffect`}
           onLoadingComplete={(img) => (img.style.opacity = "1")}
         />
         <p className={style.title}>{title}</p>
-        <p className={style.artist}>{author}</p>
+        <p className={style.artist}>{authorFullName}</p>
         <div className={style.buy}>
           <p className={style.buy__price}>{`€ ${price}`}</p>
           <div className={style.buy__icon}>
