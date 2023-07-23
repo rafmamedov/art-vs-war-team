@@ -1,9 +1,23 @@
-import { SortPaintings } from "@/types/SortPaintings";
-
 const BASE_URL = "https://www.albedosunrise.com/";
 
 export async function getPaintings(params: string) {
-  const response = await fetch(`${BASE_URL}paintings/search?${params}`, {
+  const response = await fetch(
+    `${BASE_URL}paintings/search?size=1000&${params}`,
+    {
+      cache: "no-store",
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}
+
+export async function getFiltersData() {
+  const response = await fetch(`${BASE_URL}paintings/params`, {
     cache: "no-store",
   });
   if (!response.ok) {
@@ -12,7 +26,7 @@ export async function getPaintings(params: string) {
 
   const data = await response.json();
 
-  return data.content;
+  return data;
 }
 
 export async function getPainting(id: string) {

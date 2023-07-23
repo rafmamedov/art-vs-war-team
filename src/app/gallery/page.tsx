@@ -1,10 +1,11 @@
 import style from "./page.module.scss";
 
-import { getPaintings } from "@/utils/api";
+import { getFiltersData, getPaintings } from "@/utils/api";
 import Sort from "./sort/sort";
 import Preloader from "./preloader";
 import MasonryCatalog from "./massonry-catalog/massonry-catalog";
 import Filter from "./filter/filter";
+import { SortPaintings } from "@/types/SortPaintings";
 
 const Gallery = async ({
   searchParams,
@@ -21,8 +22,10 @@ const Gallery = async ({
     .join("&");
 
   const paintingsList = await getPaintings(
-    queryString || "sort=entityCreatedAt,desc"
+    queryString || `sort=${SortPaintings.newToOld}`
   );
+
+  const filtersData = await getFiltersData();
 
   return (
     <section className={style.gallery}>
@@ -30,7 +33,7 @@ const Gallery = async ({
       <Preloader paintingsList={paintingsList} />
       <div className={style.filters}>
         <Sort />
-        <Filter />
+        <Filter filtersData={filtersData} />
       </div>
 
       <div className={style.cards}>
