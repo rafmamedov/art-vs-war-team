@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 
 import style from "./artistTabs.module.scss";
 
-import { Add } from "@/app/icons/add";
+import { Add } from "@/app/icons/icon-add";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 import ArtProcess from "./artProcess/artProcess";
-import MasonryGallery from "@/app/components/masonry-catalog/masonry-catalog";
+import MasonryGallery from "@/app/components/masonry/masonry";
 import { Painting } from "@/types/Painting";
 
 const tabs: ArtistTabOptions[] = [

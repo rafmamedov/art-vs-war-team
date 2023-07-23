@@ -1,11 +1,11 @@
+import { SortPaintings } from "@/types/SortPaintings";
+
 const BASE_URL = "https://www.albedosunrise.com/";
 
-export async function getPaintings() {
-  const response = await fetch(
-    `${BASE_URL}paintings/search?size=100&sort=entityCreatedAt,desc`,
-    { cache: "no-store" }
-  );
-
+export async function getPaintings(params: string) {
+  const response = await fetch(`${BASE_URL}paintings/search?${params}`, {
+    cache: "no-store",
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }

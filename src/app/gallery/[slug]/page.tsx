@@ -98,7 +98,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
               </div>
             </div>
             <div className={style.description__block}>
-              <p>Created:</p>
+              <p>Year:</p>
               <p className={style.info}>{yearOfCreation}</p>
             </div>
             <div className={style.description__block}>

@@ -2,8 +2,8 @@ import { FC } from "react";
 import Image from "next/image";
 
 import style from "./artistInfo.module.scss";
-import { MapPoint } from "@/app/icons/map-point";
-import { Add } from "@/app/icons/add";
+import { MapPoint } from "@/app/icons/icon-map-point";
+import { Add } from "@/app/icons/icon-add";
 import { Artist } from "@/types/Artist";
 
 type Props = {

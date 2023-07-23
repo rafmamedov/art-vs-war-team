@@ -9,8 +9,8 @@ import {
   setFoundArtists,
 } from "@/app/redux/slices/searchArtistsSlice";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import { Search } from "@/app/icons/search";
-import { Close } from "@/app/icons/close";
+import { Search } from "@/app/icons/icon-search";
+import { CloseIcon } from "@/app/icons/icon-close";
 import { getFindArtistFromServer } from "@/utils/api";
 
 const InputArtistSearch = () => {
@@ -30,7 +30,7 @@ const InputArtistSearch = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      dispatch(setSearchArtists(query));
+      dispatch(setSearchArtists(query.trim()));
     }, 700);
 
     return () => {
@@ -69,7 +69,7 @@ const InputArtistSearch = () => {
           className={`${style.searchIcon} ${style.closeIcon}`}
           onClick={handleClearQuery}
         >
-          <Close />
+          <CloseIcon />
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Whatsapp } from "@/app/icons/social-icons";
+import { Facebook, Instagram, Whatsapp } from "@/app/icons/icons-social-networks";
 
 export const defaultContacts = {
   instagram: "https://www.instagram.com/",

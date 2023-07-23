@@ -33,6 +33,17 @@
   }
 }
 
+.filters {
+  @include set-flex(row);
+
+  gap: 20px;
+  position: relative;
+
+  @include laptop {
+    justify-content: flex-end;
+  }
+}
+
 .cards {
   margin-top: 24px;
 }

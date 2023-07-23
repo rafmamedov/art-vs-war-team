@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import style from "./artistCard.module.scss";
 import { Artist } from "@/types/Artist";
-import { MapPoint } from "@/app/icons/map-point";
-import { ArrowRight } from "@/app/icons/arrow-right";
+import { MapPoint } from "@/app/icons/icon-map-point";
+import { ArrowRight } from "@/app/icons/icon-arrow-right";
 
 type Props = {
   artist: Artist;

@@ -33,7 +33,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/components/card-preview",
-    "src/app/components/masonry-catalog",
+    "src/app/components/masonry",
     "_app.js",
     "src/app/api/sign-cloudinary-params.js"
   ],

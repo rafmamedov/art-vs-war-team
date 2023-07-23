@@ -4,6 +4,7 @@
 .card {
   @include set-flex(column);
   transition: transform 0.3s ease;
+  cursor: default;
 
   width: 100%;
   color: $gray-5;
@@ -36,6 +37,7 @@
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 1.5s;
+  cursor: pointer;
 }
 
 .title {
@@ -67,5 +69,6 @@
     border-color: $gray-0;
     border-width: 1px;
     border-style: solid;
+    cursor: pointer;
   }
 }
