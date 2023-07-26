@@ -1,6 +1,5 @@
 @import "./vars.scss";
 @import "./mixins.scss";
-@import '~bulma/bulma';
 
 * {
   box-sizing: border-box;
@@ -56,4 +55,14 @@ p {
 .buttonLight {
   height: 48px;
   width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -1,122 +1,61 @@
 "use client"
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
+import axios from "axios";
 
-import style from "./page.module.scss";
+import style from './page.module.scss';
 
-import { Add } from "../icons/add";
-import { Location } from "../icons/location";
-import AuthorPhoto from './assets/author.png';
-import MasonryGallery from "../gallery/masonry-catalog/masonry-catalog";
-import ArtProcess from "../components/artProcess/artProcess";
+import ArtistInfo from "../components/artistInfo/artistInfo";
+import EditProfile, { Author } from "../components/editProfile/editProfile";
+import CreatePainting from "../components/createPainting/createPainting";
 
-const arr = [
-  "/assets/images/Rectangle 2.png",
-  "/assets/images/Rectangle 3.png",
-  "/assets/images/Rectangle 4.png",
-  "/assets/images/Rectangle 5.png",
-  "/assets/images/Rectangle 6.png",
-  "/assets/images/Rectangle 7.png",
-  "/assets/images/Rectangle 2.png",
-  "/assets/images/Rectangle 3.png",
-  "/assets/images/Rectangle 4.png",
-  "/assets/images/Rectangle 5.png",
-  "/assets/images/Rectangle 6.png",
-  "/assets/images/Rectangle 7.png",
-];
+const PROFILE = 'https://www.albedosunrise.com/authors/profile';
 
-const Author = () => {
-  const [isArtworksVisible, setIsArtworksVisible] = useState(true);
-  const [isProcessVisible, setIsProcessVisible] = useState(false);
+export type Form = 'profile' | 'painting' | null;
 
-  const handleShowArtWorks = () => {
-    setIsProcessVisible(false);
-    setIsArtworksVisible(true);
-  };
+const Profile = () => {
+  const { user } = useAuthenticator((context) => [context.user]);
+  const [author, setAuthor] = useState<Author | null>(null);
+  const [openForm, setOpenForm] = useState<Form>(null);
 
-  const handleShowProcess = () => {
-    setIsArtworksVisible(false);
-    setIsProcessVisible(true);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const accessToken = user.getSignInUserSession()?.getAccessToken().getJwtToken();
+      const headers = {
+        'Authorization': `Bearer ${accessToken}`,
+      };
+
+      const response = await axios.get(PROFILE, { headers });
+      setAuthor(response.data);
+    };
+
+    if (user?.username) {
+      fetchData();
+    }
+  }, [user]);
 
   return (
-    <section className={style.author}>
-      <div className={style.container}>
-        <div className={style.author__photo}>
-          <Image
-            className={style.image}
-            src={AuthorPhoto}
-            alt="author"
-          />
-        </div>
+    <Authenticator className={style.auth}>
+      {(!openForm && author) && (
+        <ArtistInfo
+          isProfile
+          data={author}
+          setOpenForm={setOpenForm}
+        />
+      )}
 
-        <div className={style.author__info}>
-          <div className={style.author__name}>
-            Margarita Dudinska
-          </div>
-          <div className={style.author__styles}>
-            Style: Primitivism / Native
-          </div>
-          <div className={style.author__location}>
-            <Location />
-            Poland, Warsaw
-          </div>
-          <div className={style.author__about}>
-            Margarita Dudinska is an acclaimed artist known for her captivating and innovative artwork.
-            Born in an artistic family in [place of birth] on [date of birth], Dudinska displayed a
-            passion for creativity from an early age.
-            With a strong determination to pursue her artistic dreams, Dudinska attended
-            [name of art school/university] where she honed her skills and developed a unique style.
-            Her works often showcase a harmonious blend of vibrant colors, intricate details,
-            and thought-provoking themes.
-          </div>
+      {(openForm === 'profile' || !author) && (
+        <EditProfile
+          author={author}
+          setAuthor={setAuthor}
+          setOpenForm={setOpenForm}
+        />
+      )}
 
-          <button
-            className={style.button__edit}
-            type="button"
-          >
-            Edit profile
-          </button>
-          <button
-            className={style.button__add}
-            type="button"
-          >
-            <Add className={style.button__icon} />
-            Add Arts
-          </button>
-        </div>
-      </div>
-
-      <div className={style.tabs}>
-        <div className={style.tabs__container}>
-          <div
-            className={isArtworksVisible ? style.isActive : style.tab}
-            onClick={handleShowArtWorks}
-          >
-            Artworks
-          </div>
-          <div className={style.tab}>Collections</div>
-          <div
-            className={isProcessVisible ? style.isActive : style.tab}
-            onClick={handleShowProcess}
-          >
-            Art Process
-          </div>
-        </div>
-
-        <button className={style.add}>
-          +
-        </button>
-        <div className={ style.tabsFooter } />
-      </div>
-
-      <div className={style.gallery}>
-        {isArtworksVisible && <MasonryGallery images={arr} />}
-        {isProcessVisible && <ArtProcess />}
-      </div>
-    </section>
+      {openForm === 'painting' && <CreatePainting setOpenForm={setOpenForm} />}
+    </Authenticator>
   );
 };
 
-export default Author;
+export default Profile;
