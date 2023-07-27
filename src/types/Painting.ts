@@ -6,3 +6,8 @@ export interface Painting {
   authorFullName: string;
   price: number;
 }
+
+export interface ArtCollection {
+  total: number;
+  content: Painting[];
+}

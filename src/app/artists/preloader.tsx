@@ -2,11 +2,11 @@
 
 import { useRef } from "react";
 
-import { Artist } from "@/types/Artist";
+import { ArtistsCollection } from "@/types/Artist";
 import { setFoundArtists } from "../redux/slices/searchArtistsSlice";
 import { store } from "../redux/store";
 
-function Preloader({ artistsList }: { artistsList: Artist[] }) {
+function Preloader({ artistsList }: { artistsList: ArtistsCollection }) {
   const loaded = useRef(false);
   if (!loaded.current) {
     store.dispatch(setFoundArtists(artistsList));

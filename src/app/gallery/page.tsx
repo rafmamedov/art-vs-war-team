@@ -1,11 +1,11 @@
-import style from "./page.module.scss";
-
 import { getFiltersData, getPaintings } from "@/utils/api";
-import Sort from "./sort/sort";
-import Preloader from "./preloader";
-import MasonryCatalog from "./massonry-catalog/massonry-catalog";
 import Filter from "./filter/filter";
-import { SortPaintings } from "@/types/SortPaintings";
+import MasonryCatalog from "./massonry-catalog/massonry-catalog";
+import Preloader from "./preloader";
+import Sort from "./sort/sort";
+
+import style from "./page.module.scss";
+import MorePaintingsButton from "./more-paintings-button/more-paintings-button";
 
 const Gallery = async ({
   searchParams,
@@ -21,16 +21,14 @@ const Gallery = async ({
     )
     .join("&");
 
-  const paintingsList = await getPaintings(
-    queryString || `sort=${SortPaintings.newToOld}`
-  );
+  const artCollection = await getPaintings(queryString || "");
 
   const filtersData = await getFiltersData();
 
   return (
     <section className={style.gallery}>
       <h1 className={style.title}>Gallery</h1>
-      <Preloader paintingsList={paintingsList} />
+      <Preloader artCollection={artCollection} />
       <div className={style.filters}>
         <Sort />
         <Filter filtersData={filtersData} />
@@ -39,7 +37,7 @@ const Gallery = async ({
       <div className={style.cards}>
         <MasonryCatalog />
       </div>
-      {/* <button className={style.button}>More Artworks</button> */}
+      <MorePaintingsButton />
     </section>
   );
 };

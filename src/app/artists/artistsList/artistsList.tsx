@@ -6,11 +6,11 @@ import { Artist } from "@/types/Artist";
 import style from "./artistsList.module.scss";
 import { useAppSelector } from "@/types/ReduxHooks";
 import InputArtistSearch from "./inputSearch/inputSearch";
+import MoreArtistsButton from "./more-artists-button/more-artists-button";
 
 const ArtistsList = () => {
-  const { foundArtists, search } = useAppSelector(
-    (state) => state.searchArtistsSlice
-  );
+  const { foundArtists } = useAppSelector((state) => state.searchArtistsSlice);
+
 
   return (
     <section className={style.artists}>
@@ -23,7 +23,7 @@ const ArtistsList = () => {
         {foundArtists.map((artist: Artist, index: number) => (
           <ArtistCard
             artist={artist}
-            key={artist.cognitoUsername}
+            key={artist.cognitoSubject}
             className={
               index % 2 === 0
                 ? `${style.artistsCardOdd}`
@@ -32,7 +32,7 @@ const ArtistsList = () => {
           />
         ))}
       </div>
-      {/* {!search && <button className={style.button}>More Artists</button>} */}
+      <MoreArtistsButton />
     </section>
   );
 };
