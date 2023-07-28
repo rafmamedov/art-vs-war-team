@@ -24,8 +24,18 @@
       "@redux*": ["./src/app/redux/*"],
       "@styles*": ["./src/styles/*"],
       "@home*": ["./src/app/components/home*"],
+      "@components*": ["./src/app/components/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/gallery/card-preview", "src/app/gallery/masonry-catalog", "_app.js", "src/app/api/sign-cloudinary-params.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/components/card-preview",
+    "src/app/components/masonry-catalog",
+    "_app.js",
+    "src/app/api/sign-cloudinary-params.js"
+  ],
   "exclude": ["node_modules"]
 }

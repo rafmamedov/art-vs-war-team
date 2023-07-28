@@ -33,29 +33,24 @@ export const metadata = {
   description: "Artists gallery",
 };
 
-export default function RootLayout({
-  children,
-}: Props) {
+export default function RootLayout({ children }: Props) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning={true}
-    >
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${openSansFont.variable} ${kyivFont.variable}`}
         suppressHydrationWarning={true}
       >
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-        />
-        <Header />
         <ReduxProvider>
           <AuthenticatorProvider>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+            <Header />
             {children}
+            <Footer />
           </AuthenticatorProvider>
         </ReduxProvider>
-        <Footer />
       </body>
     </html>
   );

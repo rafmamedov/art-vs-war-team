@@ -10,7 +10,7 @@
 }
 
 .slider .swiper-container__thumbs {
-  @include set-size(100%, 90%);
+  @include set-size(100%, 100%);
 }
 
 .slider .swiper-container__image {
@@ -48,7 +48,7 @@
   }
 
   @include desktopHD {
-    height: 550px;
+    height: 585px;
   }
 }
 .slider__thumbs .slider__image {
@@ -98,8 +98,8 @@
 
   @include desktopHD {
     max-width: 800px;
-    height: 550px;
-    max-height: 550px;
+    height: 650px;
+    max-height: 650px;
   }
 }
 

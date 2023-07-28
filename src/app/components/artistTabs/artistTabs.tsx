@@ -8,7 +8,8 @@ import style from './artistTabs.module.scss';
 import ArtProcess from '../artProcess/artProcess';
 import { Add } from '@/app/icons/add';
 import { Form } from '@/app/profile/page';
-import MasonryGallery from '@/app/gallery/masonry-catalog/masonry-catalog';
+import MasonryGallery from '../masonry-catalog/masonry-catalog';
+import { Painting } from '@/types/Painting';
 
 const tabs = ['Artworks', 'Collections', 'Art Process'];
 
@@ -29,9 +30,10 @@ const arr = [
 
 type Props = {
   setOpenForm: Dispatch<SetStateAction<Form>>;
+  paintings: Painting[];
 }
 
-const ArtistTabs: FC<Props> = ({ setOpenForm }) => {
+const ArtistTabs: FC<Props> = ({ setOpenForm, paintings }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const pathname = usePathname();
 
@@ -71,7 +73,7 @@ const ArtistTabs: FC<Props> = ({ setOpenForm }) => {
       </div>
 
       <div className={style.gallery}>
-        {selectedTab === 'Artworks' && <MasonryGallery images={arr} />}
+        {selectedTab === 'Artworks' && <MasonryGallery paintingsList={paintings} />}
         {selectedTab === 'Art Process' && <ArtProcess />}
       </div>
     </>

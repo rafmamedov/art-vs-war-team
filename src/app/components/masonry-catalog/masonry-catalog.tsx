@@ -2,19 +2,20 @@
 
 import Masonry from "react-masonry-css";
 
-import "./masonry-catalog.scss";
+import "@styles/masonry-catalog.scss";
+
+import { Painting } from "@/types/Painting";
 import CardPreview from "../card-preview/card-preview";
 
 type Props = {
-  images: string[];
+  paintingsList: Painting[];
 };
 
-const MasonryGallery: React.FC<Props> = ({ images }) => {
+const MasonryGallery: React.FC<Props> = ({ paintingsList }) => {
   const breakpointColumnsObj = {
-    default: 2,
     639: 2,
     1365: 3,
-    4000: 4,
+    5000: 4,
   };
 
   return (
@@ -23,8 +24,8 @@ const MasonryGallery: React.FC<Props> = ({ images }) => {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {images.map((card, index) => (
-        <CardPreview image={card} key={index} />
+      {paintingsList.map((painting: Painting) => (
+        <CardPreview paintingDetails={painting} key={painting.id} />
       ))}
     </Masonry>
   );

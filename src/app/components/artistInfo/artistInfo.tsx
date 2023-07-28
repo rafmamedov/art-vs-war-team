@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 
 import style from "./artistInfo.module.scss";
@@ -7,15 +7,9 @@ import { Add } from "../../icons/add";
 import { Location } from "../../icons/location";
 import ArtistTabs from "../artistTabs/artistTabs";
 import { Form } from "@/app/profile/page";
-
-export interface Author {
-  id: string;
-  fullName: string;
-  country: string;
-  city: string;
-  aboutMe: string;
-  imageUrl: string;
-};
+import { getPaintingsByArtist } from "@/utils/api";
+import { Author } from "../editProfile/editProfile";
+import { Painting } from "@/types/Painting";
 
 type Props = {
 data: Author;
@@ -28,6 +22,21 @@ const ArtistInfo: FC<Props> = ({
   setOpenForm,
   isProfile = false,
 }) => {
+  const [paintings, setPaintings] = useState<Painting[]>([]);
+
+  const getPaintings = async () => {
+    try {
+      const response = await getPaintingsByArtist(data.prettyId);
+      setPaintings(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPaintings();
+  }, []);
+
   return (
     <section className={style.author}>
       <div className={style.container}>
@@ -48,7 +57,7 @@ const ArtistInfo: FC<Props> = ({
           <div className={style.author__styles}>
             <div className={style.style}>
               <span className={style.style__title}>Styles: </span>
-              Primitivism
+              Conceptual
             </div>
           </div>
 
@@ -82,7 +91,10 @@ const ArtistInfo: FC<Props> = ({
         </div>
       </div>
 
-      <ArtistTabs setOpenForm={setOpenForm} />
+      <ArtistTabs
+        setOpenForm={setOpenForm}
+        paintings={paintings}
+      />
     </section>
   );
 };

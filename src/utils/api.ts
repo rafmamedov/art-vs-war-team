@@ -1,0 +1,100 @@
+const BASE_URL = "https://www.albedosunrise.com/";
+
+export async function getPaintings() {
+  const response = await fetch(
+    `${BASE_URL}paintings/search?size=100&sort=entityCreatedAt,desc`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}
+
+export async function getPainting(id: string) {
+  const response = await fetch(`${BASE_URL}paintings/v2/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getArtists() {
+  const response = await fetch(`${BASE_URL}authors`, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}
+
+export async function getArtist(id: string) {
+  const response = await fetch(`${BASE_URL}authors/v2/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getPaintingsByArtist(id: string) {
+  const response = await fetch(`${BASE_URL}paintings/author/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}
+
+export async function getMorePaintings(id: string, size: number) {
+  const response = await fetch(
+    `https://www.albedosunrise.com/paintings/additional?paintingPrettyId=${id}&size=${size}`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getFindArtistFromServer(searchWord: string) {
+  const response = await fetch(
+    `https://www.albedosunrise.com/authors${searchWord}`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}

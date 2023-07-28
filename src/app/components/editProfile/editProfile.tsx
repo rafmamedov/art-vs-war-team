@@ -19,7 +19,7 @@ const PROFILE = 'https://www.albedosunrise.com/authors/profile';
 const SIGNATURE = 'https://www.albedosunrise.com/images/getSignature';
 const VALIDATE = 'https://www.albedosunrise.com/authors/checkInputAndGet';
 
-export type UserData = {
+export interface UserData {
   fullName: string;
   country: string;
   city: string;
@@ -27,12 +27,11 @@ export type UserData = {
   image: File | {};
 }
 
-export type ImageData = {
+export interface ImageData {
   publicId: string;
-  width?: number;
-  height?: number;
   version: number;
   signature: string;
+  moderationStatus: string;
 }
 
 export interface Author {
@@ -41,6 +40,7 @@ export interface Author {
   country: string;
   city: string;
   aboutMe: string;
+  prettyId: string;
   imageUrl: string;
   imagePublicId: string;
 };
@@ -165,11 +165,10 @@ const EditProfile: FC<Props> = ({
           formData,
           { headers: {"Content-Type": "multipart/form-data"} },
         );
-  
+
         const imageData: ImageData = {
           publicId: response.data.public_id,
-          width: response.data.width,
-          height: response.data.height,
+          moderationStatus: 'APPROVED',
           version: response.data.version,
           signature: response.data.signature,
         }
@@ -207,34 +206,20 @@ const EditProfile: FC<Props> = ({
       image: image || { publicId: author?.imagePublicId },
     };
 
+    console.log(image);
+    console.log(authorData);
+
     action === 'create'
       ? (
         await axios.post(AUTHOR, authorData, { headers })
         .then(response => {
           refreshAccessToken();
           setAuthor(response.data);
-          toast.success('Successfully created!', {
-            style: {
-              borderRadius: '10px',
-              background: '#1c1d1d',
-              color: '#b3b4b5',
-            },
-          });
         })
       ) : (
         await axios.put(AUTHOR, authorData, { headers })
         .then(response => {
-          axios.get(PROFILE, { headers })
-            .then(response => {
-              setAuthor(response.data);
-              toast.success('Successfully updated!', {
-                style: {
-                  borderRadius: '10px',
-                  background: '#1c1d1d',
-                  color: '#b3b4b5',
-                },
-              });
-            });
+          setAuthor(response.data);
         })
       )
   };
@@ -269,8 +254,34 @@ const EditProfile: FC<Props> = ({
     };
 
     author
-      ? onUpdateProfile('update', data)
-      : onUpdateProfile('create', data);
+      ? toast.promise(
+        onUpdateProfile('update', data),
+        {
+          loading: 'Saving...',
+          success: <b>Settings saved!</b>,
+          error: <b>Could not save.</b>,
+        }, {
+          style: {
+            borderRadius: '10px',
+            background: '#1c1d1d',
+            color: '#b3b4b5',
+          }
+        }
+      )
+      : toast.promise(
+        onUpdateProfile('create', data),
+        {
+          loading: 'Saving...',
+          success: <b>Settings saved!</b>,
+          error: <b>Could not save.</b>,
+        }, {
+          style: {
+            borderRadius: '10px',
+            background: '#1c1d1d',
+            color: '#b3b4b5',
+          }
+        }
+      );
 
     setImagePreview(null);
     reset();
