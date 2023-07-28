@@ -1,10 +1,10 @@
 import { getArtists } from "@/utils/api";
 import ArtistsList from "./artistsList/artistsList";
 import Preloader from "./preloader";
-import { Artist } from "@/types/Artist";
+import { ArtistsCollection } from "@/types/Artist";
 
 const Artists = async () => {
-  const artistsList: Artist[] = await getArtists();
+  const artistsList: ArtistsCollection = await getArtists();
 
   return (
     <>

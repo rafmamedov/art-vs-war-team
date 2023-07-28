@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 import style from "./header.module.scss";
 
-import { Cart } from "@/app/icons/cart";
-import { MobileMenu } from "@/app/icons/menu";
-import { Close } from "@/app/icons/close";
+import { Cart } from "@/app/icons/icon-cart";
+import { MobileMenu } from "@/app/icons/icon-menu";
+import { CloseIcon } from "@/app/icons/icon-close";
 import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
 import LoginButton from "./navigation/login-button/login-button";
@@ -38,7 +38,7 @@ const Header = () => {
             className={style.header__mobileElement}
             onClick={handleShowMobileMenu}
           >
-            <Close />
+            <CloseIcon />
           </div>
         ) : (
           <div

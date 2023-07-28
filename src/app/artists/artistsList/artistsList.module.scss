@@ -53,9 +53,15 @@
   font-size: $font-size-base;
   color: $gray-100;
   background-color: $gray-5;
+  transition-duration: 0.3s;
 
   &:hover {
     background-color: $gray-0;
+  }
+
+  &:active {
+    transform: scale(0.9);
+    transition-duration: 0.3s;
   }
 
   @include tablet {
@@ -63,6 +69,14 @@
 
     align-self: center;
     border-radius: 50%;
+    background-color: $gray-100;
+    border: 1px solid $gray-0;
+    color: $gray-0;
+
+    &:hover {
+      background-color: $gray-0;
+      color: $gray-100;
+    }
   }
 
   @include desktop {

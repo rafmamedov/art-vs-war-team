@@ -64,3 +64,8 @@ p {
   transition-duration: 0.5s;
   opacity: 0;
 }
+
+div ::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}

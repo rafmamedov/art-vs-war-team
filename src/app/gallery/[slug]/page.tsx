@@ -5,7 +5,6 @@ import style from "./page.module.scss";
 import PaintingGallery from "./paintingGallery/paintingGallery";
 import AddToCartButton from "./paintingGallery/button/button";
 import MorePaintings from "./morePainting/morePaintings";
-import { Medium, Style, Subject, Support } from "@/types/Painting";
 import { getPainting } from "@/utils/api";
 
 const PaintingCard = async ({ params }: { params: { slug: string } }) => {
@@ -57,9 +56,9 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
             <div className={style.description__block}>
               <p>Subject:</p>
               <div>
-                {subjects.map((subject: Subject, index: number) => (
+                {subjects.map((subject: string, index: number) => (
                   <span key={index}>
-                    {subject.name}
+                    {subject}
                     {index !== subjects.length - 1 && `,  `}
                   </span>
                 ))}
@@ -68,9 +67,9 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
             <div className={style.description__block}>
               <p>Style:</p>
               <div>
-                {styles.map((style: Style, index: number) => (
+                {styles.map((style: string, index: number) => (
                   <span key={index}>
-                    {style.name}
+                    {style}
                     {index !== styles.length - 1 && `,  `}
                   </span>
                 ))}
@@ -79,9 +78,9 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
             <div className={style.description__block}>
               <p>Medium:</p>
               <div>
-                {mediums.map((medium: Medium, index: number) => (
+                {mediums.map((medium: string, index: number) => (
                   <span key={index}>
-                    {medium.name}
+                    {medium}
                     {index !== mediums.length - 1 && `,  `}
                   </span>
                 ))}
@@ -90,16 +89,16 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
             <div className={style.description__block}>
               <p>Support:</p>
               <div>
-                {supports.map((support: Support, index: number) => (
+                {supports.map((support: string, index: number) => (
                   <span key={index}>
-                    {support.name}
+                    {support}
                     {index !== supports.length - 1 && `,  `}
                   </span>
                 ))}
               </div>
             </div>
             <div className={style.description__block}>
-              <p>Created:</p>
+              <p>Year:</p>
               <p className={style.info}>{yearOfCreation}</p>
             </div>
             <div className={style.description__block}>
