@@ -28,10 +28,12 @@ const ArtistCard: React.FC<Props> = ({ artist, className }) => {
         <Image
           src={imageUrl}
           alt={`artist ${fullName}`}
-          width={1000}
-          height={1000}
+          width={645}
+          height={790}
           style={{
             objectFit: "cover",
+            maxHeight: "789px",
+            maxWidth: "641.5px",
           }}
           className={`${style.image} imageOpacityEffect`}
           onLoadingComplete={(img) => (img.style.opacity = "1")}
