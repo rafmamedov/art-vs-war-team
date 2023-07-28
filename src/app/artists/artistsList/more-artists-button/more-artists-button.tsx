@@ -34,7 +34,7 @@ const MoreArtistsButton = () => {
     <>
       {!isEndArtistsList && (
         <button className={style.button} onClick={handleGetNewPage}>
-          More Artworks
+          More Artists
         </button>
       )}
     </>

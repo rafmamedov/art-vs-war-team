@@ -6,7 +6,7 @@ import style from "./filter.module.scss";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 import {
-  resetPageNumber,
+  resetGalleryPageCount,
   setPaintings,
 } from "@/app/redux/slices/paintingsSlice";
 import { useAppDispatch } from "@/types/ReduxHooks";
@@ -17,8 +17,13 @@ import { CloseIcon } from "@/app/icons/icon-close";
 import RangeSlider from "./rangeSlider/rangeSlider";
 import StylesCheckBox from "./stylesCheckbox/stylesCheckbox";
 import SizesSection from "./sizesSection/sizesSection";
+import { PaintingFilterParams } from "@/types/Painting";
 
-const Filter = ({ filtersData }: any) => {
+type Props = {
+  filtersData: PaintingFilterParams;
+};
+
+const Filter: React.FC<Props> = ({ filtersData }) => {
   const {
     maxPrice,
     minPrice,
@@ -62,16 +67,15 @@ const Filter = ({ filtersData }: any) => {
     mediumCheckOptions.length +
     supportCheckOptions.length;
 
-  const getFilteringPaintings = async (searchParams: any) => {
-    const paintings = await getPaintings(searchParams);
+  const getFilteringPaintings = async (filtersParams: string) => {
+    const paintings = await getPaintings(filtersParams);
     dispatch(setPaintings(paintings));
   };
 
   const handleFilterPaintings = () => {
     setIsMenuOpen(!isMenuOpen);
     const params = new URLSearchParams(window.location.search);
-    params.delete("page");
-    dispatch(resetPageNumber());
+    dispatch(resetGalleryPageCount());
 
     if (priceRanges[0] !== minPrice || priceRanges[1] !== maxPrice) {
       params.set("priceBetween", priceRanges.join(","));
@@ -102,6 +106,18 @@ const Filter = ({ filtersData }: any) => {
       params.delete("supportIn");
     }
 
+    if (widthRanges[0] !== minWidth || widthRanges[1] !== maxWidth) {
+      params.set("widthBetween", widthRanges.join(","));
+    } else {
+      params.delete("widthBetween");
+    }
+
+    if (heightRanges[0] !== minHeight || heightRanges[1] !== maxHeight) {
+      params.set("heightBetween", heightRanges.join(","));
+    } else {
+      params.delete("heightBetween");
+    }
+
     router.replace(`${pathname}?${params.toString()}`);
 
     getFilteringPaintings(params.toString());
@@ -109,12 +125,13 @@ const Filter = ({ filtersData }: any) => {
 
   const removeAllSearchParameters = (params: URLSearchParams) => {
     const allSearchParams = [
-      "page",
       "priceBetween",
       "styleIn",
       "subjectIn",
       "mediumIn",
       "supportIn",
+      "widthBetween",
+      "heightBetween",
     ];
 
     allSearchParams.forEach((param) => params.delete(param));
@@ -122,7 +139,7 @@ const Filter = ({ filtersData }: any) => {
 
   const handleClearFilters = () => {
     setIsMenuOpen(false);
-    dispatch(resetPageNumber());
+    dispatch(resetGalleryPageCount());
 
     const params = new URLSearchParams(window.location.search);
     removeAllSearchParameters(params);
@@ -133,16 +150,25 @@ const Filter = ({ filtersData }: any) => {
     setSubjectCheckOptions([]);
     setMediumCheckOptions([]);
     setSupportCheckOptions([]);
+    setWidthRanges([minWidth, maxWidth]);
+    setHeightRanges([minHeight, maxHeight]);
 
     getFilteringPaintings(params.toString());
   };
 
   useEffect(() => {
+    const price = searchParams.get("priceBetween");
     const style = searchParams.get("styleIn");
     const subject = searchParams.get("subjectIn");
     const medium = searchParams.get("mediumIn");
     const support = searchParams.get("supportIn");
-    const price = searchParams.get("priceBetween");
+    const width = searchParams.get("widthBetween");
+    const height = searchParams.get("heightBetween");
+
+    if (price) {
+      const priceNumbers = price.split(",").map((item) => Number(item));
+      setPriceRanges(priceNumbers);
+    }
 
     if (style) {
       setStyleCheckOptions(style.split(","));
@@ -160,15 +186,20 @@ const Filter = ({ filtersData }: any) => {
       setSupportCheckOptions(support.split(","));
     }
 
-    if (price) {
-      const priceNumbers = price.split(",").map((item) => Number(item));
-      setPriceRanges(priceNumbers);
+    if (width) {
+      const widthNumbers = width.split(",").map((item) => Number(item));
+      setWidthRanges(widthNumbers);
+    }
+
+    if (height) {
+      const heightNumbers = height.split(",").map((item) => Number(item));
+      setHeightRanges(heightNumbers);
     }
   }, []);
 
   useEffect(() => {
-    const handleCloseDropdown = (event: any) => {
-      if (!menuRef.current?.contains(event.target)) {
+    const handleCloseDropdown = (event: MouseEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
     };
