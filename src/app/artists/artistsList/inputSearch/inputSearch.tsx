@@ -39,7 +39,7 @@ const InputArtistSearch = () => {
   }, [query, dispatch]);
 
   useEffect(() => {
-    getFindArtists(`/searchByWord?word=${search}`);
+    getFindArtists(`?query=${search}`);
   }, [search, getFindArtists]);
 
   const handleSearchArtist = (event: React.ChangeEvent<HTMLInputElement>) => {

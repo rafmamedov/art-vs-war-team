@@ -1,4 +1,4 @@
-const BASE_URL = "https://www.albedosunrise.com/";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getPaintings(params: string) {
   const response = await fetch(`${BASE_URL}paintings/search?${params}`, {
@@ -84,7 +84,7 @@ export async function getPaintingsByArtist(id: string) {
 
 export async function getMorePaintings(id: string, size: number) {
   const response = await fetch(
-    `https://www.albedosunrise.com/paintings/additional?paintingPrettyId=${id}&size=${size}`,
+    `${BASE_URL}paintings/additional?paintingPrettyId=${id}&size=${size}`,
     { cache: "no-store" }
   );
 

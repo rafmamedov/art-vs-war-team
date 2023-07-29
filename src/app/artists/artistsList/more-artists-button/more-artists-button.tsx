@@ -25,9 +25,7 @@ const MoreArtistsButton = () => {
     const currentPage = pagesCount + 1;
     !search
       ? getAdditionalPaintings(`?page=${currentPage}`)
-      : getAdditionalPaintings(
-          `/searchByWord?word=${search}&page=${currentPage}`
-        );
+      : getAdditionalPaintings(`?page=${currentPage}&query=${search}`);
   };
 
   return (

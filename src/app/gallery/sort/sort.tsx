@@ -107,9 +107,8 @@ const Sort = () => {
                 key={index}
                 onClick={() => handleSortPaintings(field.value)}
               >
-                <option value={field.value} className={style.dropdown__option}>
-                  {field.title}
-                </option>
+                <span>{field.title}</span>
+                <option value={field.value} />
                 <div
                   className={`${
                     sortBy === field.value && style.radioButtonActive
