@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import style from "./artistCard.module.scss";
 import { Artist } from "@/types/Artist";
-import { MapPoint } from "@/app/icons/map-point";
-import { ArrowRight } from "@/app/icons/arrow-right";
+import { MapPoint } from "@/app/icons/icon-map-point";
+import { ArrowRight } from "@/app/icons/icon-arrow-right";
 
 type Props = {
   artist: Artist;
@@ -28,10 +28,12 @@ const ArtistCard: React.FC<Props> = ({ artist, className }) => {
         <Image
           src={imageUrl}
           alt={`artist ${fullName}`}
-          width={1000}
-          height={1000}
+          width={645}
+          height={790}
           style={{
             objectFit: "cover",
+            maxHeight: "789px",
+            maxWidth: "641.5px",
           }}
           className={`${style.image} imageOpacityEffect`}
           onLoadingComplete={(img) => (img.style.opacity = "1")}

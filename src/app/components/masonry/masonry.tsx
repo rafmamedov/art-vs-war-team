@@ -2,7 +2,7 @@
 
 import Masonry from "react-masonry-css";
 
-import "@styles/masonry-catalog.scss";
+import "@styles/masonry.scss";
 
 import { Painting } from "@/types/Painting";
 import CardPreview from "../card-preview/card-preview";

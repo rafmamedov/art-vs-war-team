@@ -4,6 +4,8 @@
 .tabs {
   position: relative;
   margin-top: 36px;
+  margin-bottom: 32px;
+  padding-left: 22px;
   font-size: $font-size-md;
   line-height: 20px;
   color: $gray-0;
@@ -15,9 +17,9 @@
   }
 
   @include tabletXL {
-    @include set-flex(row);
-
+    @include set-flex(row, center, center);
     padding-left: 36px;
+    justify-content: space-between;
   }
 
   @include laptop {
@@ -74,7 +76,7 @@
     width: 94px;
     height: 48px;
     border: 1px solid $gray-0;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 3px solid $gray-100;
     border-radius: 24px 24px 0px 0px;
     z-index: 2;
 
@@ -94,6 +96,7 @@
     width: 184px;
     height: 48px;
     border-radius: 24px 24px 0px 0px;
+    transform: translateY(-1px);
     color: $gray-70;
     text-align: center;
     font-size: $font-size-base;
@@ -103,9 +106,9 @@
       cursor: pointer;
     }
 
-    @include laptop {
-      width: 208px;
+    @include tabletXL {
       @include set-flex(row, center, center);
+      width: 208px;
       gap: 4px;
     }
   }
@@ -113,16 +116,16 @@
   .tabsFooter {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 1px;
     height: 1px;
     width: 100%;
-    z-index: 1;
     background-color: $gray-0;
+    z-index: 0;
   }
 }
 
 .gallery {
-  padding: 32px 22px;
+  padding: 15px 22px;
 
   @include tabletXL {
     padding: 32px 36px;

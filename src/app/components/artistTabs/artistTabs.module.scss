@@ -76,8 +76,6 @@
     width: 94px;
     height: 48px;
     border: 1px solid $gray-0;
-    // border-left: 1px solid $gray-0;
-    // border-right: 1px solid $gray-0;
     border-bottom: 3px solid $gray-100;
     border-radius: 24px 24px 0px 0px;
     z-index: 2;
@@ -98,6 +96,7 @@
     width: 184px;
     height: 48px;
     border-radius: 24px 24px 0px 0px;
+    transform: translateY(-1px);
     color: $gray-70;
     text-align: center;
     font-size: $font-size-base;
@@ -107,7 +106,7 @@
       cursor: pointer;
     }
 
-    @include laptop {
+    @include tabletXL {
       width: 208px;
       @include set-flex(row, center, center);
       gap: 4px;

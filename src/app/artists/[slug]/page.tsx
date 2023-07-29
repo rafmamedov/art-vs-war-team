@@ -1,3 +1,4 @@
+import style from './page.module.scss'
 import ArtistInfo from "./artistInfo/artistInfo";
 import { getArtist, getPaintingsByArtist } from "@/utils/api";
 import ArtistTabs from "./artistTabs/artistTabs";
@@ -12,10 +13,10 @@ const Artist = async ({ params }: { params: { slug: string } }) => {
   ]);
 
   return (
-    <>
-      <ArtistInfo artistInfo={artistInfo} />
-      <ArtistTabs paintingsList={paintingsList} />
-    </>
+      <section className={style.artist}>
+        <ArtistInfo artistInfo={artistInfo} />
+        <ArtistTabs paintingsList={paintingsList} />
+      </section>
   );
 };
 

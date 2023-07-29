@@ -1,19 +1,43 @@
-import MasonryGallery from "@components/masonry-catalog/masonry-catalog";
+import { getFiltersData, getPaintings } from "@/utils/api";
+import Filter from "./filter/filter";
+import MasonryCatalog from "./massonry-catalog/massonry-catalog";
+import Preloader from "./preloader";
+import Sort from "./sort/sort";
+
 import style from "./page.module.scss";
+import MorePaintingsButton from "./more-paintings-button/more-paintings-button";
 
-import { getPaintings } from "@/utils/api";
+const Gallery = async ({
+  searchParams,
+}: {
+  searchParams: { sort: string };
+}) => {
+  const queryString = Object.keys(searchParams)
+    .map(
+      (key) =>
+        `${key}=${encodeURIComponent(
+          searchParams[key as keyof typeof searchParams]
+        )}`
+    )
+    .join("&");
 
-const Gallery = async () => {
-  const paintingsList = await getPaintings();
+  const artCollection = await getPaintings(queryString || "");
+
+  const filtersData = await getFiltersData();
 
   return (
     <section className={style.gallery}>
       <h1 className={style.title}>Gallery</h1>
+      <Preloader artCollection={artCollection} />
+      <div className={style.filters}>
+        <Sort />
+        <Filter filtersData={filtersData} />
+      </div>
 
       <div className={style.cards}>
-        <MasonryGallery paintingsList={paintingsList} />
+        <MasonryCatalog />
       </div>
-      <button className={style.button}>More Artworks</button>
+      <MorePaintingsButton />
     </section>
   );
 };

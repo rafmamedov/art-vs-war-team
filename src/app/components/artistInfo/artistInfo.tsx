@@ -1,42 +1,29 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import Image from "next/image";
 
 import style from "./artistInfo.module.scss";
 
-import { Add } from "../../icons/add";
+import { Add } from "../../icons/icon-add";
 import { Location } from "../../icons/location";
-import ArtistTabs from "../artistTabs/artistTabs";
+
 import { Form } from "@/app/profile/page";
-import { getPaintingsByArtist } from "@/utils/api";
 import { Author } from "../editProfile/editProfile";
 import { Painting } from "@/types/Painting";
+import ArtistTabs from "@/app/artists/[slug]/artistTabs/artistTabs";
 
 type Props = {
 data: Author;
 isProfile?: boolean;
+paintings: Painting[];
 setOpenForm: Dispatch<SetStateAction<Form>>;
 };
 
 const ArtistInfo: FC<Props> = ({
   data,
+  paintings,
   setOpenForm,
   isProfile = false,
 }) => {
-  const [paintings, setPaintings] = useState<Painting[]>([]);
-
-  const getPaintings = async () => {
-    try {
-      const response = await getPaintingsByArtist(data.prettyId);
-      setPaintings(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getPaintings();
-  }, []);
-
   return (
     <section className={style.author}>
       <div className={style.container}>
@@ -93,7 +80,7 @@ const ArtistInfo: FC<Props> = ({
 
       <ArtistTabs
         setOpenForm={setOpenForm}
-        paintings={paintings}
+        paintingsList={paintings}
       />
     </section>
   );

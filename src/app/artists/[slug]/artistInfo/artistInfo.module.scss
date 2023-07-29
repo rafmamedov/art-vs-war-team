@@ -30,6 +30,8 @@
 
     .image {
       object-fit: contain;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -76,13 +78,54 @@
     }
   }
 
+  // &__styles {
+  //   flex-wrap: wrap;
+  //   margin-top: 16px;
+  //   color: $gray-5;
+
+  //   @include tablet {
+  //     margin-top: 24px;
+  //   }
+  // }
+
   &__styles {
-    flex-wrap: wrap;
     margin-top: 16px;
-    color: $gray-5;
+
+    @include laptop {
+      @include set-flex(row, flex-start, center);
+      gap: 16px;
+    }
 
     @include tablet {
       margin-top: 24px;
+    }
+
+    .style {
+      @include laptop {
+        padding: 12px 20px;
+        border-radius: 100px;
+        border: 1px solid $gray-0;
+
+        &__title {
+          @include laptop {
+            display: none;
+          }
+        }
+      }
+
+      &__mobile {
+        @include laptop {
+          display: none;
+        }
+      }
+
+      &__laptop {
+        display: none;
+
+        @include laptop {
+          display: inline;
+        }
+      }
     }
   }
 

@@ -6,34 +6,19 @@ import { usePathname } from 'next/navigation';
 import style from './artistTabs.module.scss';
 
 import ArtProcess from '../artProcess/artProcess';
-import { Add } from '@/app/icons/add';
+import { Add } from '@/app/icons/icon-add';
 import { Form } from '@/app/profile/page';
-import MasonryGallery from '../masonry-catalog/masonry-catalog';
+import MasonryGallery from '../masonry/masonry';
 import { Painting } from '@/types/Painting';
 
 const tabs = ['Artworks', 'Collections', 'Art Process'];
 
-const arr = [
-  "/assets/images/Rectangle 2.png",
-  "/assets/images/Rectangle 3.png",
-  "/assets/images/Rectangle 4.png",
-  "/assets/images/Rectangle 5.png",
-  "/assets/images/Rectangle 6.png",
-  "/assets/images/Rectangle 7.png",
-  "/assets/images/Rectangle 2.png",
-  "/assets/images/Rectangle 3.png",
-  "/assets/images/Rectangle 4.png",
-  "/assets/images/Rectangle 5.png",
-  "/assets/images/Rectangle 6.png",
-  "/assets/images/Rectangle 7.png",
-];
-
 type Props = {
-  setOpenForm: Dispatch<SetStateAction<Form>>;
-  paintings: Painting[];
+  setOpenForm?: Dispatch<SetStateAction<Form>>;
+  paintingsList: Painting[];
 }
 
-const ArtistTabs: FC<Props> = ({ setOpenForm, paintings }) => {
+const ArtistTabs: FC<Props> = ({ setOpenForm, paintingsList }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const pathname = usePathname();
 
@@ -58,7 +43,7 @@ const ArtistTabs: FC<Props> = ({ setOpenForm, paintings }) => {
           ))}
         </div>
 
-        {isProfile && (
+        {(isProfile && setOpenForm) && (
           <button
             type="button"
             className={style.add}
@@ -73,7 +58,7 @@ const ArtistTabs: FC<Props> = ({ setOpenForm, paintings }) => {
       </div>
 
       <div className={style.gallery}>
-        {selectedTab === 'Artworks' && <MasonryGallery paintingsList={paintings} />}
+        {selectedTab === 'Artworks' && <MasonryGallery paintingsList={paintingsList} />}
         {selectedTab === 'Art Process' && <ArtProcess />}
       </div>
     </>

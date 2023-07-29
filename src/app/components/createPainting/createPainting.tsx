@@ -8,7 +8,7 @@ import axios from 'axios';
 import style from './createPainting.module.scss'
 
 import { Form } from '@/app/profile/page';
-import { Add } from '@/app/icons/add';
+import { Add } from '@/app/icons/icon-add';
 import { ArrowLeft } from "@/app/icons/arrowLeft";
 import { SubjectType, mediums, styles, subjects, supports } from './subjects';
 

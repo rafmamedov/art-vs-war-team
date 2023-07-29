@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import style from "./artistTabs.module.scss";
 
-import { Add } from "@/app/icons/add";
-import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import { Add } from "@/app/icons/icon-add";
 import ArtProcess from "./artProcess/artProcess";
-import MasonryGallery from "@/app/components/masonry-catalog/masonry-catalog";
+import MasonryGallery from "@/app/components/masonry/masonry";
+import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 import { Painting } from "@/types/Painting";
 
 const tabs: ArtistTabOptions[] = [
@@ -19,9 +19,13 @@ const tabs: ArtistTabOptions[] = [
 
 type Props = {
   paintingsList: Painting[];
+  setOpenForm?: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
-const ArtistTabs: React.FC<Props> = ({ paintingsList }) => {
+const ArtistTabs: React.FC<Props> = ({
+  paintingsList,
+  setOpenForm
+}) => {
   const [selectedTab, setSelectedTab] = useState(ArtistTabOptions.artworks);
   const pathname = usePathname();
 
@@ -46,8 +50,12 @@ const ArtistTabs: React.FC<Props> = ({ paintingsList }) => {
           ))}
         </div>
 
-        {isProfile && (
-          <button className={style.add}>
+        {(isProfile && setOpenForm) && (
+          <button
+            type="button"
+            className={style.add}
+            onClick={() => setOpenForm(selectedTab)}
+          >
             <Add />
             {selectedTab}
           </button>

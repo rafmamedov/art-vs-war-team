@@ -4,7 +4,7 @@ import Image from "next/image";
 import style from "./card-preview.module.scss";
 import "@styles/globals.scss";
 
-import { Cart } from "@/app/icons/cart";
+import { Cart } from "@/app/icons/icon-cart";
 import { Painting } from "@/types/Painting";
 
 type Props = {

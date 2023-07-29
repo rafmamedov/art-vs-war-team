@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart, FaGift } from "react-icons/fa";
 
 import "./button-style.scss";
-import { CheckIcon } from "@/app/icons/check";
+import { CheckIcon } from "@/app/icons/icon-check";
 
 // type Props = {
 //   handleAddProductToCart: () => void;

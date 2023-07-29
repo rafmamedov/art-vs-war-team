@@ -2,27 +2,27 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import style from "./inputSearch.module.scss";
-
 import {
   setSearchArtists,
   setFoundArtists,
+  resetArtistsPageNumber,
 } from "@/app/redux/slices/searchArtistsSlice";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import { Search } from "@/app/icons/search";
-import { Close } from "@/app/icons/close";
-import { getFindArtistFromServer } from "@/utils/api";
+import { Search } from "@/app/icons/icon-search";
+import { CloseIcon } from "@/app/icons/icon-close";
+import { getArtists } from "@/utils/api";
+import style from "./inputSearch.module.scss";
 
 const InputArtistSearch = () => {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState("");
   const { search } = useAppSelector((state) => state.searchArtistsSlice);
-  const searchParams = search ? `/searchByWord/${search}` : "";
 
   const getFindArtists = useCallback(
-    async (searchWord: string) => {
-      const artists = await getFindArtistFromServer(searchWord);
+    async (searchQuery?: string) => {
+      const artists = await getArtists(searchQuery);
 
+      dispatch(resetArtistsPageNumber());
       dispatch(setFoundArtists(artists));
     },
     [dispatch]
@@ -30,7 +30,7 @@ const InputArtistSearch = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      dispatch(setSearchArtists(query));
+      dispatch(setSearchArtists(query.trim()));
     }, 700);
 
     return () => {
@@ -39,8 +39,8 @@ const InputArtistSearch = () => {
   }, [query, dispatch]);
 
   useEffect(() => {
-    getFindArtists(searchParams);
-  }, [search, searchParams, getFindArtists]);
+    getFindArtists(`/searchByWord?word=${search}`);
+  }, [search, getFindArtists]);
 
   const handleSearchArtist = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -48,7 +48,7 @@ const InputArtistSearch = () => {
 
   const handleClearQuery = () => {
     setQuery("");
-    getFindArtists(searchParams);
+    getFindArtists();
   };
 
   return (
@@ -69,7 +69,7 @@ const InputArtistSearch = () => {
           className={`${style.searchIcon} ${style.closeIcon}`}
           onClick={handleClearQuery}
         >
-          <Close />
+          <CloseIcon />
         </div>
       )}
     </div>

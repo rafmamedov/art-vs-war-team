@@ -9,10 +9,11 @@ import axios from "axios";
 
 import style from "./editProfile.module.scss";
 
-import { Add } from "@/app/icons/add";
-import { Form } from "@/app/profile/page";
+import { Add } from "@/app/icons/icon-add";
 import { CountryType, countries } from "./countries";
 import { ArrowLeft } from "@/app/icons/arrowLeft";
+import { Artist } from "@/types/Artist";
+import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 
 const AUTHOR = 'https://www.albedosunrise.com/authors/';
 const PROFILE = 'https://www.albedosunrise.com/authors/profile';
@@ -46,9 +47,9 @@ export interface Author {
 };
 
 type Props = {
-  author: Author | null;
-  setOpenForm: Dispatch<SetStateAction<Form>>;
-  setAuthor: Dispatch<SetStateAction<Author | null>>;
+  author: Artist | null;
+  setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
+  setAuthor: Dispatch<SetStateAction<Artist | null>>;
 };
 
 type Action = 'create' | 'update';
@@ -83,7 +84,7 @@ const EditProfile: FC<Props> = ({
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const { user, route, signOut } = useAuthenticator((context) => [context.route]);
+  const { user, route } = useAuthenticator((context) => [context.route]);
   const accessToken = user.getSignInUserSession()?.getAccessToken().getJwtToken();
   const idToken = user.getSignInUserSession()?.getIdToken().getJwtToken();
   const refreshToken = user.getSignInUserSession()?.getRefreshToken();
@@ -172,11 +173,11 @@ const EditProfile: FC<Props> = ({
           version: response.data.version,
           signature: response.data.signature,
         }
-  
+
         return {
           imageData,
         };
-  
+
       } catch (error) {
         console.log(error);
       }
@@ -258,8 +259,8 @@ const EditProfile: FC<Props> = ({
         onUpdateProfile('update', data),
         {
           loading: 'Saving...',
-          success: <b>Settings saved!</b>,
-          error: <b>Could not save.</b>,
+          success: <b>Profile edited!</b>,
+          error: <b>Could not edit.</b>,
         }, {
           style: {
             borderRadius: '10px',
@@ -271,9 +272,9 @@ const EditProfile: FC<Props> = ({
       : toast.promise(
         onUpdateProfile('create', data),
         {
-          loading: 'Saving...',
-          success: <b>Settings saved!</b>,
-          error: <b>Could not save.</b>,
+          loading: 'Creating...',
+          success: <b>Profile created!</b>,
+          error: <b>Could not create.</b>,
         }, {
           style: {
             borderRadius: '10px',
@@ -481,13 +482,6 @@ const EditProfile: FC<Props> = ({
                 className={style.submit}
               >
                 Submit
-              </button>
-              <button
-                type="reset"
-                className={style.signout}
-                onClick={signOut}
-              >
-                Sign Out
               </button>
             </div>
           </div>

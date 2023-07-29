@@ -1,18 +1,29 @@
 const BASE_URL = "https://www.albedosunrise.com/";
 
-export async function getPaintings() {
-  const response = await fetch(
-    `${BASE_URL}paintings/search?size=100&sort=entityCreatedAt,desc`,
-    { cache: "no-store" }
-  );
-
+export async function getPaintings(params: string) {
+  const response = await fetch(`${BASE_URL}paintings/search?${params}`, {
+    cache: "no-store",
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
 
   const data = await response.json();
 
-  return data.content;
+  return data;
+}
+
+export async function getFiltersData() {
+  const response = await fetch(`${BASE_URL}paintings/params`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
 }
 
 export async function getPainting(id: string) {
@@ -29,8 +40,10 @@ export async function getPainting(id: string) {
   return data;
 }
 
-export async function getArtists() {
-  const response = await fetch(`${BASE_URL}authors`, { cache: "no-store" });
+export async function getArtists(params: string = "") {
+  const response = await fetch(`${BASE_URL}authors${params}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
@@ -38,7 +51,7 @@ export async function getArtists() {
 
   const data = await response.json();
 
-  return data.content;
+  return data;
 }
 
 export async function getArtist(id: string) {
@@ -82,19 +95,4 @@ export async function getMorePaintings(id: string, size: number) {
   const data = await response.json();
 
   return data;
-}
-
-export async function getFindArtistFromServer(searchWord: string) {
-  const response = await fetch(
-    `https://www.albedosunrise.com/authors${searchWord}`,
-    { cache: "no-store" }
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const data = await response.json();
-
-  return data.content;
 }
