@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { getPaintings } from "@/utils/api";
 import {
   addMorePaintings,
-  increasePageNumber,
+  increaseGalleryPage,
 } from "@/app/redux/slices/paintingsSlice";
 
 const MorePaintingsButton = () => {
@@ -19,18 +19,17 @@ const MorePaintingsButton = () => {
 
   const isEndPaintingList = totalSize <= paintings.length;
 
-  const getAdditionalPaintings = async (searchParams: string) => {
-    const paintings = await getPaintings(searchParams);
-    dispatch(addMorePaintings(paintings));
-  };
-
-  const handleGetNewPage = () => {
-    dispatch(increasePageNumber());
-    const currentPage = pagesCount + 1;
+  const handleGetNewPage = async () => {
     const params = new URLSearchParams(window.location.search);
-    params.set("page", currentPage.toString());
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
-    getAdditionalPaintings(params.toString());
+
+    const currentPage = pagesCount + 1;
+    const paintings = await getPaintings(
+      `${params.toString()}&page=${currentPage}`
+    );
+
+    dispatch(addMorePaintings(paintings));
+    dispatch(increaseGalleryPage());
   };
 
   return (

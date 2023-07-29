@@ -142,7 +142,9 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
 
       <hr className={style.line} />
 
-      <button className={style.buttonExplore}>Explore</button>
+      <Link href={`/artists/${author.prettyId}`}>
+        <button className={style.buttonExplore}>Explore</button>
+      </Link>
 
       <div className={style.shipping}>
         <p className={style.title}>SHIPPING</p>

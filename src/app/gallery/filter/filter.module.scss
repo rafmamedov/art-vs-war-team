@@ -34,7 +34,7 @@
   top: 0;
   right: 0;
   background-color: $gray-100;
-  z-index: 100;
+  z-index: 10;
   border-radius: 24px;
 
   @include tablet {
@@ -84,7 +84,6 @@
 
   @include tablet {
     max-height: 850px;
-
   }
 
   &__option {
@@ -103,6 +102,13 @@
 
 .buttons {
   @include set-flex(column);
+
+  position: sticky;
+  bottom: 0;
+  background-color: $gray-100;
+  border-bottom-left-radius: 24px 24px;
+  border-bottom-right-radius: 24px 24px;
+  z-index: 10;
 
   gap: 12px;
   padding: 28px 12px 12px;

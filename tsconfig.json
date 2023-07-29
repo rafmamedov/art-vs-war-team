@@ -35,7 +35,8 @@
     "src/app/components/card-preview",
     "src/app/components/masonry",
     "_app.js",
-    "src/app/api/sign-cloudinary-params.js"
+    "src/app/api/sign-cloudinary-params.js",
+    "src/utils/api.ts"
   ],
   "exclude": ["node_modules"]
 }

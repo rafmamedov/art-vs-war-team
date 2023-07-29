@@ -27,11 +27,11 @@ const paintingsSlice = createSlice({
       state.paintings.push(...action.payload.content);
     },
 
-    increasePageNumber(state) {
+    increaseGalleryPage(state) {
       state.pagesCount++;
     },
 
-    resetPageNumber(state) {
+    resetGalleryPageCount(state) {
       state.pagesCount = 0;
     },
   },
@@ -40,8 +40,8 @@ const paintingsSlice = createSlice({
 export const {
   setPaintings,
   addMorePaintings,
-  increasePageNumber,
-  resetPageNumber,
+  increaseGalleryPage,
+  resetGalleryPageCount,
 } = paintingsSlice.actions;
 
 export default paintingsSlice.reducer;

@@ -25,16 +25,14 @@ const MoreArtistsButton = () => {
     const currentPage = pagesCount + 1;
     !search
       ? getAdditionalPaintings(`?page=${currentPage}`)
-      : getAdditionalPaintings(
-          `/searchByWord?word=${search}&page=${currentPage}`
-        );
+      : getAdditionalPaintings(`?page=${currentPage}&query=${search}`);
   };
 
   return (
     <>
       {!isEndArtistsList && (
         <button className={style.button} onClick={handleGetNewPage}>
-          More Artworks
+          More Artists
         </button>
       )}
     </>

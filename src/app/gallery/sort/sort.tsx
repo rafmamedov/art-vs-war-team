@@ -3,11 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-
 import { ArrowUpIcon } from "@/app/icons/icon-arrow-up";
 import { SortIcon } from "@/app/icons/icon-sort";
 import {
-  resetPageNumber,
+  resetGalleryPageCount,
   setPaintings,
 } from "@/app/redux/slices/paintingsSlice";
 import { useAppDispatch } from "@/types/ReduxHooks";
@@ -50,10 +49,9 @@ const Sort = () => {
   };
 
   const handleSortPaintings = (sortValue: SortPaintings) => {
-    dispatch(resetPageNumber());
+    dispatch(resetGalleryPageCount());
     setSortBy(sortValue);
     const params = new URLSearchParams(window.location.search);
-    params.delete("page");
     params.set("sort", sortValue);
     router.replace(`${pathname}?${params.toString()}`);
 
@@ -105,11 +103,12 @@ const Sort = () => {
           <div className={style.dropdown}>
             {fieldsOptions.map((field, index) => (
               <div
-                className={style.dropdown__option}
+                className={style.dropdown__options}
                 key={index}
                 onClick={() => handleSortPaintings(field.value)}
               >
-                <option value={field.value}>{field.title}</option>
+                <span>{field.title}</span>
+                <option value={field.value} />
                 <div
                   className={`${
                     sortBy === field.value && style.radioButtonActive
