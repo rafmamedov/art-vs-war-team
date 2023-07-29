@@ -1,16 +1,17 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import style from "./more-artists-button.module.scss";
-import { getArtists } from "@/utils/api";
 import {
   addMoreArtists,
   increaseArtistsPageNumber,
 } from "@/app/redux/slices/searchArtistsSlice";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import { getArtists } from "@/utils/api";
+
+import style from "./more-artists-button.module.scss";
 
 const MoreArtistsButton = () => {
   const { pagesCount, totalSize, foundArtists, search } = useAppSelector(
-    (state) => state.searchArtistsSlice
+    (state) => state.artists
   );
   const dispatch = useAppDispatch();
   const isEndArtistsList = totalSize <= foundArtists.length;

@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-import style from "./page.module.scss";
-
-import PaintingGallery from "./paintingGallery/paintingGallery";
-import AddToCartButton from "./paintingGallery/button/button";
-import MorePaintings from "./morePainting/morePaintings";
+import { CartItem } from "@/types/CartItem";
 import { getPainting } from "@/utils/api";
+import MorePaintings from "./morePainting/morePaintings";
+import AddToCartButton from "./paintingGallery/button/button";
+import PaintingGallery from "./paintingGallery/paintingGallery";
+
+import style from "./page.module.scss";
 
 const PaintingCard = async ({ params }: { params: { slug: string } }) => {
   const paintingsList = await getPainting(params.slug);
@@ -26,6 +27,14 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
     mediums,
     supports,
   } = paintingsList;
+
+  const orderData: CartItem = {
+    id: prettyId,
+    title: title,
+    price: price,
+    author: author.fullName,
+    image: image.imageUrl,
+  };
 
   return (
     <section className={style.card}>
@@ -113,7 +122,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
             </div>
           </div>
           <div>
-            <AddToCartButton />
+            <AddToCartButton orderData={orderData} />
           </div>
         </div>
       </div>

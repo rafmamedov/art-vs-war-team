@@ -1,22 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaShoppingCart, FaGift } from "react-icons/fa";
+import { FaGift, FaShoppingCart } from "react-icons/fa";
 
-import "./button-style.scss";
 import { CheckIcon } from "@/app/icons/icon-check";
+import { addPainting } from "@/app/redux/slices/cartSlice";
+import { CartItem } from "@/types/CartItem";
+import { useAppDispatch } from "@/types/ReduxHooks";
+import "./button-style.scss";
 
-// type Props = {
-//   handleAddProductToCart: () => void;
-// };
+type Props = {
+  orderData: CartItem;
+};
 
-const AddToCartButton = () => {
+const AddToCartButton: React.FC<Props> = ({ orderData }) => {
+  const dispatch = useAppDispatch();
   const [isAdded, setIsAdded] = useState(false);
-
-  const handleClick = () => {
-    // handleAddProductToCart();
-    setIsAdded(true);
-  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -25,11 +24,16 @@ const AddToCartButton = () => {
     return () => clearTimeout(timeoutId);
   }, [isAdded]);
 
+  const handleAddPaintingToCart = () => {
+    setIsAdded(true);
+    dispatch(addPainting(orderData));
+  };
+
   return (
     <>
       <button
         className={`cart-button ${isAdded ? "clicked" : ""}`}
-        onClick={handleClick}
+        onClick={handleAddPaintingToCart}
         disabled={isAdded}
         aria-label="Add to cart"
       >

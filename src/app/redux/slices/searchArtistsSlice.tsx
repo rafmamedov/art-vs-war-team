@@ -17,7 +17,7 @@ const initialState: SearchArtistsState = {
 };
 
 const artistsSlice = createSlice({
-  name: "search",
+  name: "artists",
   initialState,
   reducers: {
     setSearchArtists(state, action: PayloadAction<string>) {
