@@ -1,22 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
 
-import style from "./header.module.scss";
-
 import { Cart } from "@/app/icons/icon-cart";
-import { MobileMenu } from "@/app/icons/icon-menu";
 import { CloseIcon } from "@/app/icons/icon-close";
+import { MobileMenu } from "@/app/icons/icon-menu";
+import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
 import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
-import LoginButton from "./navigation/login-button/login-button";
 import SocialNetworkIcons from "../social-network/social-network";
-import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
+import LoginButton from "./navigation/login-button/login-button";
+
+import style from "./header.module.scss";
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
+  const { paintings, totalPrice } = useAppSelector((state) => state.cart);
 
   const handleShowMobileMenu = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
@@ -53,14 +55,19 @@ const Header = () => {
           <MenuItems className={style.menuItems} />
         </nav>
         <div className={style.cart__container}>
-          <div className={style.cart}>
-            <Cart />
-            <div className={style.cart__circle}>1</div>
-          </div>
-          <div className={style.price}>
-            <div className={style.price__title}>Total</div>
-            <div className={style.price__amount}>€ 2435</div>
-          </div>
+          <Link href={`/cart`}>
+            <div className={style.cart}>
+              <Cart />
+              <div className={style.cart__circle}>{paintings.length}</div>
+            </div>
+          </Link>
+          <Link href={`/cart`}>
+            <div className={style.price}>
+              <div className={style.price__title}>Total</div>
+              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
+            </div>
+          </Link>
+
           <LoginButton className={style.loginDesktop} />
         </div>
       </div>

@@ -1,8 +1,6 @@
 @import "@styles/mixins.scss";
 @import "@styles/vars.scss";
 
-
-
 .header {
   @include set-flex(row, space-between, center);
 
@@ -16,6 +14,8 @@
   }
 
   &__mobileElement {
+    height: 24px;
+
     @include laptop {
       display: none;
     }
@@ -31,6 +31,7 @@
 .cart {
   position: relative;
   cursor: pointer;
+  height: 24px;
 
   &__circle {
     @include set-flex(row, center, center);

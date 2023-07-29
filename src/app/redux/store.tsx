@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import showUp from "./slices/showUpSlice";
-import artistsSlice from "./slices/searchArtistsSlice";
-import sortPaintings from "./slices/paintingsSlice";
+import artists from "./slices/searchArtistsSlice";
+import paintings from "./slices/paintingsSlice";
+import cart from "./slices/cartSlice";
 
 export const store = configureStore({
   reducer: {
     showUp,
-    searchArtistsSlice: artistsSlice,
-    paintingsSlice: sortPaintings,
+    artists,
+    paintings,
+    cart,
   },
   devTools: false,
 });
