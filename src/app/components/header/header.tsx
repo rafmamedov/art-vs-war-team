@@ -65,7 +65,7 @@ const Header = () => {
           <Link href={`/cart`}>
             <div className={style.cart}>
               <Cart />
-              {paintings.length && (
+              {paintings.length > 0 && (
                 <div className={style.cart__circle}>{paintings.length}</div>
               )}
             </div>
