@@ -24,6 +24,10 @@ const Header = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
   };
 
+  const handleCloseMobileMenu = () => {
+    dispatch(setShowMobileMenu(false));
+  };
+
   useEffect(() => {
     if (typeof document !== "undefined") {
       showMobileMenu
@@ -50,7 +54,10 @@ const Header = () => {
             <MobileMenu />
           </div>
         )}
-        <Logo />
+        <Link href={"/"} onClick={handleCloseMobileMenu}>
+          <Logo />
+        </Link>
+
         <nav className={style.navigation}>
           <MenuItems className={style.menuItems} />
         </nav>
