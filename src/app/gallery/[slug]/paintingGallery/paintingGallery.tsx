@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide, SwiperClass } from "swiper/react";
 import { Navigation, Thumbs, Mousewheel, Pagination } from "swiper";
 
-import "./styles.scss";
+import "./paintingGallery.scss";
 import "@styles/globals.scss";
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -55,6 +55,8 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                         alt={`art ${title} by ${author}`}
                         width={800}
                         height={600}
+                        priority
+                        loading={"eager"}
                         style={{
                           objectFit: "contain",
                         }}
@@ -98,6 +100,8 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                           alt={`art ${title} by ${author}`}
                           width={96}
                           height={96}
+                          priority
+                          loading={"eager"}
                           className="imageOpacityEffect"
                           onLoadingComplete={(img) => (img.style.opacity = "1")}
                         />

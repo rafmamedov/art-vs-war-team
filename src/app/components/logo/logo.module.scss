@@ -3,7 +3,6 @@
 
 .wrapper {
   @include set-flex(row, center, center);
-  width: 100%;
   gap: 5px;
 }
 
