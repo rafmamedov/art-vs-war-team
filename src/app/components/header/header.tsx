@@ -50,7 +50,7 @@ const Header = () => {
             <MobileMenu />
           </div>
         )}
-        <Logo className={style.logo} />
+        <Logo />
         <nav className={style.navigation}>
           <MenuItems className={style.menuItems} />
         </nav>
@@ -58,15 +58,19 @@ const Header = () => {
           <Link href={`/cart`}>
             <div className={style.cart}>
               <Cart />
-              <div className={style.cart__circle}>{paintings.length}</div>
+              {paintings.length && (
+                <div className={style.cart__circle}>{paintings.length}</div>
+              )}
             </div>
           </Link>
-          <Link href={`/cart`}>
-            <div className={style.price}>
-              <div className={style.price__title}>Total</div>
-              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
-            </div>
-          </Link>
+          {paintings.length > 0 && (
+            <Link href={`/cart`}>
+              <div className={style.price}>
+                <div className={style.price__title}>Total</div>
+                <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
+              </div>
+            </Link>
+          )}
 
           <LoginButton className={style.loginDesktop} />
         </div>

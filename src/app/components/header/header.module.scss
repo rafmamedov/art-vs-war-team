@@ -67,13 +67,6 @@
   }
 }
 
-.logo {
-  @include set-size(176px, 48px);
-
-  position: relative;
-  cursor: pointer;
-}
-
 .loginDesktop {
   display: none;
 
