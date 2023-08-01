@@ -4,7 +4,11 @@ export interface Painting {
   imageUrl: string;
   title: string;
   authorFullName: string;
+  authorPrettyId: string;
   price: number;
+  width: number;
+  height: number;
+  depth: number;
 }
 
 export interface ArtCollection {

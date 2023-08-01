@@ -48,6 +48,11 @@
 .artist {
   margin-top: 5px;
   color: $gray-10;
+
+  &:hover {
+    color: $gray-0;
+    text-decoration: underline;
+  }
 }
 
 .buy {

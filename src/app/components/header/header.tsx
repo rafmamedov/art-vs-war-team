@@ -71,12 +71,12 @@ const Header = () => {
             </div>
           </Link>
           {paintings.length > 0 && (
-            <Link href={`/cart`}>
-              <div className={style.price}>
+            <div className={style.price}>
+              <Link href={`/cart`}>
                 <div className={style.price__title}>Total</div>
                 <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           )}
 
           <LoginButton className={style.loginDesktop} />

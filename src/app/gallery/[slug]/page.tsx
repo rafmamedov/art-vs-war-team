@@ -33,7 +33,11 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
     title: title,
     price: price,
     author: author.fullName,
+    authorId: author.prettyId,
     image: image.imageUrl,
+    width: width,
+    height: height,
+    depth: depth,
   };
 
   return (
