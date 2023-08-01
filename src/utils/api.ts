@@ -96,3 +96,18 @@ export async function getMorePaintings(id: string, size: number) {
 
   return data;
 }
+
+export async function getMightLikePaintings(id: string, size: number) {
+  const response = await fetch(
+    `${BASE_URL}paintings/recommend?prettyIds=${id}&size=${size}`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}

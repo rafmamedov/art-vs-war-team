@@ -2,26 +2,27 @@
 
 import { useEffect, useState } from "react";
 
-import style from "./morePaintings.module.scss";
-
-import CardPreview from "@components/card-preview/card-preview";
-import { getMorePaintings } from "@/utils/api";
 import { Painting } from "@/types/Painting";
+import { getMightLikePaintings } from "@/utils/api";
+import CardPreview from "@components/card-preview/card-preview";
+
+import style from "./might-like.module.scss";
 
 type Props = {
-  prettyId: string;
+  selectedPaintings: string;
 };
 
-const MorePaintings: React.FC<Props> = ({ prettyId }) => {
+const MightLike: React.FC<Props> = ({ selectedPaintings }) => {
   const [paintings, setPaintings] = useState<Painting[]>([]);
   const [paintingsQuantity, setPaintingsQuantity] = useState<number | null>(
     null
   );
 
   const getMorePaintingsFromArtist = async (id: string, size: number) => {
-    console.log(id, size);
+    const paintings = await getMightLikePaintings(id, size);
+    console.log("id", id);
+    console.log("size", size);
 
-    const paintings = await getMorePaintings(id, size);
     setPaintings(paintings);
   };
 
@@ -48,21 +49,26 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
     handleChangeCardQuantity();
 
     if (paintingsQuantity) {
-      getMorePaintingsFromArtist(prettyId, paintingsQuantity);
+      getMorePaintingsFromArtist(selectedPaintings, paintingsQuantity);
     }
-  }, [prettyId, paintingsQuantity]);
+  }, [selectedPaintings, paintingsQuantity]);
 
   return (
-    <div className={style.more__painting}>
-      {paintings.map((painting: Painting) => (
-        <CardPreview
-          paintingDetails={painting}
-          key={painting.id}
-          className={style.cardPreview}
-        />
-      ))}
+    <div className={style.mightLike}>
+      <hr className={style.line} />
+
+      <div className={style.title}>YOU ALSO MIGHT LIKE</div>
+      <div className={style.more__painting}>
+        {paintings.map((painting: Painting) => (
+          <CardPreview
+            paintingDetails={painting}
+            key={painting.id}
+            className={style.cardPreview}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default MorePaintings;
+export default MightLike;
