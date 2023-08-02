@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { Cart } from "@/app/icons/icon-cart";
 import { CloseIcon } from "@/app/icons/icon-close";
 import { MobileMenu } from "@/app/icons/icon-menu";
+import { setDataFromLocalStorage } from "@/app/redux/slices/cartSlice";
 import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
+import { DataFromLocalStorage } from "@/types/CartItem";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import getDataFromLocalStorage from "@/utils/getDataFromLocalStorage";
 import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
 import SocialNetworkIcons from "../social-network/social-network";
@@ -35,6 +38,21 @@ const Header = () => {
         : (document.body.style.overflow = "auto");
     }
   }, [showMobileMenu]);
+
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    const data: DataFromLocalStorage = getDataFromLocalStorage();
+    dispatch(setDataFromLocalStorage(data));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(paintings);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [paintings]);
 
   return (
     <header>

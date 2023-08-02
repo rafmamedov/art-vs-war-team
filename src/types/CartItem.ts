@@ -9,3 +9,8 @@ export interface CartItem {
   height: number;
   depth: number;
 }
+
+export interface DataFromLocalStorage {
+  paintingsFromLocalStorage: CartItem[];
+  totalPriceFromLocalStorage: number;
+}

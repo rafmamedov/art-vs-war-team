@@ -4,17 +4,17 @@
 .wrapper {
   @include set-flex(row, center, center);
   gap: 5px;
-
-  :hover {
-    transition: 1s;
-    transform: rotate(90deg);
-  }
 }
 
 .image__wrapper {
   @include set-square(32px);
 
   position: relative;
+
+  :hover {
+    transition: 1s;
+    transform: rotate(180deg);
+  }
 
   @include laptop {
     @include set-square(48px);
