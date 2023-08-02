@@ -80,6 +80,12 @@ const Header = () => {
           <MenuItems className={style.menuItems} />
         </nav>
         <div className={style.cart__container}>
+          <div className={style.price}>
+            <Link href={`/cart`}>
+              <div className={style.price__title}>Total</div>
+              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
+            </Link>
+          </div>
           <Link href={`/cart`}>
             <div className={style.cart}>
               <Cart />
@@ -88,14 +94,6 @@ const Header = () => {
               )}
             </div>
           </Link>
-          {paintings.length > 0 && (
-            <div className={style.price}>
-              <Link href={`/cart`}>
-                <div className={style.price__title}>Total</div>
-                <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
-              </Link>
-            </div>
-          )}
 
           <LoginButton className={style.loginDesktop} />
         </div>
