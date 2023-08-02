@@ -42,19 +42,19 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: $gray-50;
+  background-color: $gray-30;
   border-radius: 50%;
   cursor: pointer;
 
   @include tablet {
     top: 0;
     right: 0;
-    background-color: $gray-50;
   }
 
   &:hover {
     transform: rotate(90deg);
     transition: 0.3s;
+    background-color: $gray-50;
   }
 
   &:active {

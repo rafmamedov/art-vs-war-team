@@ -23,9 +23,13 @@
 }
 
 .cart__container {
-  @include set-flex(row, center, center);
+  @include set-flex(row, flex-end, center);
 
   gap: 40px;
+
+  @include laptop {
+    min-width: 250px;
+  }
 }
 
 .cart {
