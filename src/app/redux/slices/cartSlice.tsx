@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { CartItem } from "@/types/CartItem";
+import { CartItem, DataFromLocalStorage } from "@/types/CartItem";
 import getTotalPrice from "@/utils/calcTotalPrice";
 
 export interface CartState {
@@ -17,6 +17,14 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setDataFromLocalStorage: (
+      state,
+      action: PayloadAction<DataFromLocalStorage>
+    ) => {
+      state.paintings = action.payload.paintingsFromLocalStorage;
+      state.totalPrice = action.payload.totalPriceFromLocalStorage;
+    },
+
     addPainting: (state, action: PayloadAction<CartItem>) => {
       if (state.paintings.length > 0) {
         const findPainting = state.paintings.find(
@@ -49,6 +57,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addPainting, removeItem } = cartSlice.actions;
+export const { addPainting, removeItem, setDataFromLocalStorage } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
