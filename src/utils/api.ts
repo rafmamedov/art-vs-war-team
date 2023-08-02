@@ -1,3 +1,7 @@
+import { PaintingData } from "@/types/Painting";
+import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
+import axios, { AxiosHeaders } from "axios";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getPaintings(params: string) {
@@ -93,6 +97,64 @@ export async function getMorePaintings(id: string, size: number) {
   }
 
   const data = await response.json();
+
+  return data;
+}
+
+export async function validateData (
+  url: string,
+  inputsData: UserData | PaintingData,
+  headers: HeadersInit,
+  ) {
+    const response = await fetch(BASE_URL + url, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(inputsData),
+    });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getSignature (
+  requestParams: RequestParams,
+  headers: HeadersInit,
+  ) {
+    const response = await fetch(BASE_URL + 'images/getSignature', {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(requestParams),
+    });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function uploadImage (
+  formData: FormData,
+  cloudName: string,
+  ) {
+    const { data } = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      formData,
+      { headers: {"Content-Type": "multipart/form-data"} },
+    );
 
   return data;
 }

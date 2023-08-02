@@ -78,21 +78,12 @@
     }
   }
 
-  // &__styles {
-  //   flex-wrap: wrap;
-  //   margin-top: 16px;
-  //   color: $gray-5;
-
-  //   @include tablet {
-  //     margin-top: 24px;
-  //   }
-  // }
-
   &__styles {
     margin-top: 16px;
 
     @include laptop {
       @include set-flex(row, flex-start, center);
+      flex-wrap: wrap;
       gap: 16px;
     }
 

@@ -6,15 +6,15 @@ import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 
 import style from './page.module.scss';
 
-import EditProfile, { Author } from "../components/editProfile/editProfile";
-import CreatePainting from "../components/createPainting/createPainting";
-import { Painting } from "@/types/Painting";
-import { getPaintingsByArtist } from "@/utils/api";
-import ArtistInfo from "../artists/[slug]/artistInfo/artistInfo";
 import { Artist } from "@/types/Artist";
-import ArtistTabs from "../artists/[slug]/artistTabs/artistTabs";
-import Loading from "../loading";
+import { Painting } from "@/types/Painting";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import EditProfile from "../components/editProfile/editProfile";
+import CreatePainting from "../components/createPainting/createPainting";
+import ArtistInfo from "../artists/[slug]/artistInfo/artistInfo";
+import ArtistTabs from "../artists/[slug]/artistTabs/artistTabs";
+import { getPaintingsByArtist } from "@/utils/api";
+import Loading from "../loading";
 
 const PROFILE = 'https://www.albedosunrise.com/authors/profile';
 
@@ -36,9 +36,8 @@ const Profile = () => {
       setAuthor(fetchedAuthor.data);
 
       const paintingsData = await getPaintingsByArtist(fetchedAuthor.data.prettyId);
-        setPaintings(paintingsData);
-
-        setIsFetching(false);
+      setPaintings(paintingsData);
+      setIsFetching(false);
     };
 
     if (user?.username) {
@@ -73,7 +72,10 @@ const Profile = () => {
                 />
               )}
               {openForm === ArtistTabOptions.artworks && (
-                <CreatePainting setOpenForm={setOpenForm} />
+                <CreatePainting
+                  setPaintings={setPaintings}
+                  setOpenForm={setOpenForm}
+                />
               )}
             </Authenticator>
           )}

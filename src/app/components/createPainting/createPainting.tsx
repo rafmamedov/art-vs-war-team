@@ -4,60 +4,41 @@ import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 import Image from "next/image";
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 import style from './createPainting.module.scss'
 
-import { Form } from '@/app/profile/page';
 import { Add } from '@/app/icons/icon-add';
 import { ArrowLeft } from "@/app/icons/arrowLeft";
+import { ArtistTabOptions } from '@/types/ArtistTabOptions';
 import { SubjectType, mediums, styles, subjects, supports } from './subjects';
+import { Painting, PaintingData, PaintingForm } from '@/types/Painting';
+import { uploadImageToServer } from '@/utils/profile';
 
-const VALIDATE = 'https://www.albedosunrise.com/paintings/checkInputAndGet';
-const SIGNATURE = 'https://www.albedosunrise.com/images/getSignature';
-const URL = ' https://www.albedosunrise.com/paintings';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const URL = 'paintings/checkInputAndGet';
 
 type Props = {
-  setOpenForm: Dispatch<SetStateAction<Form>>;
+  setPaintings: Dispatch<SetStateAction<Painting[]>>;
+  setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
-export type ImageData = {
-  publicId: string;
-  width?: number;
-  height?: number;
-  version: number;
-  signature: string;
-}
-
-export type PaintingData = {
-  image: File;
-  year: number;
-  title: string;
-  weight: number;
-  width: number;
-  height: number;
-  depth: number;
-  price: number;
-  styles: number[];
-  mediums: number[];
-  supports: number[];
-  subjects: number[];
-  description: string;
-};
-
-const CreatePainting: FC<Props> = ({ setOpenForm }) => {
+const CreatePainting: FC<Props> = ({
+  setOpenForm,
+  setPaintings,
+}) => {
   const {
     handleSubmit,
-    setValue,
     register,
     control,
     reset,
     formState: { errors },
-  } = useForm<PaintingData>({
+  } = useForm<PaintingForm>({
     defaultValues: {
-      styles: [],
-      mediums: [],
-      supports: [],
-      subjects: [],
+      styleIds: [],
+      mediumIds: [],
+      supportIds: [],
+      subjectIds: [],
     },
   });
 
@@ -73,10 +54,6 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
   const headers = {
     'Authorization': `Bearer ${accessToken}`,
   };
-
-  const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY!;
 
   const checkOptions = (options: SubjectType[]) => {
     if (options.length === 3) {
@@ -95,138 +72,70 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
     setSelectedSupports([]);
   };
 
-  const validateInputs = async (data: PaintingData): Promise<any> => {
-    const dataToValidate = {
-      title: data.title,
-      width: +data.width,
-      depth: +data.depth,
-      price: +data.price,
-      weight: +data.weight,
-      height: +data.height,
-      styleIds: data.styles,
-      mediumIds: data.mediums,
-      supportIds: data.supports,
-      subjectIds: data.subjects,
-      yearOfCreation: +data.year,
-      description: data.description,
-    };
-
-    try {
-      const {
-        folder
-      } = (await axios.post(VALIDATE, dataToValidate, { headers })).data;
-
-      return {
-        folder,
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const getSignature = async (data: PaintingData): Promise<any> => {
-    const { folder } = await validateInputs(data);
-
-    try {
-      const requestParams = {
-        upload_preset,
-        folder,
-      };
-
-      const {
-        signature,
-        timestamp,
-      } = (await axios.post(SIGNATURE, requestParams)).data;
-
-      return {
-        signature,
-        timestamp,
-        folder,
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const uploadImage = async (data: PaintingData): Promise<any> => {
-    if (data.image instanceof File) {
-
-      const { signature, timestamp, folder } = await getSignature(data);
-  
-      const formData = new FormData();
-  
-      formData.append("file", data.image);
-      formData.append("folder", folder);
-      formData.append('signature', signature);
-      formData.append('timestamp', timestamp);
-      formData.append("upload_preset", upload_preset);
-      formData.append('api_key', cloudinaryApiKey);
-  
-      try {
-        const response = await axios.post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          formData,
-          { headers: {"Content-Type": "multipart/form-data"} },
-        );
-  
-        const imageData: ImageData = {
-          publicId: response.data.public_id,
-          width: response.data.width,
-          height: response.data.height,
-          version: response.data.version,
-          signature: response.data.signature,
-        }
-  
-        return {
-          imageData,
-        };
-  
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   const onCreatePainting = async (data: PaintingData) => {
     if (data.image instanceof File) {
+      await toast.promise(
+        uploadImageToServer(data, URL, headers)
+        .then(imageData => {
+          const paintingData = {
+            ...data,
+            image: imageData,
+          };
 
-      const { imageData } = await uploadImage(data);
+          axios.post(BASE_URL + 'paintings', paintingData, { headers })
+          .then(({ data }) => {
+            const uploadedPainting = {
+              id: data.id,
+              title: data.title,
+              price: data.price,
+              prettyId: data.prettyId,
+              imageUrl: data.image.imageUrl,
+              authorFullName: data.author.fullName,
+            };
 
-      const paintingData = {
-        title: data.title,
-        yearOfCreation: +data.year,
-        weight: +data.weight,
-        width: +data.width,
-        height: +data.height,
-        depth: +data.depth,
-        price: +data.price,
-        styleIds: data.styles,
-        mediumIds: data.mediums,
-        supportIds: data.supports,
-        subjectIds: data.subjects,
-        description: data.description,
-        image: imageData,
-      };
-
-      await axios.post(URL, paintingData, { headers })
-        .finally(() => {
-          onReset();
-        })
+            setPaintings(current => [...current, uploadedPainting]);
+          })
+          .finally(() => {
+            onReset();
+          })
+        }),
+        {
+          loading: 'Creating...',
+          success: <b>Painting created!</b>,
+          error: <b>Could not create.</b>,
+        }, {
+          style: {
+            borderRadius: '10px',
+            background: '#1c1d1d',
+            color: '#b3b4b5',
+          },
+        },
+      );
     }
   };
 
-  const onSubmit = (data: PaintingData | any) => {
+  const onSubmit = (data: PaintingForm | any) => {
     if (!data || !isAuthenticated) {
       return;
     }
 
-    onCreatePainting(data);
-    setImagePreview(null);
-    reset();
+    const dataToUpload: PaintingData = {
+      ...data,
+      image: data.image[0],
+      weight: +data.weight,
+      width: +data.width,
+      height: +data.height,
+      depth: +data.depth,
+      price: +data.price,
+      yearOfCreation: +data.yearOfCreation,
+    };
+
+    onCreatePainting(dataToUpload);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (!file) {
       return;
     }
@@ -238,8 +147,6 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
     };
 
     reader.readAsDataURL(file);
-
-    setValue('image', file);
   };
 
   return (
@@ -272,8 +179,10 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
             <input
               type="file"
               className={style.file__input}
-              {...register("image", { required: 'Image is required!' })}
-              onChange={handleFileChange}
+              {...register("image", {
+                required: 'Image is required!',
+                onChange: handleFileChange,
+              })}
             />
             {imagePreview ? (
               <div className={style.preview}>
@@ -330,11 +239,11 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                       className={style.text}
                       placeholder="Year of creation"
                       onWheel={e => e.currentTarget.blur()}
-                      {...register("year", { required: 'This field is required!' })}
+                      {...register("yearOfCreation", { required: 'This field is required!' })}
                     />
 
-                    {typeof errors?.year?.message === 'string' && (
-                      <p className={style.error}>{errors.year.message}</p>
+                    {typeof errors?.yearOfCreation?.message === 'string' && (
+                      <p className={style.error}>{errors.yearOfCreation.message}</p>
                     )}
                   </div>
                 </label>
@@ -411,7 +320,13 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                       placeholder="Depth cm"
                       step="0.1"
                       onWheel={e => e.currentTarget.blur()}
-                      {...register("depth", { required: 'This field is required!' })}
+                      {...register("depth", {
+                        required: 'This field is required!',
+                        max: {
+                          value: 10,
+                          message: 'Max value allowed 10'
+                        }
+                     })}
                     />
 
                     {typeof errors?.depth?.message === 'string' && (
@@ -429,7 +344,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                   </div>
                   <div className={style.input}>
                     <Controller
-                      name="styles"
+                      name="styleIds"
                       control={control}
                       rules={{ required: 'This field is required!' }}
                       render={({ field: { value, onChange } }) => (
@@ -511,8 +426,8 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                       )}
                     />
 
-                    {typeof errors?.styles?.message === 'string' && (
-                      <p className={style.error}>{errors.styles.message}</p>
+                    {typeof errors?.styleIds?.message === 'string' && (
+                      <p className={style.error}>{errors.styleIds.message}</p>
                     )}
                   </div>
                 </label>
@@ -523,7 +438,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                     </div>
                     <div className={style.input}>
                       <Controller
-                        name="mediums"
+                        name="mediumIds"
                         control={control}
                         rules={{ required: 'This field is required!' }}
                         render={({ field: { onChange, value } }) => (
@@ -603,8 +518,8 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                         )}
                       />
 
-                      {typeof errors?.mediums?.message === 'string' && (
-                        <p className={style.error}>{errors.mediums.message}</p>
+                      {typeof errors?.mediumIds?.message === 'string' && (
+                        <p className={style.error}>{errors.mediumIds.message}</p>
                       )}
                     </div>
                   </label>
@@ -615,7 +530,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                     </div>
                     <div className={style.input}>
                       <Controller
-                        name="supports"
+                        name="supportIds"
                         control={control}
                         rules={{ required: 'This field is required!' }}
                         render={({ field: { onChange, value } }) => (
@@ -695,8 +610,8 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                         )}
                       />
 
-                      {typeof errors?.supports?.message === 'string' && (
-                        <p className={style.error}>{errors.supports.message}</p>
+                      {typeof errors?.supportIds?.message === 'string' && (
+                        <p className={style.error}>{errors.supportIds.message}</p>
                       )}
                     </div>
                   </label>
@@ -707,9 +622,9 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                     </div>
                     <div className={style.input}>
                       <Controller
-                        name="subjects"
+                        name="subjectIds"
                         control={control}
-                        rules={{ validate: value => value.length > 0 || 'This field is required!'}}
+                        rules={{ required: 'This field is required!' }}
                         render={({ field: { onChange, value } }) => (
                           <Select
                             options={subjects}
@@ -787,8 +702,8 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
                         )}
                       />
 
-                      {typeof errors?.subjects?.message === 'string' && (
-                        <p className={style.error}>{errors.subjects.message}</p>
+                      {typeof errors?.subjectIds?.message === 'string' && (
+                        <p className={style.error}>{errors.subjectIds.message}</p>
                       )}
                     </div>
                   </label>
@@ -815,24 +730,27 @@ const CreatePainting: FC<Props> = ({ setOpenForm }) => {
             </div>
           </div>
         </div>
+
         <div className={style.devider}/>
-          <label className={style.about}>
-            <div className={style.about__label}>
-              About
 
-              <span className={style.star}>*</span>
+        <label className={style.about}>
+          <div className={style.about__label}>
+            About
 
-              {typeof errors?.description?.message === 'string' && (
-                <p className={style.error}>{errors.description.message}</p>
-              )}
-            </div>
+            <span className={style.star}>*</span>
 
-            <textarea
-              className={style.about__input}
-              placeholder="Write some description about the painting"
-              {...register("description", { required: 'This field is required!' })}
-            />
-          </label>
+            {typeof errors?.description?.message === 'string' && (
+              <p className={style.error}>{errors.description.message}</p>
+            )}
+          </div>
+
+          <textarea
+            className={style.about__input}
+            placeholder="Write some description about the painting"
+            {...register("description", { required: 'This field is required!' })}
+          />
+        </label>
+
         <div className={style.buttonContainer}>
           <button
             type="reset"

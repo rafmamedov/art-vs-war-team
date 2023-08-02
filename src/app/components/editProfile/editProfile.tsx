@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import Image from "next/image";
 import Select from "react-select";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import jwt_decode, { JwtPayload } from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -14,51 +14,17 @@ import { CountryType, countries } from "./countries";
 import { ArrowLeft } from "@/app/icons/arrowLeft";
 import { Artist } from "@/types/Artist";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import { Action, CustomJwtPayload, ProfileForm, UserData, UserDataToSave } from "@/types/Profile";
+import { uploadImageToServer, validateDataOnServer } from "@/utils/profile";
 
-const AUTHOR = 'https://www.albedosunrise.com/authors/';
-const PROFILE = 'https://www.albedosunrise.com/authors/profile';
-const SIGNATURE = 'https://www.albedosunrise.com/images/getSignature';
-const VALIDATE = 'https://www.albedosunrise.com/authors/checkInputAndGet';
-
-export interface UserData {
-  fullName: string;
-  country: string;
-  city: string;
-  aboutMe: string;
-  image: File | {};
-}
-
-export interface ImageData {
-  publicId: string;
-  version: number;
-  signature: string;
-  moderationStatus: string;
-}
-
-export interface Author {
-  id: string;
-  fullName: string;
-  country: string;
-  city: string;
-  aboutMe: string;
-  prettyId: string;
-  imageUrl: string;
-  imagePublicId: string;
-};
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const URL = 'authors/checkInputAndGet';
 
 type Props = {
   author: Artist | null;
   setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
   setAuthor: Dispatch<SetStateAction<Artist | null>>;
 };
-
-type Action = 'create' | 'update';
-
-type CustomJwtPayload = JwtPayload & { email: string };
-
-const getValue = (value: string) => (
-  value ? countries.find(county => county.value === value) : ''
-);
 
 const EditProfile: FC<Props> = ({
   author,
@@ -72,13 +38,13 @@ const EditProfile: FC<Props> = ({
     control,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<ProfileForm>({
     values: {
       fullName: author?.fullName || '',
       city: author?.city || '',
       country: author?.country || '',
       aboutMe: author?.aboutMe || '',
-      image: {},
+      image: [],
     },
     mode: "onBlur",
   });
@@ -88,101 +54,16 @@ const EditProfile: FC<Props> = ({
   const accessToken = user.getSignInUserSession()?.getAccessToken().getJwtToken();
   const idToken = user.getSignInUserSession()?.getIdToken().getJwtToken();
   const refreshToken = user.getSignInUserSession()?.getRefreshToken();
-  const isAuthenticated = route === 'authenticated';
   const decoded = idToken ? (jwt_decode(idToken) as CustomJwtPayload) : '';
   const userEmail = decoded && decoded.email;
-
+  const isAuthenticated = route === 'authenticated';
   const headers = {
     'Authorization': `Bearer ${accessToken}`,
   };
 
-  const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-  const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY!;
-
-  const validateInputs = async (data: UserData): Promise<any> => {
-    const dataToValidate = {
-      fullName: data.fullName,
-      country: data.country,
-      city: data.city,
-      aboutMe: data.aboutMe,
-      email: userEmail,
-    };
-
-    try {
-      const {
-        folder
-      } = (await axios.post(VALIDATE, dataToValidate, { headers })).data;
-
-      return {
-        folder,
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const getSignature = async (data: UserData): Promise<any> => {
-    const { folder } = await validateInputs(data);
-
-    try {
-      const requestParams = {
-        upload_preset,
-        folder,
-      };
-
-      const {
-        signature,
-        timestamp,
-      } = (await axios.post(SIGNATURE, requestParams)).data;
-
-      return {
-        signature,
-        timestamp,
-        folder,
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const uploadImage = async (data: UserData): Promise<any> => {
-    if (data.image instanceof File) {
-
-      const { signature, timestamp, folder } = await getSignature(data);
-  
-      const formData = new FormData();
-  
-      formData.append("file", data.image);
-      formData.append("folder", folder);
-      formData.append('signature', signature);
-      formData.append('timestamp', timestamp);
-      formData.append("upload_preset", upload_preset);
-      formData.append('api_key', cloudinaryApiKey);
-  
-      try {
-        const response = await axios.post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          formData,
-          { headers: {"Content-Type": "multipart/form-data"} },
-        );
-
-        const imageData: ImageData = {
-          publicId: response.data.public_id,
-          moderationStatus: 'APPROVED',
-          version: response.data.version,
-          signature: response.data.signature,
-        }
-
-        return {
-          imageData,
-        };
-
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  const getValue = (value: string) => (
+    value ? countries.find(county => county.value === value) : ''
+  );
 
   const refreshAccessToken = () => {
     if (refreshToken) {
@@ -190,45 +71,58 @@ const EditProfile: FC<Props> = ({
     }
   };
 
-  const onUpdateProfile = async (action: Action, data: UserData) => {
-    let image;
-
-    if (data.image && data.image instanceof File) {
-      const { imageData } = await uploadImage(data);
-      image = imageData;
-    }
-
-    const authorData = {
-      fullName: data.fullName,
-      country: data.country,
-      city: data.city,
-      aboutMe: data.aboutMe,
-      email: userEmail,
-      image: image || { publicId: author?.imagePublicId },
-    };
-
-    console.log(image);
-    console.log(authorData);
-
-    action === 'create'
-      ? (
-        await axios.post(AUTHOR, authorData, { headers })
-        .then(response => {
-          refreshAccessToken();
-          setAuthor(response.data);
-        })
-      ) : (
-        await axios.put(AUTHOR, authorData, { headers })
-        .then(response => {
-          setAuthor(response.data);
-        })
-      )
+  const createProfile = async (userData: UserDataToSave) => {
+    await axios.post(BASE_URL + 'authors/', userData, { headers })
+    .then(response => {
+      refreshAccessToken();
+      setAuthor(response.data);
+    })
   };
 
-  const onReset = () => {
-    reset();
-    setValue('country', '');
-    setImagePreview(null);
+  const updateProfile = async (userData: UserDataToSave) => {
+    await axios.put(BASE_URL + 'authors/', userData, { headers })
+    .then(response => {
+      setAuthor(response.data);
+    })
+  };
+
+  const handleEditProfile = async (action: Action, data: UserData) => {
+    let authorData: UserDataToSave;
+
+    if (data.image instanceof File) {
+      const {
+        publicId,
+        version,
+        signature,
+        moderationStatus,
+      } = await uploadImageToServer(data, URL, headers, userEmail);
+
+      const profileImage = {
+        publicId,
+        version,
+        signature,
+        moderationStatus,
+      };
+
+      authorData = {
+        ...data,
+        email: userEmail,
+        image: profileImage,
+      };
+
+      action === 'create' ? createProfile(authorData) : updateProfile(authorData);
+    } else {
+      await validateDataOnServer(data, URL, headers, userEmail)
+      .then(() => {
+        authorData = {
+          ...data,
+          email: userEmail,
+          image: { publicId: author?.imagePublicId || '' },
+        };
+
+        action === 'create' ? createProfile(authorData) : updateProfile(authorData);
+      });
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -245,18 +139,27 @@ const EditProfile: FC<Props> = ({
     };
 
     reader.readAsDataURL(file);
-
-    setValue('image', file);
   };
 
-  const onSubmit = (data: UserData | null) => {
+  const onReset = () => {
+    reset();
+    setValue('country', '');
+    setImagePreview(null);
+  };
+
+  const onSubmit = async (data: ProfileForm) => {
     if (!isAuthenticated || !data) {
       return;
     };
 
+    const dataToUpload: UserData = {
+      ...data,
+      image: data.image[0],
+    };
+
     author
-      ? toast.promise(
-        onUpdateProfile('update', data),
+      ? await toast.promise(
+        handleEditProfile('update', dataToUpload),
         {
           loading: 'Saving...',
           success: <b>Profile edited!</b>,
@@ -269,8 +172,8 @@ const EditProfile: FC<Props> = ({
           }
         }
       )
-      : toast.promise(
-        onUpdateProfile('create', data),
+      : await toast.promise(
+        handleEditProfile('create', dataToUpload),
         {
           loading: 'Creating...',
           success: <b>Profile created!</b>,
@@ -283,9 +186,6 @@ const EditProfile: FC<Props> = ({
           }
         }
       );
-
-    setImagePreview(null);
-    reset();
   };
 
   return (
@@ -318,8 +218,13 @@ const EditProfile: FC<Props> = ({
               <input
                 type="file"
                 className={style.file__input}
-                {...register("image")}
-                onChange={handleFileChange}
+                {...register("image", author
+                  ? { onChange: handleFileChange }
+                  : {
+                      onChange: handleFileChange,
+                      required: "Image is required!"
+                    }
+                )}
               />
               {imagePreview ? (
                 <div className={style.preview}>
@@ -331,11 +236,17 @@ const EditProfile: FC<Props> = ({
                   />
                 </div>
               ) : (
-                <>
-                  <Add className={style.file__icon}/>
-                  <span className={style.file__label}>Choose a file</span>
-                </>
-              )}
+                typeof errors?.image?.message === 'string' ? (
+                  <div className={`${style.error} ${style.error__file}`}>
+                    {errors.image.message}
+                  </div>
+                ) : (
+                  <>
+                    <Add className={style.file__icon}/>
+                    <span className={style.file__label}>Choose a file</span>
+                  </>
+                )
+            )}
             </label>
             <div className={style.recomendations}>
               **Please add a photo with a large resolution (!!!!!!!!!!!!!)
