@@ -2,21 +2,22 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { CloseIcon } from "@/app/icons/icon-close";
+import { Search } from "@/app/icons/icon-search";
 import {
-  setSearchArtists,
-  setFoundArtists,
   resetArtistsPageNumber,
+  setFoundArtists,
+  setSearchArtists,
 } from "@/app/redux/slices/searchArtistsSlice";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import { Search } from "@/app/icons/icon-search";
-import { CloseIcon } from "@/app/icons/icon-close";
 import { getArtists } from "@/utils/api";
+
 import style from "./inputSearch.module.scss";
 
 const InputArtistSearch = () => {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState("");
-  const { search } = useAppSelector((state) => state.searchArtistsSlice);
+  const { search } = useAppSelector((state) => state.artists);
 
   const getFindArtists = useCallback(
     async (searchQuery?: string) => {

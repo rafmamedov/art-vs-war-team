@@ -23,24 +23,24 @@ export const MenuItems: React.FC<Props> = ({ className }) => {
         </Link>
       </li>
       <li>
-        <a href={"/artists"} onClick={handleCloseMobileMenu}>
+        <Link href={"/artists"} onClick={handleCloseMobileMenu}>
           Artists
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={"/delivery"} onClick={handleCloseMobileMenu}>
+        <Link href={"/delivery"} onClick={handleCloseMobileMenu}>
           Donation
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={"/#about"} onClick={handleCloseMobileMenu}>
+        <Link href={"/#about"} onClick={handleCloseMobileMenu}>
           About
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={"/#contacts"} onClick={handleCloseMobileMenu}>
+        <Link href={"/#contacts"} onClick={handleCloseMobileMenu}>
           Contacts
-        </a>
+        </Link>
       </li>
     </ul>
   );

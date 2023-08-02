@@ -1,15 +1,15 @@
 "use client";
 
-import ArtistCard from "../artistCard/artistCard";
 import { Artist } from "@/types/Artist";
-
-import style from "./artistsList.module.scss";
 import { useAppSelector } from "@/types/ReduxHooks";
+import ArtistCard from "../artistCard/artistCard";
 import InputArtistSearch from "./inputSearch/inputSearch";
 import MoreArtistsButton from "./more-artists-button/more-artists-button";
 
+import style from "./artistsList.module.scss";
+
 const ArtistsList = () => {
-  const { foundArtists } = useAppSelector((state) => state.searchArtistsSlice);
+  const { foundArtists } = useAppSelector((state) => state.artists);
 
   return (
     <section className={style.artists}>

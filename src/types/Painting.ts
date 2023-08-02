@@ -5,6 +5,10 @@ export interface Painting {
   prettyId: string;
   imageUrl: string;
   authorFullName: string;
+  authorPrettyId: string;
+  width: number;
+  height: number;
+  depth: number;
 }
 
 export interface ArtCollection {

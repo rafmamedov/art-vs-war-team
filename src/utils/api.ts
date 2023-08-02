@@ -1,5 +1,5 @@
 import { PaintingData } from "@/types/Painting";
-import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
+import { RequestParams, UserData } from "@/types/Profile";
 import axios, { AxiosHeaders } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -101,6 +101,36 @@ export async function getMorePaintings(id: string, size: number) {
   return data;
 }
 
+export async function getMightLikePaintings(id: string, size: number) {
+  const response = await fetch(
+    `${BASE_URL}paintings/recommend?prettyIds=${id}&size=${size}`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getAllPaintingsByArtist(headers: HeadersInit) {
+  const response = await fetch(`${BASE_URL}paintings/author/all?size=20`, {
+    cache: "no-store",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data.content;
+}
+
 export async function validateData (
   url: string,
   inputsData: UserData | PaintingData,
@@ -110,7 +140,7 @@ export async function validateData (
       method: 'POST',
       headers: {
         ...headers,
-        'Content-Type': 'application/json;charset=utf-8',
+        "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(inputsData),
     });
@@ -132,7 +162,7 @@ export async function getSignature (
       method: 'POST',
       headers: {
         ...headers,
-        'Content-Type': 'application/json;charset=utf-8',
+        "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(requestParams),
     });

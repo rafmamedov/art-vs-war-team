@@ -13,7 +13,7 @@ import EditProfile from "../components/editProfile/editProfile";
 import CreatePainting from "../components/createPainting/createPainting";
 import ArtistInfo from "../artists/[slug]/artistInfo/artistInfo";
 import ArtistTabs from "../artists/[slug]/artistTabs/artistTabs";
-import { getPaintingsByArtist } from "@/utils/api";
+import { getAllPaintingsByArtist } from "@/utils/api";
 import Loading from "../loading";
 
 const PROFILE = 'https://www.albedosunrise.com/authors/profile';
@@ -35,7 +35,7 @@ const Profile = () => {
       const fetchedAuthor = await axios.get(PROFILE, { headers });
       setAuthor(fetchedAuthor.data);
 
-      const paintingsData = await getPaintingsByArtist(fetchedAuthor.data.prettyId);
+      const paintingsData = await getAllPaintingsByArtist(headers);
       setPaintings(paintingsData);
       setIsFetching(false);
     };

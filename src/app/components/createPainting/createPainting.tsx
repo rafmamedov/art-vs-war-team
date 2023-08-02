@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import style from './createPainting.module.scss'
 
 import { Add } from '@/app/icons/icon-add';
-import { ArrowLeft } from "@/app/icons/arrowLeft";
+import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { ArtistTabOptions } from '@/types/ArtistTabOptions';
 import { SubjectType, mediums, styles, subjects, supports } from './subjects';
 import { Painting, PaintingData, PaintingForm } from '@/types/Painting';
@@ -91,6 +91,10 @@ const CreatePainting: FC<Props> = ({
               prettyId: data.prettyId,
               imageUrl: data.image.imageUrl,
               authorFullName: data.author.fullName,
+              authorPrettyId: data.author.prettyId,
+              width: data.width,
+              height: data.height,
+              depth: data.depth,
             };
 
             setPaintings(current => [...current, uploadedPainting]);
@@ -323,8 +327,8 @@ const CreatePainting: FC<Props> = ({
                       {...register("depth", {
                         required: 'This field is required!',
                         max: {
-                          value: 10,
-                          message: 'Max value allowed 10'
+                          value: 9.9,
+                          message: 'Max value allowed 9.9'
                         }
                      })}
                     />

@@ -11,7 +11,7 @@ import style from "./editProfile.module.scss";
 
 import { Add } from "@/app/icons/icon-add";
 import { CountryType, countries } from "./countries";
-import { ArrowLeft } from "@/app/icons/arrowLeft";
+import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { Artist } from "@/types/Artist";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 import { Action, CustomJwtPayload, ProfileForm, UserData, UserDataToSave } from "@/types/Profile";

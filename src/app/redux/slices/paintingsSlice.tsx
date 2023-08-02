@@ -15,7 +15,7 @@ const initialState: PaintingsState = {
 };
 
 const paintingsSlice = createSlice({
-  name: "sortPaintings",
+  name: "paintings",
   initialState,
   reducers: {
     setPaintings(state, action: PayloadAction<ArtCollection>) {

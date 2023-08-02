@@ -1,25 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
-
-import style from "./header.module.scss";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 import { Cart } from "@/app/icons/icon-cart";
-import { MobileMenu } from "@/app/icons/icon-menu";
 import { CloseIcon } from "@/app/icons/icon-close";
+import { MobileMenu } from "@/app/icons/icon-menu";
+import { setDataFromLocalStorage } from "@/app/redux/slices/cartSlice";
+import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
+import { DataFromLocalStorage } from "@/types/CartItem";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import getDataFromLocalStorage from "@/utils/getDataFromLocalStorage";
 import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
-import LoginButton from "./navigation/login-button/login-button";
 import SocialNetworkIcons from "../social-network/social-network";
-import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
+import LoginButton from "./navigation/login-button/login-button";
+
+import style from "./header.module.scss";
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
+  const { paintings, totalPrice } = useAppSelector((state) => state.cart);
 
   const handleShowMobileMenu = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
+  };
+
+  const handleCloseMobileMenu = () => {
+    dispatch(setShowMobileMenu(false));
   };
 
   useEffect(() => {
@@ -29,6 +38,21 @@ const Header = () => {
         : (document.body.style.overflow = "auto");
     }
   }, [showMobileMenu]);
+
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    const data: DataFromLocalStorage = getDataFromLocalStorage();
+    dispatch(setDataFromLocalStorage(data));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(paintings);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [paintings]);
 
   return (
     <header>
@@ -48,19 +72,29 @@ const Header = () => {
             <MobileMenu />
           </div>
         )}
-        <Logo className={style.logo} />
+        <Link href={"/"} onClick={handleCloseMobileMenu}>
+          <Logo />
+        </Link>
+
         <nav className={style.navigation}>
           <MenuItems className={style.menuItems} />
         </nav>
         <div className={style.cart__container}>
-          <div className={style.cart}>
-            <Cart />
-            <div className={style.cart__circle}>1</div>
-          </div>
           <div className={style.price}>
-            <div className={style.price__title}>Total</div>
-            <div className={style.price__amount}>€ 2435</div>
+            <Link href={`/cart`}>
+              <div className={style.price__title}>Total</div>
+              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
+            </Link>
           </div>
+          <Link href={`/cart`}>
+            <div className={style.cart}>
+              <Cart />
+              {paintings.length > 0 && (
+                <div className={style.cart__circle}>{paintings.length}</div>
+              )}
+            </div>
+          </Link>
+
           <LoginButton className={style.loginDesktop} />
         </div>
       </div>

@@ -1,17 +1,19 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import style from "./more-paintings-button.module.scss";
-import { useRouter, usePathname } from "next/navigation";
-import { getPaintings } from "@/utils/api";
+import { usePathname, useRouter } from "next/navigation";
+
 import {
   addMorePaintings,
   increaseGalleryPage,
 } from "@/app/redux/slices/paintingsSlice";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import { getPaintings } from "@/utils/api";
+
+import style from "./more-paintings-button.module.scss";
 
 const MorePaintingsButton = () => {
   const { totalSize, paintings, pagesCount } = useAppSelector(
-    (state) => state.paintingsSlice
+    (state) => state.paintings
   );
   const dispatch = useAppDispatch();
   const router = useRouter();
