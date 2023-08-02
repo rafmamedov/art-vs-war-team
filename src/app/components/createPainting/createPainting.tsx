@@ -11,8 +11,8 @@ import style from './createPainting.module.scss'
 import { Add } from '@/app/icons/icon-add';
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { ArtistTabOptions } from '@/types/ArtistTabOptions';
-import { SubjectType, mediums, styles, subjects, supports } from './subjects';
 import { Painting, PaintingData, PaintingForm } from '@/types/Painting';
+import { SubjectType, mediums, styles, subjects, supports } from './subjects';
 import { uploadImageToServer } from '@/utils/profile';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

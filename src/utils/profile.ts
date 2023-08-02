@@ -31,8 +31,8 @@ export const validateDataOnServer = async (
     const { folder } = await validateData(url, dataToValidate, headers);
 
     return folder;
-  } catch (error) {
-    console.log(error);
+  } catch {
+    return;
   }
 }
 
