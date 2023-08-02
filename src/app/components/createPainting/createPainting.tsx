@@ -72,7 +72,7 @@ const CreatePainting: FC<Props> = ({
     setSelectedSupports([]);
   };
 
-  const onCreatePainting = async (data: PaintingData) => {
+  const handleCreatePainting = async (data: PaintingData) => {
     if (data.image instanceof File) {
       await toast.promise(
         uploadImageToServer(data, URL, headers)
@@ -134,7 +134,7 @@ const CreatePainting: FC<Props> = ({
       yearOfCreation: +data.yearOfCreation,
     };
 
-    onCreatePainting(dataToUpload);
+    handleCreatePainting(dataToUpload);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

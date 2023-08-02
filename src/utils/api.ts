@@ -1,6 +1,6 @@
 import { PaintingData } from "@/types/Painting";
 import { RequestParams, UserData } from "@/types/Profile";
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
