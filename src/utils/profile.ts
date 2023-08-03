@@ -2,9 +2,9 @@ import { ImageData, UserData } from "@/types/Profile";
 import { PaintingData } from "@/types/Painting";
 import { getSignature, uploadImage, validateData } from "./api";
 
-const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET!;
-const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY!;
+const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET;
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+const cloudinaryApiKey = process.env.NEXT_APP_CLOUDINARY_API_KEY;
 
 export const validateDataOnServer = async (
   data: UserData | PaintingData,
@@ -45,6 +45,10 @@ export const getSignatureFromServer = async (
   const folder = await validateDataOnServer(data, url, headers, email);
 
   try {
+    if (!upload_preset) {
+      return;
+    }
+
     const requestParams = {
       upload_preset,
       folder,
@@ -68,7 +72,10 @@ export const uploadImageToServer = async (
     headers: HeadersInit,
     email: string = '',
   ): Promise<any> => {
-  if (data.image) {
+  if (data.image
+    && upload_preset
+    && cloudinaryApiKey
+    && cloudName) {
     const { signature, timestamp, folder } = await getSignatureFromServer(data, url, headers, email);
     const formData = new FormData();
 
