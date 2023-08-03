@@ -50,7 +50,7 @@ const EditProfile: FC<Props> = ({
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const { user, route } = useAuthenticator((context) => [context.route]);
+  const { user, route, signOut } = useAuthenticator((context) => [context.route]);
   const accessToken = user.getSignInUserSession()?.getAccessToken().getJwtToken();
   const idToken = user.getSignInUserSession()?.getIdToken().getJwtToken();
   const refreshToken = user.getSignInUserSession()?.getRefreshToken();
@@ -349,6 +349,13 @@ const EditProfile: FC<Props> = ({
               >
                 Submit
               </button>
+              <button
+                type="submit"
+                className={style.signout}
+                onClick={signOut}
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>
@@ -365,6 +372,13 @@ const EditProfile: FC<Props> = ({
             className={style.submit}
           >
             Submit
+          </button>
+          <button
+            type="submit"
+            className={style.signout}
+            onClick={signOut}
+          >
+            Sign Out
           </button>
         </div>
       </form>
