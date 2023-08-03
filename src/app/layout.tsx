@@ -7,6 +7,7 @@ import ReduxProvider from "@redux/redux-provider";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import AuthenticatorProvider from "./authenticator/authenticatior";
+import { Toaster } from "react-hot-toast";
 
 interface Props {
   children: React.ReactNode;
@@ -41,6 +42,10 @@ export default function RootLayout({ children }: Props) {
       >
         <ReduxProvider>
           <AuthenticatorProvider>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
             <Header />
             {children}
             <Footer />

@@ -2,6 +2,7 @@
 @import "@styles/mixins.scss";
 
 .container {
+  max-width: 1008px;
   margin: 0 auto;
   @include set-flex(row, flex-start);
   flex-wrap: wrap;
@@ -22,7 +23,6 @@
   max-height: 264px;
   object-fit: contain;
   width: 100%;
-  height: auto;
 }
 
 .description {

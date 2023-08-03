@@ -57,6 +57,16 @@ p {
   width: 100%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .imageOpacityEffect {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 0.5);

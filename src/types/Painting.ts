@@ -1,11 +1,11 @@
 export interface Painting {
   id: number;
+  title: string;
+  price: number;
   prettyId: string;
   imageUrl: string;
-  title: string;
   authorFullName: string;
   authorPrettyId: string;
-  price: number;
   width: number;
   height: number;
   depth: number;
@@ -28,3 +28,35 @@ export interface PaintingFilterParams {
   supports: string[];
   subjects: string[];
 }
+
+export type PaintingForm = {
+  image: FileList;
+  yearOfCreation: number;
+  title: string;
+  weight: number;
+  width: number;
+  height: number;
+  depth: number;
+  price: number;
+  styleIds: number[];
+  mediumIds: number[];
+  supportIds: number[];
+  subjectIds: number[];
+  description: string;
+};
+
+export type PaintingData = {
+  image?: File;
+  yearOfCreation: number;
+  title: string;
+  weight: number;
+  width: number;
+  height: number;
+  depth: number;
+  price: number;
+  styleIds: number[];
+  mediumIds: number[];
+  supportIds: number[];
+  subjectIds: number[];
+  description: string;
+};
