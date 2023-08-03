@@ -39,6 +39,8 @@ const Profile = () => {
 
     if (user?.username) {
       fetchData();
+    } else {
+      setIsFetching(false);
     }
   }, [user]);
 

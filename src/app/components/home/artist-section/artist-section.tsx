@@ -1,9 +1,10 @@
 'use client'
 
-import Carousel from './carousel/carousel';
+import Link from 'next/link';
 
 import styles from './artist-section.module.scss';
-import Link from 'next/link';
+
+import Carousel from './carousel/carousel';
 
 const Artist = () => {
   return (
