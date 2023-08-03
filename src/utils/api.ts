@@ -1,4 +1,4 @@
-import { PaintingData } from "@/types/Painting";
+import { PaintingData, PaintingDataToSave } from "@/types/Painting";
 import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
 import axios, { AxiosHeaders } from "axios";
 

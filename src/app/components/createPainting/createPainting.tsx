@@ -11,10 +11,10 @@ import style from './createPainting.module.scss'
 import { Add } from '@/app/icons/icon-add';
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { ArtistTabOptions } from '@/types/ArtistTabOptions';
-import { Painting, PaintingData, PaintingForm } from '@/types/Painting';
+import { Painting, PaintingData, PaintingDataToSave, PaintingForm } from '@/types/Painting';
 import { SubjectType, mediums, styles, subjects, supports } from './subjects';
-import { stylesSelect } from './stylesSelect';
 import { uploadImageToServer } from '@/utils/profile';
+import { stylesSelect } from './stylesSelect';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = 'paintings/checkInputAndGet';
@@ -78,7 +78,7 @@ const CreatePainting: FC<Props> = ({
       await toast.promise(
         uploadImageToServer(data, URL, headers)
         .then(imageData => {
-          const paintingData = {
+          const paintingData: PaintingDataToSave = {
             ...data,
             image: imageData,
           };

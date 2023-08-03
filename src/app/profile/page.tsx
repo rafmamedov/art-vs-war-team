@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 
 import style from './page.module.scss';
@@ -15,8 +14,6 @@ import ArtistInfo from "../artists/[slug]/artistInfo/artistInfo";
 import ArtistTabs from "../artists/[slug]/artistTabs/artistTabs";
 import { getAllPaintingsByArtist, getProfile } from "@/utils/api";
 import Loading from "../loading";
-
-const PROFILE = 'https://www.albedosunrise.com/authors/profile';
 
 const Profile = () => {
   const { user } = useAuthenticator((context) => [context.user]);

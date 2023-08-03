@@ -5,7 +5,6 @@ import Select from "react-select";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import jwt_decode from 'jwt-decode';
 import toast from "react-hot-toast";
-import axios from "axios";
 
 import style from "./editProfile.module.scss";
 
@@ -19,7 +18,6 @@ import { uploadImageToServer, validateDataOnServer } from "@/utils/profile";
 import { createProfile, updateProfile } from "@/utils/api";
 import { styles } from "./stylesSelect";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = 'authors/checkInputAndGet';
 
 type Props = {
