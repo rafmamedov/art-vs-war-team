@@ -189,13 +189,15 @@ const EditProfile: FC<Props> = ({
   return (
     <section className={style.editProfile}>
       <div className={style.titleContainer}>
-        <button
-          type="button"
-          className={style.arrow}
-          onClick={() => setOpenForm(null)}
-        >
-          <ArrowLeft />
-        </button>
+        {author && (
+          <button
+            type="button"
+            className={style.arrow}
+            onClick={() => setOpenForm(null)}
+          >
+            <ArrowLeft />
+          </button>
+        )}
 
         <h2 className={style.title}>
           {author
@@ -363,7 +365,7 @@ const EditProfile: FC<Props> = ({
           <button
             type="reset"
             className={style.cancel}
-            onClick={onReset}
+            onClick={() => setOpenForm(null)}
           >
             Cancel
           </button>

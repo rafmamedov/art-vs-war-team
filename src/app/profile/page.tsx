@@ -31,6 +31,7 @@ const Profile = () => {
 
       const fetchedAuthor = await getProfile(headers);
       setAuthor(fetchedAuthor);
+      setIsFetching(false);
 
       const paintingsData = await getAllPaintingsByArtist(headers);
       setPaintings(paintingsData);

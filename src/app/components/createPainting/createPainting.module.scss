@@ -209,11 +209,13 @@
   }
 
   &__input {
+    padding: 2px 6px;
     width: 100%;
     height: auto;
     min-height: 180px;
     background-color: transparent;
     color: $gray-30;
+    background-color: $gray-90;
     font-family: $font-text;
     font-size: $font-size-base;
     line-height: $line-height-base;
