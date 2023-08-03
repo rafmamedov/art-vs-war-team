@@ -5,7 +5,6 @@ import Select from "react-select";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import jwt_decode from 'jwt-decode';
 import toast from "react-hot-toast";
-import axios from "axios";
 
 import style from "./editProfile.module.scss";
 
@@ -16,8 +15,9 @@ import { Artist } from "@/types/Artist";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 import { Action, CustomJwtPayload, ProfileForm, UserData, UserDataToSave } from "@/types/Profile";
 import { uploadImageToServer, validateDataOnServer } from "@/utils/profile";
+import { createProfile, updateProfile } from "@/utils/api";
+import { styles } from "./stylesSelect";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = 'authors/checkInputAndGet';
 
 type Props = {
@@ -71,19 +71,17 @@ const EditProfile: FC<Props> = ({
     }
   };
 
-  const createProfile = async (userData: UserDataToSave) => {
-    await axios.post(BASE_URL + 'authors/', userData, { headers })
-    .then(response => {
-      refreshAccessToken();
-      setAuthor(response.data);
-    })
+  const handleCreateProfile = async (userData: UserDataToSave) => {
+    const createdAuthor = await createProfile(userData, headers);
+
+    refreshAccessToken();
+    setAuthor(createdAuthor);
   };
 
-  const updateProfile = async (userData: UserDataToSave) => {
-    await axios.put(BASE_URL + 'authors/', userData, { headers })
-    .then(response => {
-      setAuthor(response.data);
-    })
+  const handleUpdateProfile = async (userData: UserDataToSave) => {
+    const updatedAuthor = await updateProfile(userData, headers);
+
+    setAuthor(updatedAuthor);
   };
 
   const handleEditProfile = async (action: Action, data: UserData) => {
@@ -110,7 +108,7 @@ const EditProfile: FC<Props> = ({
         image: profileImage,
       };
 
-      action === 'create' ? createProfile(authorData) : updateProfile(authorData);
+      action === 'create' ? handleCreateProfile(authorData) : handleUpdateProfile(authorData);
     } else {
       await validateDataOnServer(data, URL, headers, userEmail)
       .then(() => {
@@ -120,7 +118,7 @@ const EditProfile: FC<Props> = ({
           image: { publicId: author?.imagePublicId || '' },
         };
 
-        action === 'create' ? createProfile(authorData) : updateProfile(authorData);
+        action === 'create' ? handleCreateProfile(authorData) : handleUpdateProfile(authorData);
       });
     }
   };
@@ -310,50 +308,7 @@ const EditProfile: FC<Props> = ({
                       isSearchable={false}
                       className={style.select}
                       placeholder="A country of your current stay"
-                      styles={{
-                        control: (provided) => ({
-                          ...provided,
-                          width: '100%',
-                          height: '48px',
-                          padding: '0 8px',
-                          border: 'none',
-                          borderRadius: '0',
-                          backgroundColor: '#1c1d1d',
-                          color: '#78797a',
-                          fontSize: '16px',
-                          lineHeight: '24px',
-                          fontWeight: '400',
-                          ":hover": {
-                            cursor: 'pointer',
-                          },
-                        }),
-                        menu: (provided) => ({
-                          ...provided,
-                          backgroundColor: '#161717',
-                          color: '#78797a',
-                          fontSize: '16px',
-                          lineHeight: '24px',
-                          fontWeight: '400',
-                        }),
-                        option: (provided, state) => ({
-                          ...provided,
-                          backgroundColor: state.isSelected ? '#1c1d1d' : '#3d3e3f',
-                          color: state.isSelected ? '#fff' : '#eff0f1',
-                          ":hover": {
-                            backgroundColor: '#1c1d1d',
-                            color: '#fff',
-                            cursor: 'pointer',
-                          },
-                        }),
-                        singleValue: (provided) => ({
-                          ...provided,
-                          backgroundColor: '#1c1d1d',
-                          color: '#78797a',
-                        }),
-                        indicatorSeparator: () => ({
-                          display: 'none',
-                        }),
-                      }}
+                      styles={styles}
                     />
                   )}
                 />

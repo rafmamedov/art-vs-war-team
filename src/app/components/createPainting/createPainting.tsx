@@ -11,9 +11,10 @@ import style from './createPainting.module.scss'
 import { Add } from '@/app/icons/icon-add';
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { ArtistTabOptions } from '@/types/ArtistTabOptions';
-import { Painting, PaintingData, PaintingForm } from '@/types/Painting';
+import { Painting, PaintingData, PaintingDataToSave, PaintingForm } from '@/types/Painting';
 import { SubjectType, mediums, styles, subjects, supports } from './subjects';
 import { uploadImageToServer } from '@/utils/profile';
+import { stylesSelect } from './stylesSelect';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = 'paintings/checkInputAndGet';
@@ -77,14 +78,14 @@ const CreatePainting: FC<Props> = ({
       await toast.promise(
         uploadImageToServer(data, URL, headers)
         .then(imageData => {
-          const paintingData = {
+          const paintingData: PaintingDataToSave = {
             ...data,
             image: imageData,
           };
 
           axios.post(BASE_URL + 'paintings', paintingData, { headers })
           .then(({ data }) => {
-            const uploadedPainting = {
+            const uploadedPainting: Painting = {
               id: data.id,
               title: data.title,
               price: data.price,
@@ -365,67 +366,7 @@ const CreatePainting: FC<Props> = ({
                           closeMenuOnSelect={false}
                           className={style.select}
                           placeholder="Choose styles"
-                          styles={{
-                            control: (provided) => ({
-                              ...provided,
-                              width: '100%',
-                              minHeight: '48px',
-                              height: 'auto',
-                              padding: '0 8px',
-                              border: 'none',
-                              borderRadius: '0',
-                              backgroundColor: '#1c1d1d',
-                              color: '#78797a',
-                              fontSize: '16px',
-                              lineHeight: '24px',
-                              fontWeight: '400',
-                              ":hover": {
-                                cursor: 'pointer',
-                              },
-                            }),
-                            menu: (provided) => ({
-                              ...provided,
-                              backgroundColor: '#161717',
-                              color: '#78797a',
-                              fontSize: '16px',
-                              lineHeight: '24px',
-                              fontWeight: '400',
-                            }),
-                            option: (provided, state) => ({
-                              ...provided,
-                              backgroundColor: state.isSelected ? '#1c1d1d' : '#3d3e3f',
-                              color: state.isSelected ? '#fff' : '#eff0f1',
-                              ":hover": {
-                                backgroundColor: '#1c1d1d',
-                                color: '#fff',
-                                cursor: 'pointer',
-                              },
-                            }),
-                            singleValue: (provided) => ({
-                              ...provided,
-                              backgroundColor: '#1c1d1d',
-                              color: '#78797a',
-                            }),
-                            multiValue: (provided) => ({
-                              ...provided,
-                              backgroundColor: 'transparent',
-                            }),
-                            multiValueLabel: (provided) => ({
-                              ...provided,
-                              color: '#eff0f1',
-                              fontSize: '12px',
-                            }),
-                            multiValueRemove: (provided) => ({
-                              ...provided,
-                              padding: 0,
-                              ":hover": {
-                                color: '#eff0f1',
-                              },
-                            }),
-                            indicatorSeparator: () => ({
-                              display: 'none',
-                            }),
-                          }}
+                          styles={stylesSelect}
                         />
                       )}
                     />
@@ -458,66 +399,7 @@ const CreatePainting: FC<Props> = ({
                             closeMenuOnSelect={false}
                             className={style.select}
                             placeholder="Choose mediums"
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                width: '100%',
-                                minHeight: '48px',
-                                height: 'auto',
-                                padding: '0 8px',
-                                border: 'none',
-                                borderRadius: '0',
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                                ":hover": {
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              menu: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#161717',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                              }),
-                              option: (provided, state) => ({
-                                ...provided,
-                                backgroundColor: state.isSelected ? '#1c1d1d' : '#3d3e3f',
-                                color: state.isSelected ? '#fff' : '#eff0f1',
-                                ":hover": {
-                                  backgroundColor: '#1c1d1d',
-                                  color: '#fff',
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              singleValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                              }),
-                              multiValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: 'transparent',
-                              }),
-                              multiValueLabel: (provided) => ({
-                                ...provided,
-                                color: '#eff0f1',
-                                fontSize: '12px',
-                              }),
-                              multiValueRemove: (provided) => ({
-                                ...provided,
-                                ":hover": {
-                                  color: '#eff0f1',
-                                },
-                              }),
-                              indicatorSeparator: () => ({
-                                display: 'none',
-                              }),
-                            }}
+                            styles={stylesSelect}
                           />
                         )}
                       />
@@ -550,66 +432,7 @@ const CreatePainting: FC<Props> = ({
                             closeMenuOnSelect={false}
                             className={style.select}
                             placeholder="Choose supports"
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                width: '100%',
-                                minHeight: '48px',
-                                height: 'auto',
-                                padding: '0 8px',
-                                border: 'none',
-                                borderRadius: '0',
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                                ":hover": {
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              menu: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#161717',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                              }),
-                              option: (provided, state) => ({
-                                ...provided,
-                                backgroundColor: state.isSelected ? '#1c1d1d' : '#3d3e3f',
-                                color: state.isSelected ? '#fff' : '#eff0f1',
-                                ":hover": {
-                                  backgroundColor: '#1c1d1d',
-                                  color: '#fff',
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              singleValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                              }),
-                              multiValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: 'transparent',
-                              }),
-                              multiValueLabel: (provided) => ({
-                                ...provided,
-                                color: '#eff0f1',
-                                fontSize: '12px',
-                              }),
-                              multiValueRemove: (provided) => ({
-                                ...provided,
-                                ":hover": {
-                                  color: '#eff0f1',
-                                },
-                              }),
-                              indicatorSeparator: () => ({
-                                display: 'none',
-                              }),
-                            }}
+                            styles={stylesSelect}
                           />
                         )}
                       />
@@ -642,66 +465,7 @@ const CreatePainting: FC<Props> = ({
                             closeMenuOnSelect={false}
                             className={style.select}
                             placeholder="Choose subjects"
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                width: '100%',
-                                minHeight: '48px',
-                                height: 'auto',
-                                padding: '0 8px',
-                                border: 'none',
-                                borderRadius: '0',
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                                ":hover": {
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              menu: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#161717',
-                                color: '#78797a',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                fontWeight: '400',
-                              }),
-                              option: (provided, state) => ({
-                                ...provided,
-                                backgroundColor: state.isSelected ? '#1c1d1d' : '#3d3e3f',
-                                color: state.isSelected ? '#fff' : '#eff0f1',
-                                ":hover": {
-                                  backgroundColor: '#1c1d1d',
-                                  color: '#fff',
-                                  cursor: 'pointer',
-                                },
-                              }),
-                              singleValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: '#1c1d1d',
-                                color: '#78797a',
-                              }),
-                              multiValue: (provided) => ({
-                                ...provided,
-                                backgroundColor: 'transparent',
-                              }),
-                              multiValueLabel: (provided) => ({
-                                ...provided,
-                                color: '#eff0f1',
-                                fontSize: '12px',
-                              }),
-                              multiValueRemove: (provided) => ({
-                                ...provided,
-                                ":hover": {
-                                  color: '#eff0f1',
-                                },
-                              }),
-                              indicatorSeparator: () => ({
-                                display: 'none',
-                              }),
-                            }}
+                            styles={stylesSelect}
                           />
                         )}
                       />

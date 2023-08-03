@@ -1,3 +1,5 @@
+import { ImageData } from "./Profile";
+
 export interface Painting {
   id: number;
   title: string;
@@ -47,6 +49,22 @@ export type PaintingForm = {
 
 export type PaintingData = {
   image?: File;
+  yearOfCreation: number;
+  title: string;
+  weight: number;
+  width: number;
+  height: number;
+  depth: number;
+  price: number;
+  styleIds: number[];
+  mediumIds: number[];
+  supportIds: number[];
+  subjectIds: number[];
+  description: string;
+};
+
+export type PaintingDataToSave = {
+  image: ImageData;
   yearOfCreation: number;
   title: string;
   weight: number;

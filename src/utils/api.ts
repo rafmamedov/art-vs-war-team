@@ -1,6 +1,6 @@
-import { PaintingData } from "@/types/Painting";
-import { RequestParams, UserData } from "@/types/Profile";
-import axios from "axios";
+import { PaintingData, PaintingDataToSave } from "@/types/Painting";
+import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
+import axios, { AxiosHeaders } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -131,6 +131,12 @@ export async function getAllPaintingsByArtist(headers: HeadersInit) {
   return data.content;
 }
 
+export async function getProfile (headers: object) {
+  const { data } = await axios.get(BASE_URL + 'authors/profile', { headers });
+
+  return data;
+}
+
 export async function validateData (
   url: string,
   inputsData: UserData | PaintingData,
@@ -185,6 +191,18 @@ export async function uploadImage (
       formData,
       { headers: {"Content-Type": "multipart/form-data"} },
     );
+
+  return data;
+}
+
+export async function createProfile (userData: UserDataToSave, headers: object) {
+  const { data } = await axios.post(BASE_URL + 'authors/', userData, { headers });
+
+  return data;
+}
+
+export async function updateProfile (userData: UserDataToSave, headers: object) {
+  const { data } = await axios.put(BASE_URL + 'authors/', userData, { headers });
 
   return data;
 }
