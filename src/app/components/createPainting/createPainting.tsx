@@ -523,7 +523,7 @@ const CreatePainting: FC<Props> = ({
           <button
             type="reset"
             className={style.cancel}
-            onClick={onReset}
+            onClick={() => setOpenForm(null)}
           >
             Cancel
           </button>
