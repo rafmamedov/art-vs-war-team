@@ -25,10 +25,9 @@
 .cart__container {
   @include set-flex(row, flex-end, center);
 
-  gap: 40px;
-
   @include laptop {
     min-width: 250px;
+    gap: 40px;
   }
 }
 
@@ -72,13 +71,17 @@
 }
 
 .profile {
-  @include set-flex(row, center, center);
-  @include set-square(50px);
+  display: none;
 
-  cursor: pointer;
-  background-color: transparent;
-  border-radius: 50%;
-  transition: 0.3s ease;
+  @include laptop {
+    @include set-flex(row, center, center);
+    @include set-square(50px);
+
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: 0.3s ease;
+  }
 
   &:hover {
     background-color: $gray-50;
