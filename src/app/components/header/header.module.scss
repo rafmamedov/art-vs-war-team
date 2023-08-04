@@ -71,6 +71,20 @@
   }
 }
 
+.profile {
+  @include set-flex(row, center, center);
+  @include set-square(50px);
+
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: $gray-50;
+  }
+}
+
 .loginDesktop {
   display: none;
 
@@ -83,6 +97,23 @@
   @include laptop {
     display: none;
   }
+}
+
+.signOut {
+  @include set-flex(row, center, center);
+  @include set-size(96px, 48px);
+
+  // margin-top: 32px;
+  // background-color: $gray-0;
+  border: 1px solid $gray-0;
+  color: $gray-0;
+  border-radius: 24px;
+  cursor: pointer;
+
+  // @include laptop {
+  //   display: none;
+  //   margin-top: 0;
+  // }
 }
 
 .navigation {

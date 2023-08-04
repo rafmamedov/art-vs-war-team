@@ -20,9 +20,6 @@ const MightLike: React.FC<Props> = ({ selectedPaintings }) => {
 
   const getMorePaintingsFromArtist = async (id: string, size: number) => {
     const paintings = await getMightLikePaintings(id, size);
-    console.log("id", id);
-    console.log("size", size);
-
     setPaintings(paintings);
   };
 

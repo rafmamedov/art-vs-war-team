@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 
 import { CloseIcon } from "@/app/icons/icon-close";
+import { MapPoint } from "@/app/icons/icon-map-point";
 import { removeItem } from "@/app/redux/slices/cartSlice";
 import { CartItem } from "@/types/CartItem";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
 import MightLike from "../might-like/might-like";
 
 import style from "./order-list.module.scss";
-import { Fragment } from "react";
 
 const OrderList = () => {
   const { paintings, totalPrice } = useAppSelector((state) => state.cart);
@@ -55,10 +56,13 @@ const OrderList = () => {
                     <Link href={`/gallery/${painting.authorId}`}>
                       <p className={style.author}>{`by ${painting.author}`}</p>
                     </Link>
-
+                    <div className={style.country}>
+                      <MapPoint />
+                      {`${painting.country}`}
+                    </div>
                     <p
                       className={style.size}
-                    >{`${painting.width} x ${painting.height} cm`}</p>
+                    >{`${painting.width}W x ${painting.height}H x ${painting.depth}D cm`}</p>
                   </div>
                   <p className={style.price}>{`${painting.price} €`}</p>
                 </div>
