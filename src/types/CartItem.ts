@@ -4,7 +4,7 @@ export interface CartItem {
   price: number;
   author: string;
   authorId: string;
-  country: string;
+  country?: string;
   image: string;
   width: number;
   height: number;
