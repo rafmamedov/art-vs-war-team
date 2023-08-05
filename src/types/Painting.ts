@@ -8,7 +8,7 @@ export interface Painting {
   imageUrl: string;
   authorFullName: string;
   authorPrettyId: string;
-  authorCountry: string;
+  authorCountry?: string;
   width: number;
   height: number;
   depth: number;

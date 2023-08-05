@@ -1,33 +1,35 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { Controller, useForm } from 'react-hook-form';
-import Select from 'react-select';
+import { Dispatch, FC, SetStateAction, useState } from "react";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 import Image from "next/image";
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import toast from "react-hot-toast";
 
-import style from './createPainting.module.scss'
+import style from "./createPainting.module.scss";
 
-import { Add } from '@/app/icons/icon-add';
+import { Add } from "@/app/icons/icon-add";
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
-import { ArtistTabOptions } from '@/types/ArtistTabOptions';
-import { Painting, PaintingData, PaintingDataToSave, PaintingForm } from '@/types/Painting';
-import { SubjectType, mediums, styles, subjects, supports } from './subjects';
-import { uploadImageToServer } from '@/utils/profile';
-import { stylesSelect } from './stylesSelect';
+import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import {
+  Painting,
+  PaintingData,
+  PaintingDataToSave,
+  PaintingForm,
+} from "@/types/Painting";
+import { SubjectType, mediums, styles, subjects, supports } from "./subjects";
+import { uploadImageToServer } from "@/utils/profile";
+import { stylesSelect } from "./stylesSelect";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const URL = 'paintings/checkInputAndGet';
+const URL = "paintings/checkInputAndGet";
 
 type Props = {
   setPaintings: Dispatch<SetStateAction<Painting[]>>;
   setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
-const CreatePainting: FC<Props> = ({
-  setOpenForm,
-  setPaintings,
-}) => {
+const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
   const {
     handleSubmit,
     register,
@@ -50,10 +52,13 @@ const CreatePainting: FC<Props> = ({
   const [selectedSubjects, setSelectedSubjects] = useState<SubjectType[]>([]);
 
   const { user, route } = useAuthenticator((context) => [context.route]);
-  const accessToken = user.getSignInUserSession()?.getAccessToken().getJwtToken();
-  const isAuthenticated = route === 'authenticated';
+  const accessToken = user
+    .getSignInUserSession()
+    ?.getAccessToken()
+    .getJwtToken();
+  const isAuthenticated = route === "authenticated";
   const headers = {
-    'Authorization': `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`,
   };
 
   const checkOptions = (options: SubjectType[]) => {
@@ -76,45 +81,46 @@ const CreatePainting: FC<Props> = ({
   const handleCreatePainting = async (data: PaintingData) => {
     if (data.image instanceof File) {
       await toast.promise(
-        uploadImageToServer(data, URL, headers)
-        .then(imageData => {
+        uploadImageToServer(data, URL, headers).then((imageData) => {
           const paintingData: PaintingDataToSave = {
             ...data,
             image: imageData,
           };
 
-          axios.post(BASE_URL + 'paintings', paintingData, { headers })
-          .then(({ data }) => {
-            // const uploadedPainting = {
-            //   id: data.id,
-            //   title: data.title,
-            //   price: data.price,
-            //   prettyId: data.prettyId,
-            //   imageUrl: data.image.imageUrl,
-            //   authorFullName: data.author.fullName,
-            //   authorPrettyId: data.author.prettyId,
-            //   width: data.width,
-            //   height: data.height,
-            //   depth: data.depth,
-            // };
+          axios
+            .post(BASE_URL + "paintings", paintingData, { headers })
+            .then(({ data }) => {
+              const uploadedPainting: Painting = {
+                id: data.id,
+                title: data.title,
+                price: data.price,
+                prettyId: data.prettyId,
+                imageUrl: data.image.imageUrl,
+                authorFullName: data.author.fullName,
+                authorPrettyId: data.author.prettyId,
+                width: data.width,
+                height: data.height,
+                depth: data.depth,
+              };
 
-            console.log(data);
-          })
-          .finally(() => {
-            onReset();
-          })
+              setPaintings((current) => [...current, uploadedPainting]);
+            })
+            .finally(() => {
+              onReset();
+            });
         }),
         {
-          loading: 'Creating...',
+          loading: "Creating...",
           success: <b>Painting created!</b>,
           error: <b>Could not create.</b>,
-        }, {
-          style: {
-            borderRadius: '10px',
-            background: '#1c1d1d',
-            color: '#b3b4b5',
-          },
         },
+        {
+          style: {
+            borderRadius: "10px",
+            background: "#1c1d1d",
+            color: "#b3b4b5",
+          },
+        }
       );
     }
   };
@@ -169,23 +175,17 @@ const CreatePainting: FC<Props> = ({
           General Information
         </div>
 
-        <div className={style.page}>
-          Additional information
-        </div>
+        <div className={style.page}>Additional information</div>
       </div>
 
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <div className={style.topContainer}>
           <label className={style.file}>
             <input
               type="file"
               className={style.file__input}
               {...register("image", {
-                required: 'Image is required!',
+                required: "Image is required!",
                 onChange: handleFileChange,
               })}
             />
@@ -198,17 +198,15 @@ const CreatePainting: FC<Props> = ({
                   fill
                 />
               </div>
+            ) : typeof errors?.image?.message === "string" ? (
+              <div className={`${style.error} ${style.error__file}`}>
+                {errors.image.message}
+              </div>
             ) : (
-              typeof errors?.image?.message === 'string' ? (
-                <div className={`${style.error} ${style.error__file}`}>
-                  {errors.image.message}
-                </div>
-              ) : (
-                <>
-                  <Add className={style.file__icon}/>
-                  <span className={style.file__label}>Choose a file</span>
-                </>
-              )
+              <>
+                <Add className={style.file__icon} />
+                <span className={style.file__label}>Choose a file</span>
+              </>
             )}
           </label>
           <div className={style.desktopContainer}>
@@ -222,10 +220,12 @@ const CreatePainting: FC<Props> = ({
                   type="text"
                   className={style.text}
                   placeholder="Painting title"
-                  {...register("title", { required: 'This field is required!' })}
+                  {...register("title", {
+                    required: "This field is required!",
+                  })}
                 />
 
-                {typeof errors?.title?.message === 'string' && (
+                {typeof errors?.title?.message === "string" && (
                   <div className={style.error}>{errors.title.message}</div>
                 )}
               </div>
@@ -243,12 +243,16 @@ const CreatePainting: FC<Props> = ({
                       type="number"
                       className={style.text}
                       placeholder="Year of creation"
-                      onWheel={e => e.currentTarget.blur()}
-                      {...register("yearOfCreation", { required: 'This field is required!' })}
+                      onWheel={(e) => e.currentTarget.blur()}
+                      {...register("yearOfCreation", {
+                        required: "This field is required!",
+                      })}
                     />
 
-                    {typeof errors?.yearOfCreation?.message === 'string' && (
-                      <p className={style.error}>{errors.yearOfCreation.message}</p>
+                    {typeof errors?.yearOfCreation?.message === "string" && (
+                      <p className={style.error}>
+                        {errors.yearOfCreation.message}
+                      </p>
                     )}
                   </div>
                 </label>
@@ -263,11 +267,13 @@ const CreatePainting: FC<Props> = ({
                       type="number"
                       className={style.text}
                       placeholder="Weight grm"
-                      onWheel={e => e.currentTarget.blur()}
-                      {...register("weight", { required: 'This field is required!' })}
+                      onWheel={(e) => e.currentTarget.blur()}
+                      {...register("weight", {
+                        required: "This field is required!",
+                      })}
                     />
 
-                    {typeof errors?.weight?.message === 'string' && (
+                    {typeof errors?.weight?.message === "string" && (
                       <p className={style.error}>{errors.weight.message}</p>
                     )}
                   </div>
@@ -283,11 +289,13 @@ const CreatePainting: FC<Props> = ({
                       type="number"
                       className={style.text}
                       placeholder="Width cm"
-                      onWheel={e => e.currentTarget.blur()}
-                      {...register("width", { required: 'This field is required!' })}
+                      onWheel={(e) => e.currentTarget.blur()}
+                      {...register("width", {
+                        required: "This field is required!",
+                      })}
                     />
 
-                    {typeof errors?.width?.message === 'string' && (
+                    {typeof errors?.width?.message === "string" && (
                       <p className={style.error}>{errors.width.message}</p>
                     )}
                   </div>
@@ -303,11 +311,13 @@ const CreatePainting: FC<Props> = ({
                       type="number"
                       className={style.text}
                       placeholder="Height cm"
-                      onWheel={e => e.currentTarget.blur()}
-                      {...register("height", { required: 'This field is required!' })}
+                      onWheel={(e) => e.currentTarget.blur()}
+                      {...register("height", {
+                        required: "This field is required!",
+                      })}
                     />
 
-                    {typeof errors?.height?.message === 'string' && (
+                    {typeof errors?.height?.message === "string" && (
                       <p className={style.error}>{errors.height.message}</p>
                     )}
                   </div>
@@ -324,17 +334,17 @@ const CreatePainting: FC<Props> = ({
                       className={style.text}
                       placeholder="Depth cm"
                       step="0.1"
-                      onWheel={e => e.currentTarget.blur()}
+                      onWheel={(e) => e.currentTarget.blur()}
                       {...register("depth", {
-                        required: 'This field is required!',
+                        required: "This field is required!",
                         max: {
                           value: 9.9,
-                          message: 'Max value allowed 9.9'
-                        }
-                     })}
+                          message: "Max value allowed 9.9",
+                        },
+                      })}
                     />
 
-                    {typeof errors?.depth?.message === 'string' && (
+                    {typeof errors?.depth?.message === "string" && (
                       <p className={style.error}>{errors.depth.message}</p>
                     )}
                   </div>
@@ -351,17 +361,21 @@ const CreatePainting: FC<Props> = ({
                     <Controller
                       name="styleIds"
                       control={control}
-                      rules={{ required: 'This field is required!' }}
+                      rules={{ required: "This field is required!" }}
                       render={({ field: { value, onChange } }) => (
                         <Select
                           options={styles}
                           isMulti
                           isOptionDisabled={() => checkOptions(selectedStyles)}
-                          value={styles.filter(option => value.includes(option.value))}
-                          onChange={newValues => {
+                          value={styles.filter((option) =>
+                            value.includes(option.value)
+                          )}
+                          onChange={(newValues) => {
                             setSelectedStyles(newValues as SubjectType[]);
 
-                            return onChange(newValues.map(newValue => newValue.value));
+                            return onChange(
+                              newValues.map((newValue) => newValue.value)
+                            );
                           }}
                           closeMenuOnSelect={false}
                           className={style.select}
@@ -371,143 +385,159 @@ const CreatePainting: FC<Props> = ({
                       )}
                     />
 
-                    {typeof errors?.styleIds?.message === 'string' && (
+                    {typeof errors?.styleIds?.message === "string" && (
                       <p className={style.error}>{errors.styleIds.message}</p>
                     )}
                   </div>
                 </label>
-                  <label className={style.label}>
-                    <div>
-                      Mediums
-                      <span className={style.star}>*</span>
-                    </div>
-                    <div className={style.input}>
-                      <Controller
-                        name="mediumIds"
-                        control={control}
-                        rules={{ required: 'This field is required!' }}
-                        render={({ field: { onChange, value } }) => (
-                          <Select
-                            options={mediums}
-                            isOptionDisabled={() => checkOptions(selectedMediums)}
-                            value={mediums.filter(option => value.includes(option.value))}
-                            onChange={newValues => {
-                              setSelectedMediums(newValues as SubjectType[]);
-                              return onChange(newValues.map(newValue => newValue.value));
-                            }}
-                            isMulti
-                            closeMenuOnSelect={false}
-                            className={style.select}
-                            placeholder="Choose mediums"
-                            styles={stylesSelect}
-                          />
-                        )}
-                      />
-
-                      {typeof errors?.mediumIds?.message === 'string' && (
-                        <p className={style.error}>{errors.mediumIds.message}</p>
+                <label className={style.label}>
+                  <div>
+                    Mediums
+                    <span className={style.star}>*</span>
+                  </div>
+                  <div className={style.input}>
+                    <Controller
+                      name="mediumIds"
+                      control={control}
+                      rules={{ required: "This field is required!" }}
+                      render={({ field: { onChange, value } }) => (
+                        <Select
+                          options={mediums}
+                          isOptionDisabled={() => checkOptions(selectedMediums)}
+                          value={mediums.filter((option) =>
+                            value.includes(option.value)
+                          )}
+                          onChange={(newValues) => {
+                            setSelectedMediums(newValues as SubjectType[]);
+                            return onChange(
+                              newValues.map((newValue) => newValue.value)
+                            );
+                          }}
+                          isMulti
+                          closeMenuOnSelect={false}
+                          className={style.select}
+                          placeholder="Choose mediums"
+                          styles={stylesSelect}
+                        />
                       )}
-                    </div>
-                  </label>
-                  <label className={style.label}>
-                    <div>
-                      Supports
-                      <span className={style.star}>*</span>
-                    </div>
-                    <div className={style.input}>
-                      <Controller
-                        name="supportIds"
-                        control={control}
-                        rules={{ required: 'This field is required!' }}
-                        render={({ field: { onChange, value } }) => (
-                          <Select
-                            options={supports}
-                            isOptionDisabled={() => checkOptions(selectedSupports)}
-                            value={supports.filter(option => value.includes(option.value))}
-                            onChange={newValues => {
-                              setSelectedSupports(newValues as SubjectType[]);
-                              return onChange(newValues.map(newValue => newValue.value));
-                            }}
-                            isMulti
-                            closeMenuOnSelect={false}
-                            className={style.select}
-                            placeholder="Choose supports"
-                            styles={stylesSelect}
-                          />
-                        )}
-                      />
+                    />
 
-                      {typeof errors?.supportIds?.message === 'string' && (
-                        <p className={style.error}>{errors.supportIds.message}</p>
+                    {typeof errors?.mediumIds?.message === "string" && (
+                      <p className={style.error}>{errors.mediumIds.message}</p>
+                    )}
+                  </div>
+                </label>
+                <label className={style.label}>
+                  <div>
+                    Supports
+                    <span className={style.star}>*</span>
+                  </div>
+                  <div className={style.input}>
+                    <Controller
+                      name="supportIds"
+                      control={control}
+                      rules={{ required: "This field is required!" }}
+                      render={({ field: { onChange, value } }) => (
+                        <Select
+                          options={supports}
+                          isOptionDisabled={() =>
+                            checkOptions(selectedSupports)
+                          }
+                          value={supports.filter((option) =>
+                            value.includes(option.value)
+                          )}
+                          onChange={(newValues) => {
+                            setSelectedSupports(newValues as SubjectType[]);
+                            return onChange(
+                              newValues.map((newValue) => newValue.value)
+                            );
+                          }}
+                          isMulti
+                          closeMenuOnSelect={false}
+                          className={style.select}
+                          placeholder="Choose supports"
+                          styles={stylesSelect}
+                        />
                       )}
-                    </div>
-                  </label>
-                  <label className={style.label}>
-                    <div>
-                      Subjects
-                      <span className={style.star}>*</span>
-                    </div>
-                    <div className={style.input}>
-                      <Controller
-                        name="subjectIds"
-                        control={control}
-                        rules={{ required: 'This field is required!' }}
-                        render={({ field: { onChange, value } }) => (
-                          <Select
-                            options={subjects}
-                            isOptionDisabled={() => checkOptions(selectedSubjects)}
-                            value={subjects.filter(option => value.includes(option.value))}
-                            onChange={newValues => {
-                              setSelectedSubjects(newValues as SubjectType[]);
-                              return onChange(newValues.map(newValue => newValue.value));
-                            }}
-                            isMulti
-                            closeMenuOnSelect={false}
-                            className={style.select}
-                            placeholder="Choose subjects"
-                            styles={stylesSelect}
-                          />
-                        )}
-                      />
+                    />
 
-                      {typeof errors?.subjectIds?.message === 'string' && (
-                        <p className={style.error}>{errors.subjectIds.message}</p>
+                    {typeof errors?.supportIds?.message === "string" && (
+                      <p className={style.error}>{errors.supportIds.message}</p>
+                    )}
+                  </div>
+                </label>
+                <label className={style.label}>
+                  <div>
+                    Subjects
+                    <span className={style.star}>*</span>
+                  </div>
+                  <div className={style.input}>
+                    <Controller
+                      name="subjectIds"
+                      control={control}
+                      rules={{ required: "This field is required!" }}
+                      render={({ field: { onChange, value } }) => (
+                        <Select
+                          options={subjects}
+                          isOptionDisabled={() =>
+                            checkOptions(selectedSubjects)
+                          }
+                          value={subjects.filter((option) =>
+                            value.includes(option.value)
+                          )}
+                          onChange={(newValues) => {
+                            setSelectedSubjects(newValues as SubjectType[]);
+                            return onChange(
+                              newValues.map((newValue) => newValue.value)
+                            );
+                          }}
+                          isMulti
+                          closeMenuOnSelect={false}
+                          className={style.select}
+                          placeholder="Choose subjects"
+                          styles={stylesSelect}
+                        />
                       )}
-                    </div>
-                  </label>
-                  <label className={style.label}>
-                    <div>
-                      Price
-                      <span className={style.star}>*</span>
-                    </div>
-                    <div className={style.input}>
-                      <input
-                        type="number"
-                        className={style.text}
-                        placeholder="Price €"
-                        onWheel={e => e.currentTarget.blur()}
-                        {...register("price", { required: 'This field is required!' })}
-                      />
+                    />
 
-                      {typeof errors?.price?.message === 'string' && (
-                        <p className={style.error}>{errors.price.message}</p>
-                      )}
-                    </div>
-                  </label>
+                    {typeof errors?.subjectIds?.message === "string" && (
+                      <p className={style.error}>{errors.subjectIds.message}</p>
+                    )}
+                  </div>
+                </label>
+                <label className={style.label}>
+                  <div>
+                    Price
+                    <span className={style.star}>*</span>
+                  </div>
+                  <div className={style.input}>
+                    <input
+                      type="number"
+                      className={style.text}
+                      placeholder="Price €"
+                      onWheel={(e) => e.currentTarget.blur()}
+                      {...register("price", {
+                        required: "This field is required!",
+                      })}
+                    />
+
+                    {typeof errors?.price?.message === "string" && (
+                      <p className={style.error}>{errors.price.message}</p>
+                    )}
+                  </div>
+                </label>
               </div>
             </div>
           </div>
         </div>
 
-        <div className={style.devider}/>
+        <div className={style.devider} />
 
         <label className={style.about}>
           <div className={style.about__label}>
             About
-
             <span className={style.star}>*</span>
-
-            {typeof errors?.description?.message === 'string' && (
+            {typeof errors?.description?.message === "string" && (
               <p className={style.error}>{errors.description.message}</p>
             )}
           </div>
@@ -515,7 +545,9 @@ const CreatePainting: FC<Props> = ({
           <textarea
             className={style.about__input}
             placeholder="Write some description about the painting"
-            {...register("description", { required: 'This field is required!' })}
+            {...register("description", {
+              required: "This field is required!",
+            })}
           />
         </label>
 
@@ -527,10 +559,7 @@ const CreatePainting: FC<Props> = ({
           >
             Cancel
           </button>
-          <button
-            type="submit"
-            className={style.forward}
-          >
+          <button type="submit" className={style.forward}>
             Forward
           </button>
         </div>
