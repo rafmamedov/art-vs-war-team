@@ -53,7 +53,7 @@ const OrderList = () => {
                     <Link href={`/gallery/${painting.id}`}>
                       <p className={style.title}>{painting.title}</p>
                     </Link>
-                    <Link href={`/gallery/${painting.authorId}`}>
+                    <Link href={`/artists/${painting.authorId}`}>
                       <p className={style.author}>{`by ${painting.author}`}</p>
                     </Link>
                     <div className={style.country}>
@@ -62,7 +62,7 @@ const OrderList = () => {
                     </div>
                     <p
                       className={style.size}
-                    >{`${painting.width}W x ${painting.height}H x ${painting.depth}D cm`}</p>
+                    >{`${painting.width} W x ${painting.height} H x ${painting.depth} D cm`}</p>
                   </div>
                   <p className={style.price}>{`${painting.price} €`}</p>
                 </div>

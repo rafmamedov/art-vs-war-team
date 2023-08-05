@@ -24,9 +24,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
   const { paintings, totalPrice } = useAppSelector((state) => state.cart);
-  const { user } = useAuthenticator((context) => [
-    context.route,
-  ]);
+  const { user } = useAuthenticator((context) => [context.route]);
 
   const handleShowMobileMenu = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
@@ -123,7 +121,12 @@ const Header = () => {
         }`}
       >
         <div>
-          <LoginButton className={style.loginMobile} />
+          {!user && (
+            <Link href={`/profile`} onClick={handleCloseMobileMenu}>
+              <LoginButton className={style.loginMobile} />
+            </Link>
+          )}
+
           <MenuItems className={style.menuItems} />
         </div>
         <div className={style.contacts}>
