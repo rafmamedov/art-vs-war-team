@@ -53,9 +53,9 @@ const Profile = () => {
 
     if (user?.username) {
       fetchData();
-    } else {
-      setIsFetching(false);
     }
+
+    setIsFetching(false);
   }, [user, dispatch]);
 
   useEffect(() => {

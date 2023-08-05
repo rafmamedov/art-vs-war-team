@@ -93,10 +93,13 @@ const CreatePainting: FC<Props> = ({
               imageUrl: data.image.imageUrl,
               authorFullName: data.author.fullName,
               authorPrettyId: data.author.prettyId,
+              authorCountry: data.author.country,
               width: data.width,
               height: data.height,
               depth: data.depth,
             };
+
+            console.log(data);
 
             setPaintings(current => [...current, uploadedPainting]);
           })
