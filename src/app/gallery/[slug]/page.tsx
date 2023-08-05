@@ -34,6 +34,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
     price: price,
     author: author.fullName,
     authorId: author.prettyId,
+    country: author.country,
     image: image.imageUrl,
     width: width,
     height: height,
