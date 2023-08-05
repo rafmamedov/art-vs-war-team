@@ -1,10 +1,13 @@
 "use client";
 
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
 
-import { useAppDispatch } from "@/types/ReduxHooks";
 import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
-import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useAppDispatch } from "@/types/ReduxHooks";
+
+import style from "./menuItems.module.scss";
+
 type Props = {
   className?: string;
 };
@@ -20,7 +23,7 @@ export const MenuItems: React.FC<Props> = ({ className }) => {
   return (
     <ul className={className}>
       {user && (
-        <li>
+        <li className={style.profile}>
           <Link href={"/profile"} onClick={handleCloseMobileMenu}>
             Profile
           </Link>
