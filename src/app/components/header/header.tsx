@@ -1,11 +1,13 @@
 "use client";
 
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { Cart } from "@/app/icons/icon-cart";
 import { CloseIcon } from "@/app/icons/icon-close";
 import { MobileMenu } from "@/app/icons/icon-menu";
+import { ProfileIcon } from "@/app/icons/icon-profile";
 import { setDataFromLocalStorage } from "@/app/redux/slices/cartSlice";
 import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
 import { DataFromLocalStorage } from "@/types/CartItem";
@@ -22,6 +24,9 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
   const { paintings, totalPrice } = useAppSelector((state) => state.cart);
+  const { user } = useAuthenticator((context) => [
+    context.route,
+  ]);
 
   const handleShowMobileMenu = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
@@ -80,12 +85,6 @@ const Header = () => {
           <MenuItems className={style.menuItems} />
         </nav>
         <div className={style.cart__container}>
-          <div className={style.price}>
-            <Link href={`/cart`}>
-              <div className={style.price__title}>Total</div>
-              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
-            </Link>
-          </div>
           <Link href={`/cart`}>
             <div className={style.cart}>
               <Cart />
@@ -94,8 +93,24 @@ const Header = () => {
               )}
             </div>
           </Link>
-
-          <LoginButton className={style.loginDesktop} />
+          <div className={style.price}>
+            <Link href={`/cart`}>
+              <div className={style.price__title}>Total</div>
+              <div className={style.price__amount}>{`€ ${totalPrice}`}</div>
+            </Link>
+          </div>
+          {user && (
+            <Link href={`/profile`}>
+              <div className={style.profile}>
+                <ProfileIcon />
+              </div>
+            </Link>
+          )}
+          {!user && (
+            <Link href={`/profile`}>
+              <LoginButton className={style.loginDesktop} />
+            </Link>
+          )}
         </div>
       </div>
       <hr className={style.line}></hr>

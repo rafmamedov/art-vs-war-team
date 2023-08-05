@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import style from "./morePaintings.module.scss";
-
-import CardPreview from "@components/card-preview/card-preview";
-import { getMorePaintings } from "@/utils/api";
 import { Painting } from "@/types/Painting";
+import { getMorePaintings } from "@/utils/api";
+import CardPreview from "@components/card-preview/card-preview";
+
+import style from "./morePaintings.module.scss";
 
 type Props = {
   prettyId: string;
@@ -19,8 +19,6 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
   );
 
   const getMorePaintingsFromArtist = async (id: string, size: number) => {
-    console.log(id, size);
-
     const paintings = await getMorePaintings(id, size);
     setPaintings(paintings);
   };

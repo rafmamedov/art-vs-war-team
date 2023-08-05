@@ -98,6 +98,14 @@
   margin-top: 16px;
 }
 
+.country {
+  @include set-flex(row);
+
+  gap: 10px;
+  margin-top: 16px;
+  color: $gray-10;
+}
+
 .price {
   margin-top: 24px;
   font-size: $font-size-xxl;

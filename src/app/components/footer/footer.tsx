@@ -1,5 +1,8 @@
+"use client";
+
 import { MenuItems } from "../menuItems/menuItems";
 import SocialNetworkIcons from "../social-network/social-network";
+
 import style from "./footer.module.scss";
 
 const Footer = () => {

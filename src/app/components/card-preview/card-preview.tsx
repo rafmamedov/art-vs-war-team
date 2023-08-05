@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 import { Cart } from "@/app/icons/icon-cart";
+import { CheckProduct } from "@/app/icons/icon-check-product";
 import { addPainting } from "@/app/redux/slices/cartSlice";
 import { CartItem } from "@/types/CartItem";
 import { Painting } from "@/types/Painting";
-import { useAppDispatch } from "@/types/ReduxHooks";
+import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
 
 import "@styles/globals.scss";
 import style from "./card-preview.module.scss";
-import { CheckProduct } from "@/app/icons/icon-check-product";
 
 type Props = {
   paintingDetails: Painting;
@@ -18,7 +17,10 @@ type Props = {
 };
 
 const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
-  const [showNewIcon, setShowNewIcon] = useState(false);
+  const { paintings } = useAppSelector((state) => state.cart);
+  const isPaintingSelected = paintings.some(
+    (painting) => painting.id === paintingDetails.prettyId
+  );
 
   const {
     prettyId,
@@ -26,6 +28,7 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
     title,
     authorFullName,
     authorPrettyId,
+    authorCountry,
     price,
     width,
     height,
@@ -40,6 +43,7 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
       price: price,
       author: authorFullName,
       authorId: authorPrettyId,
+      country: authorCountry,
       image: imageUrl,
       width: width,
       height: height,
@@ -47,7 +51,6 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
     };
 
     dispatch(addPainting(orderData));
-    setShowNewIcon(true);
   };
 
   return (
@@ -71,13 +74,13 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
 
       <div className={style.buy}>
         <p className={style.buy__price}>{`€ ${price}`}</p>
-        {!showNewIcon ? (
+        {isPaintingSelected ? (
           <div className={style.buy__icon} onClick={handleAddPaintingToCart}>
-            <Cart />
+            <CheckProduct />
           </div>
         ) : (
           <div className={style.buy__icon} onClick={handleAddPaintingToCart}>
-            <CheckProduct />
+            <Cart />
           </div>
         )}
       </div>

@@ -8,14 +8,16 @@ export interface Painting {
   imageUrl: string;
   authorFullName: string;
   authorPrettyId: string;
+  authorCountry: string;
   width: number;
   height: number;
   depth: number;
 }
 
 export interface ArtCollection {
-  total: number;
   content: Painting[];
+  total: number;
+  artistId: string;
 }
 
 export interface PaintingFilterParams {

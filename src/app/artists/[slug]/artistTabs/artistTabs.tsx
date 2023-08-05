@@ -1,15 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
 import { usePathname } from "next/navigation";
+import { Dispatch, SetStateAction, useState } from "react";
+
+import MasonryGallery from "@/app/components/masonry/masonry";
+import { Add } from "@/app/icons/icon-add";
+import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import { useAppSelector } from "@/types/ReduxHooks";
+import ArtProcess from "./artProcess/artProcess";
+import MoreArtistPaintingsButton from "./artProcess/more-artist-paintings/more-artist-paintings";
 
 import style from "./artistTabs.module.scss";
-
-import { Add } from "@/app/icons/icon-add";
-import ArtProcess from "./artProcess/artProcess";
-import MasonryGallery from "@/app/components/masonry/masonry";
-import { ArtistTabOptions } from "@/types/ArtistTabOptions";
-import { Painting } from "@/types/Painting";
 
 const tabs: ArtistTabOptions[] = [
   ArtistTabOptions.artworks,
@@ -18,14 +19,12 @@ const tabs: ArtistTabOptions[] = [
 ];
 
 type Props = {
-  paintingsList: Painting[];
   setOpenForm?: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
-const ArtistTabs: React.FC<Props> = ({
-  paintingsList,
-  setOpenForm
-}) => {
+const ArtistTabs: React.FC<Props> = ({ setOpenForm }) => {
+  const { artistPaintings } = useAppSelector((state) => state.artistPaintings);
+
   const [selectedTab, setSelectedTab] = useState(ArtistTabOptions.artworks);
   const pathname = usePathname();
 
@@ -50,7 +49,7 @@ const ArtistTabs: React.FC<Props> = ({
           ))}
         </div>
 
-        {(isProfile && setOpenForm) && (
+        {isProfile && setOpenForm && (
           <button
             type="button"
             className={style.add}
@@ -66,7 +65,10 @@ const ArtistTabs: React.FC<Props> = ({
 
       <div className={style.gallery}>
         {selectedTab === ArtistTabOptions.artworks && (
-          <MasonryGallery paintingsList={paintingsList} />
+          <>
+            <MasonryGallery paintingsList={artistPaintings} />
+            <MoreArtistPaintingsButton />
+          </>
         )}
         {selectedTab === ArtistTabOptions.artProcess && <ArtProcess />}
       </div>

@@ -75,6 +75,21 @@ input[type=number] {
 }
 
 div ::-webkit-scrollbar {
-  width: 0;
+  width: 16px;
   background-color: transparent;
+}
+
+div ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+div ::-webkit-scrollbar-thumb {
+  background-color: $gray-80;
+  border-radius: 8px;
+  border: 1px solid $gray-30;
+}
+
+div ::-webkit-scrollbar-button {
+  background-color: transparent;
+  height: 10px;
 }
