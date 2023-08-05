@@ -14,6 +14,20 @@ export interface Painting {
   depth: number;
 }
 
+export interface UploadedPainting {
+  id: number;
+  title: string;
+  price: number;
+  prettyId: string;
+  imageUrl: string;
+  authorFullName: string;
+  authorPrettyId: string;
+  authorCountry: string;
+  width: number;
+  height: number;
+  depth: number;
+}
+
 export interface ArtCollection {
   content: Painting[];
   total: number;

@@ -85,23 +85,20 @@ const CreatePainting: FC<Props> = ({
 
           axios.post(BASE_URL + 'paintings', paintingData, { headers })
           .then(({ data }) => {
-            const uploadedPainting: Painting = {
-              id: data.id,
-              title: data.title,
-              price: data.price,
-              prettyId: data.prettyId,
-              imageUrl: data.image.imageUrl,
-              authorFullName: data.author.fullName,
-              authorPrettyId: data.author.prettyId,
-              authorCountry: data.author.country,
-              width: data.width,
-              height: data.height,
-              depth: data.depth,
-            };
+            // const uploadedPainting = {
+            //   id: data.id,
+            //   title: data.title,
+            //   price: data.price,
+            //   prettyId: data.prettyId,
+            //   imageUrl: data.image.imageUrl,
+            //   authorFullName: data.author.fullName,
+            //   authorPrettyId: data.author.prettyId,
+            //   width: data.width,
+            //   height: data.height,
+            //   depth: data.depth,
+            // };
 
             console.log(data);
-
-            setPaintings(current => [...current, uploadedPainting]);
           })
           .finally(() => {
             onReset();
