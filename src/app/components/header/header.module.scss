@@ -131,13 +131,14 @@
 .mobileNavigation {
   @include set-flex(column, space-around, center);
   @include set-size(100vw, 100%);
+
+  position: fixed;
   top: 57px;
   left: 0;
   right: 0;
   bottom: 0;
-
-  position: fixed;
   z-index: $z-index-menu;
+  overflow: hidden;
   background-color: $gray-100;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
   transition-duration: 500ms;
