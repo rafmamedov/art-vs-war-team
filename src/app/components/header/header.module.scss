@@ -130,7 +130,11 @@
 
 .mobileNavigation {
   @include set-flex(column, space-around, center);
-  @include set-size(100vw, 100dvh);
+  @include set-size(100vw, 100%);
+  top: 57px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   position: fixed;
   z-index: $z-index-menu;
