@@ -4,6 +4,7 @@
 .header {
   @include set-flex(row, space-between, center);
 
+  position: relative;
   padding: 0 22px;
   height: 56px;
   background-color: $gray-100;
@@ -129,7 +130,7 @@
 
 .mobileNavigation {
   @include set-flex(column, space-around, center);
-  @include set-size(100vw, 95%);
+  @include set-size(100vw, 100dvh);
 
   position: fixed;
   z-index: $z-index-menu;
