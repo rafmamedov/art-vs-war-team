@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import style from "@styles/not-found.module.scss";
 
-const NotFoundPage = () => {
+const NotFound = () => {
   return (
     <section className={style.notFound}>
       <div className={style.firstSection}>
@@ -30,4 +30,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default NotFound;
