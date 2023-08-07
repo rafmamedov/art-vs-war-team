@@ -1,6 +1,7 @@
 import { PaintingData, PaintingDataToSave } from "@/types/Painting";
 import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
 import axios, { AxiosHeaders } from "axios";
+import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -36,7 +37,7 @@ export async function getPainting(id: string) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   const data = await response.json();
@@ -64,7 +65,7 @@ export async function getArtist(id: string) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   const data = await response.json();
@@ -120,13 +121,10 @@ export async function getMightLikePaintings(id: string, size: number) {
 }
 
 export async function getAllPaintingsByArtist(headers: HeadersInit) {
-  const response = await fetch(
-    `${BASE_URL}paintings/author/all?&page=0`,
-    {
-      cache: "no-store",
-      headers,
-    }
-  );
+  const response = await fetch(`${BASE_URL}paintings/author/all?&page=0`, {
+    cache: "no-store",
+    headers,
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
