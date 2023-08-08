@@ -1,12 +1,15 @@
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Cart } from "@/app/icons/icon-cart";
 import { CheckProduct } from "@/app/icons/icon-check-product";
-import { addPainting } from "@/app/redux/slices/cartSlice";
+import { addPaintingToCart } from "@/app/redux/slices/cartSlice";
 import { CartItem } from "@/types/CartItem";
 import { Painting } from "@/types/Painting";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import { saveOrderPaintingToServer } from "@/utils/api";
+import createHeaders from "@/utils/getAccessToken";
 
 import "@styles/globals.scss";
 import style from "./card-preview.module.scss";
@@ -17,12 +20,17 @@ type Props = {
 };
 
 const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
+  const dispatch = useAppDispatch();
   const { paintings } = useAppSelector((state) => state.cart);
+  const { user } = useAuthenticator((context) => [context.route]);
+  const headers = createHeaders(user);
+
   const isPaintingSelected = paintings.some(
-    (painting) => painting.id === paintingDetails.prettyId
+    (painting) => painting.prettyId === paintingDetails.prettyId
   );
 
   const {
+    id,
     prettyId,
     imageUrl,
     title,
@@ -34,11 +42,11 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
     height,
     depth,
   } = paintingDetails;
-  const dispatch = useAppDispatch();
 
   const handleAddPaintingToCart = () => {
     const orderData: CartItem = {
-      id: prettyId,
+      id: id,
+      prettyId: prettyId,
       title: title,
       price: price,
       author: authorFullName,
@@ -50,7 +58,11 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
       depth: depth,
     };
 
-    dispatch(addPainting(orderData));
+    dispatch(addPaintingToCart(orderData));
+
+    if (user) {
+      saveOrderPaintingToServer(id, headers);
+    }
   };
 
   return (

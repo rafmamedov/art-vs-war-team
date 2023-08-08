@@ -12,6 +12,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
   const paintingsList = await getPainting(params.slug);
 
   const {
+    id,
     image,
     title,
     prettyId,
@@ -29,7 +30,8 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
   } = paintingsList;
 
   const orderData: CartItem = {
-    id: prettyId,
+    id: id,
+    prettyId: prettyId,
     title: title,
     price: price,
     author: author.fullName,

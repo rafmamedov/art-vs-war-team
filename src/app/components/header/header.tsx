@@ -2,29 +2,39 @@
 
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 import { Cart } from "@/app/icons/icon-cart";
 import { CloseIcon } from "@/app/icons/icon-close";
 import { MobileMenu } from "@/app/icons/icon-menu";
 import { ProfileIcon } from "@/app/icons/icon-profile";
-import { setDataFromLocalStorage } from "@/app/redux/slices/cartSlice";
+import {
+  setCartDataFromServer,
+  setDataToCartFromLocalStorage,
+} from "@/app/redux/slices/cartSlice";
 import { setShowMobileMenu } from "@/app/redux/slices/showUpSlice";
-import { DataFromLocalStorage } from "@/types/CartItem";
+import { CartItem, DataFromLocalStorage } from "@/types/CartItem";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
-import getDataFromLocalStorage from "@/utils/getDataFromLocalStorage";
+import {
+  getOrderDataFromServer,
+  saveOrderPaintingsToServer,
+} from "@/utils/api";
+import createHeaders from "@/utils/getAccessToken";
+import { getDataFromLocalStorage } from "@/utils/localStorageData";
 import { Logo } from "../logo/logo";
 import { MenuItems } from "../menuItems/menuItems";
 import SocialNetworkIcons from "../social-network/social-network";
 import LoginButton from "./navigation/login-button/login-button";
 
 import style from "./header.module.scss";
+import { Painting } from "@/types/Painting";
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const showMobileMenu = useAppSelector((state) => state.showUp.showMobileMenu);
   const { paintings, totalPrice } = useAppSelector((state) => state.cart);
   const { user } = useAuthenticator((context) => [context.route]);
+  const headers = createHeaders(user);
 
   const handleShowMobileMenu = () => {
     dispatch(setShowMobileMenu(!showMobileMenu));
@@ -42,20 +52,45 @@ const Header = () => {
     }
   }, [showMobileMenu]);
 
-  const isMounted = useRef(false);
-
   useEffect(() => {
     const data: DataFromLocalStorage = getDataFromLocalStorage();
-    dispatch(setDataFromLocalStorage(data));
-  }, [dispatch]);
+    dispatch(setDataToCartFromLocalStorage(data));
 
-  useEffect(() => {
-    if (isMounted.current) {
-      const json = JSON.stringify(paintings);
-      localStorage.setItem("cart", json);
+    if (user) {
+      const paintingsId = data.paintingsFromLocalStorage
+        .map((painting) => painting.id)
+        .join(",");
+
+      saveOrderPaintingsToServer(paintingsId, headers);
     }
-    isMounted.current = true;
-  }, [paintings]);
+
+    const getDataFromCart = async () => {
+      const dataFromServer = await getOrderDataFromServer(headers);
+      const orderData = dataFromServer.paintings.map((item: Painting) => {
+        const orderData: CartItem = {
+          id: item.id,
+          prettyId: item.prettyId,
+          title: item.title,
+          price: item.price,
+          author: item.authorFullName,
+          authorId: item.authorPrettyId,
+          country: item.authorCountry,
+          image: item.imageUrl,
+          width: item.width,
+          height: item.height,
+          depth: item.depth,
+        };
+
+        return orderData;
+      });
+
+      dispatch(setCartDataFromServer(orderData));
+    };
+
+    if (user) {
+      getDataFromCart();
+    }
+  }, [user]);
 
   return (
     <header>
