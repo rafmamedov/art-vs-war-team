@@ -1,6 +1,6 @@
-import { PaintingData, PaintingDataToSave } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
 import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -206,6 +206,40 @@ export async function createProfile(userData: UserDataToSave, headers: object) {
 
 export async function updateProfile(userData: UserDataToSave, headers: object) {
   const { data } = await axios.put(BASE_URL + "authors/", userData, {
+    headers,
+  });
+
+  return data;
+}
+
+export async function saveOrderPaintingToServer(id: any, headers: object) {
+  const { data } = await axios.get(`${BASE_URL}cart/add/${id}`, {
+    headers,
+  });
+
+  return data;
+}
+
+export async function saveOrderPaintingsToServer(ids: string, headers: object) {
+  const { data } = await axios.get(`${BASE_URL}cart/add?paintingIds=${ids}`, {
+    headers,
+  });
+
+  return data;
+}
+
+export async function removeOrderPaintingFromServer(id: any, headers: object) {
+  const { data } = await axios.get(`${BASE_URL}cart/remove/${id}`, {
+    headers,
+  });
+
+  return data;
+}
+
+export async function getOrderDataFromServer(headers: object) {
+  console.log(headers);
+
+  const { data } = await axios.get(`${BASE_URL}cart`, {
     headers,
   });
 

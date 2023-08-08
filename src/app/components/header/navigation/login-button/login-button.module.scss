@@ -5,7 +5,6 @@
   @include set-flex(row, center, center);
   @include set-size(96px, 48px);
 
-  // margin-top: 32px;
   background-color: $gray-0;
   color: $gray-100;
   border-radius: 24px;
@@ -14,5 +13,10 @@
   @include laptop {
     display: none;
     margin-top: 0;
+  }
+
+  &:active {
+    transform: scale(0.9);
+    transition-duration: 0.3s;
   }
 }

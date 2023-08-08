@@ -1,9 +1,7 @@
-"use client";
-
-import { DataFromLocalStorage } from "@/types/CartItem";
+import { CartItem, DataFromLocalStorage } from "@/types/CartItem";
 import getTotalPrice from "./calcTotalPrice";
 
-const getDataFromLocalStorage = (): DataFromLocalStorage => {
+export const getDataFromLocalStorage = (): DataFromLocalStorage => {
   const data = localStorage.getItem("cart");
   const paintingsFromLocalStorage = data ? JSON.parse(data) : [];
   const totalPriceFromLocalStorage = getTotalPrice(paintingsFromLocalStorage);
@@ -14,4 +12,8 @@ const getDataFromLocalStorage = (): DataFromLocalStorage => {
   };
 };
 
-export default getDataFromLocalStorage;
+export const setDataToLocalStorage = (paintings: CartItem[]) => {
+  const json = JSON.stringify(paintings);
+  localStorage.setItem("cart", json);
+};
+
