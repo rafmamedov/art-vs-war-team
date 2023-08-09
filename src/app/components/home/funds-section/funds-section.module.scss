@@ -212,11 +212,14 @@
 }
 
 .button {
+  @include set-flex(row, center, center);
+
   height: 48px;
   width: 100%;
   border-radius: 24px;
   font-size: $font-size-base;
   color: $gray-100;
+  background-color: $gray-5;
 
   @include laptop {
     @include set-square(140px);
@@ -244,8 +247,18 @@
     display: none;
 
     @include laptop {
-      display: block;
+      display: flex;
       align-self: center;
     }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $gray-0;
+  }
+
+  &:active {
+    transition-duration: 0.3s;
+    transform: scale(0.9);
   }
 }

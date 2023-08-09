@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import style from "./funds-section.module.scss";
 
@@ -26,9 +27,14 @@ const Funds = () => {
             className={style.imageWrapper__image}
           />
         </div>
-        <button className={`${style.button} ${style.button__desktop}`}>
+
+        <Link
+          href={"/donation"}
+          className={`${style.button} ${style.button__desktop}`}
+        >
           Learn more
-        </button>
+        </Link>
+
         <div className={style.quote}>
           <div className={style.quoteWrapper}>
             <Image
@@ -53,9 +59,12 @@ const Funds = () => {
               </div>
             </div>
           </div>
-          <button className={`${style.button} ${style.button__mobile}`}>
+          <Link
+            href={"/donation"}
+            className={`${style.button} ${style.button__mobile}`}
+          >
             Learn more
-          </button>
+          </Link>
         </div>
       </div>
     </section>

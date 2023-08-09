@@ -20,14 +20,14 @@
     height: calc(100vh - 56px);
     margin: 0 auto;
     padding: 16px 22px 24px;
-  
+
     @include set-flex(column, center, center);
     gap: 40px;
-  
+
     @include tablet {
       display: none;
     }
-  
+
     &::before {
       content: "";
       position: absolute;
@@ -36,16 +36,15 @@
       width: 100%;
       height: 100%;
       background-color: black;
-      opacity: 0.5;
+      opacity: 0.3;
       z-index: 1;
     }
-  
-  
-    &__background{
+
+    &__background {
       z-index: 0;
       object-fit: cover;
     }
-  
+
     &__title {
       text-align: center;
       font-size: 50px;
@@ -54,20 +53,20 @@
       color: $gray-0;
       z-index: 2;
     }
-  
+
     &__button {
       @include set-flex(row, center, center);
       @include set-square(144px);
       margin: 0 auto;
       border-radius: 50%;
       z-index: 2;
-  
+
       font-size: $font-size-base;
       line-height: $line-height-base;
       font-weight: $font-weight-regular;
       background-color: $gray-5;
       color: $gray-100;
-  
+
       &:hover {
         cursor: pointer;
         background-color: $gray-0;
@@ -108,7 +107,7 @@
             line-height: $line-height-huge;
           }
         }
-    
+
         &__images {
           margin-top: 50px;
           @include set-flex(row, center, center);
@@ -132,7 +131,7 @@
       }
 
       .button {
-        @include set-flex(row, center,center);
+        @include set-flex(row, center, center);
         width: 100%;
         height: 48px;
         border-radius: 24px;
@@ -173,7 +172,7 @@
         width: 100%;
         height: 82px;
       }
-      
+
       &__2x3 {
         position: relative;
         width: 100%;
@@ -354,7 +353,7 @@
 
       .button {
         @include set-flex(row, center, center);
-        @include set-square(140px); 
+        @include set-square(140px);
         border-radius: 50%;
         background-color: $gray-5;
         color: $gray-100;
@@ -366,7 +365,7 @@
         @include desktopHD {
           @include set-square(240px);
         }
-      
+
         &:hover {
           cursor: pointer;
           background-color: $gray-0;
@@ -405,7 +404,7 @@
       &__bottom {
         @include set-flex(row, space-between, center);
         gap: 30px;
-        
+
         @include desktop {
           margin-top: 96px;
         }
@@ -449,23 +448,23 @@
         @include desktop {
           display: block;
         }
-    
+
         @include desktopHD {
           width: 624px;
           height: 276px;
         }
       }
-    
+
       &__3x4 {
         position: relative;
         width: 320px;
         height: 360px;
-    
+
         @include desktopHD {
           width: 368px;
           height: 414px;
         }
-    
+
         &__desktop {
           display: none;
           position: relative;
@@ -475,7 +474,7 @@
           @include desktop {
             display: block;
           }
-    
+
           @include desktopHD {
             display: none;
           }
@@ -491,7 +490,7 @@
           display: none;
         }
       }
-    
+
       &__5x4 {
         position: relative;
         width: 544px;
@@ -512,10 +511,10 @@
           }
         }
       }
-    
+
       &__square {
         display: none;
-    
+
         @include desktopHD {
           display: block;
           position: relative;
@@ -523,7 +522,7 @@
         }
       }
     }
-    
+
     .square {
       display: none;
       position: relative;
@@ -532,7 +531,7 @@
         display: block;
         @include set-square(208px);
       }
-    
+
       @include desktopHD {
         @include set-square(240px);
       }

@@ -23,36 +23,24 @@ export const MenuItems: React.FC<Props> = ({ className }) => {
   return (
     <ul className={className}>
       {user && (
-        <li className={style.profile}>
-          <Link href={"/profile"} onClick={handleCloseMobileMenu}>
-            Profile
-          </Link>
+        <li className={style.profile} onClick={handleCloseMobileMenu}>
+          <Link href={"/profile"}>Profile</Link>
         </li>
       )}
-      <li>
-        <Link href={"/gallery"} onClick={handleCloseMobileMenu}>
-          Gallery
-        </Link>
+      <li onClick={handleCloseMobileMenu}>
+        <Link href={"/gallery"}>Gallery</Link>
       </li>
-      <li>
-        <Link href={"/artists"} onClick={handleCloseMobileMenu}>
-          Artists
-        </Link>
+      <li onClick={handleCloseMobileMenu}>
+        <Link href={"/artists"}>Artists</Link>
       </li>
-      <li>
-        <Link href={"/delivery"} onClick={handleCloseMobileMenu}>
-          Donation
-        </Link>
+      <li onClick={handleCloseMobileMenu}>
+        <Link href={"/donation"}>Donation</Link>
       </li>
-      <li>
-        <Link href={"/#about"} onClick={handleCloseMobileMenu}>
-          About
-        </Link>
+      <li onClick={handleCloseMobileMenu}>
+        <Link href={"/about"}>About</Link>
       </li>
-      <li>
-        <Link href={"/#contacts"} onClick={handleCloseMobileMenu}>
-          Contacts
-        </Link>
+      <li onClick={handleCloseMobileMenu}>
+        <Link href={"/contacts"}>Contacts</Link>
       </li>
     </ul>
   );
