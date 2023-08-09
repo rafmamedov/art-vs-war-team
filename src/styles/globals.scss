@@ -58,7 +58,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -76,6 +76,8 @@ div ::-webkit-scrollbar {
 
 div ::-webkit-scrollbar-track {
   background-color: transparent;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 div ::-webkit-scrollbar-thumb {
@@ -88,4 +90,3 @@ div ::-webkit-scrollbar-button {
   background-color: transparent;
   height: 10px;
 }
-

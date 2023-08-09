@@ -18,20 +18,33 @@ const ArtistsList = () => {
         <InputArtistSearch />
       </div>
 
-      <div className={style.artistsCards}>
-        {foundArtists.map((artist: Artist, index: number) => (
-          <ArtistCard
-            artist={artist}
-            key={artist.cognitoSubject}
-            className={
-              index % 2 === 0
-                ? `${style.artistsCardOdd}`
-                : `${style.artistsCardEven}`
-            }
-          />
-        ))}
-      </div>
-      <MoreArtistsButton />
+      <>
+        {foundArtists.length !== 0 ? (
+          <>
+            <div className={style.artistsCards}>
+              {foundArtists.map((artist: Artist, index: number) => (
+                <ArtistCard
+                  artist={artist}
+                  key={artist.cognitoSubject}
+                  className={
+                    index % 2 === 0
+                      ? `${style.artistsCardOdd}`
+                      : `${style.artistsCardEven}`
+                  }
+                />
+              ))}
+            </div>
+            <MoreArtistsButton />
+          </>
+        ) : (
+          <div className={style.noArtists}>
+            <p className={style.noArtists__title}>No such artist was found</p>
+            <a className={style.noArtists__button} href="/artists">
+              View All Artists
+            </a>
+          </div>
+        )}
+      </>
     </section>
   );
 };

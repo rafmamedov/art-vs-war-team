@@ -1,11 +1,11 @@
 import { getFiltersData, getPaintings } from "@/utils/api";
 import Filter from "./filter/filter";
 import MasonryCatalog from "./massonry-catalog/massonry-catalog";
+import MorePaintingsButton from "./more-paintings-button/more-paintings-button";
 import Preloader from "./preloader";
 import Sort from "./sort/sort";
 
 import style from "./page.module.scss";
-import MorePaintingsButton from "./more-paintings-button/more-paintings-button";
 
 const Gallery = async ({
   searchParams,

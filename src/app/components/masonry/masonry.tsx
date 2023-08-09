@@ -2,10 +2,10 @@
 
 import Masonry from "react-masonry-css";
 
-import "@styles/masonry.scss";
-
 import { Painting } from "@/types/Painting";
 import CardPreview from "../card-preview/card-preview";
+
+import "@styles/masonry.scss";
 
 type Props = {
   paintingsList: Painting[];
