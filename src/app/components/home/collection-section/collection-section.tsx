@@ -1,4 +1,6 @@
-import styles from './collection-section.module.scss';
+import Link from "next/link";
+
+import styles from "./collection-section.module.scss";
 
 const HaveCollection = () => (
   <section className={styles.collection}>
@@ -10,8 +12,12 @@ const HaveCollection = () => (
 
     <div className={styles.content}>
       <h2 className={styles.title}>Have an art collection?</h2>
-      <h6 className={styles.subtitle}>You can donate your collection items to support Ukraine</h6>
-      <div className={styles.button}>Learn more</div>
+      <h6 className={styles.subtitle}>
+        You can donate your collection items to support Ukraine
+      </h6>
+      <Link href={"/about"} className={styles.button}>
+        Learn more
+      </Link>
     </div>
 
     <div className={styles.bottom}>

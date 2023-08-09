@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import CountUp from "react-countup";
+import Link from "next/link";
 
 import style from "./dataInfo-section.module.scss";
 
@@ -45,7 +46,10 @@ const DataInfo = () => {
         </div>
       </div>
       <div className={style.wrapper}>
-        <button className={style.button}>Learn more</button>
+        <Link href={"/donation"} className={style.button}>
+          Learn more
+        </Link>
+
         <div className={style.ornament}>
           <Image
             src="/assets/dataInfoMob.webp"

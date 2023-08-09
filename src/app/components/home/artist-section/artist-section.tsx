@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import styles from './artist-section.module.scss';
+import styles from "./artist-section.module.scss";
 
-import Carousel from './carousel/carousel';
+import Carousel from "./carousel/carousel";
 
 const Artist = () => {
   return (
@@ -15,8 +15,12 @@ const Artist = () => {
         </div>
 
         <h2 className={styles.title}>Are you an artist?</h2>
-        <h6 className={styles.subtitle}>Become a part of our conscious community</h6>
-        <Link href={'/profile'} className={styles.button}>Create account</Link>
+        <h6 className={styles.subtitle}>
+          Become a part of our conscious community
+        </h6>
+        <Link href={"/profile"} className={styles.button}>
+          Create account
+        </Link>
       </div>
     </section>
   );

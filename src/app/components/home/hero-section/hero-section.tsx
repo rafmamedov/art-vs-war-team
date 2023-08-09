@@ -1,5 +1,7 @@
-import Image from 'next/image';
-import styles from './hero-section.module.scss';
+import Image from "next/image";
+import Link from "next/link";
+
+import styles from "./hero-section.module.scss";
 
 const Hero = () => (
   <section className={styles.hero}>
@@ -16,8 +18,9 @@ const Hero = () => (
         alt="background"
         fill
       />
-
-      <div className={styles.mobile__button}>Explore</div>
+      <Link href={"/gallery"} className={styles.mobile__button}>
+        Explore
+      </Link>
     </div>
 
     <div className={styles.tablet}>
@@ -129,8 +132,9 @@ const Hero = () => (
             fill
           />
         </div>
-
-        <div className={styles.button}>Explore</div>
+        <Link href={"/gallery"} className={styles.button}>
+          Explore
+        </Link>
 
         <div className={styles.container__2x3}>
           <Image
@@ -178,7 +182,10 @@ const Hero = () => (
 
       <div className={styles.middle}>
         <div className={styles.right}>
-          <div className={styles.button}>Explore</div>
+          <Link href={"/gallery"} className={styles.button}>
+            Explore
+          </Link>
+
           <div className={styles.square}>
             <Image
               src="/assets/images/Rectangle 6.png"
@@ -250,7 +257,9 @@ const Hero = () => (
                   fill
                 />
               </div>
-              <div className={styles.button}>More artworks</div>
+              <Link href={"/gallery"} className={styles.button}>
+                More artworks
+              </Link>
             </div>
             <div className={styles.container__5x4__laptop}>
               <Image
