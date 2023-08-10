@@ -1,295 +1,152 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import styles from "./hero-section.module.scss";
+import style from "./hero-section.module.scss";
 
-const Hero = () => (
-  <section className={styles.hero}>
-    <div className={styles.mobile}>
-      <h1 className={styles.mobile__title}>
-        Buy Art
-        <br />
-        Help Ukraine
-      </h1>
+type Painting = {
+  prettyId: string;
+  url: string;
+};
 
-      <Image
-        src="/assets/images/Rectangle 7.png"
-        className={styles.mobile__background}
-        alt="background"
-        fill
-      />
-      <Link href={"/gallery"} className={styles.mobile__button}>
-        Explore
-      </Link>
-    </div>
+type PaintingsData = {
+  "2.0": Painting[];
+  "1.0": Painting[];
+  "1.25": Painting[];
+  "0.75": Painting[];
+};
 
-    <div className={styles.tablet}>
-      <div className={styles.tablet__left}>
-        <h1 className={styles.left__title}>
+type HeroSectionProps = {
+  paintings: PaintingsData;
+};
+
+const HeroSection = ({ paintings }: HeroSectionProps) => {
+  const firstImage2_0 = paintings["2.0"][0];
+  const secondImage2_0 = paintings["2.0"][1];
+  const firstImage1_25 = paintings["1.25"][0];
+  const firstImage1_0 = paintings["1.0"][0];
+  const secondImage1_0 = paintings["1.0"][1];
+  const firstImage0_75 = paintings["0.75"][0];
+  const secondImage0_75 = paintings["0.75"][1];
+
+  return (
+    <section>
+      <div className={style.mobile}>
+        <h1 className={style.mobile__title}>
           Buy Art
           <br />
           Help Ukraine
         </h1>
 
-        <div className={styles.left__images}>
-          <div className={styles.images__container}>
-            <div className={styles.container__2x1}>
-              <Image
-                src="/assets/images/Rectangle 4.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-
-            <div className={styles.container__4x3}>
-              <Image
-                src="/assets/images/Rectangle 2.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-
-            <div className={styles.container__2x1}>
-              <Image
-                src="/assets/images/Rectangle 4.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
-
-          <div className={styles.images__container}>
-            <div className={styles.square}>
-              <Image
-                src="/assets/images/Rectangle 6.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-
-            <div className={styles.container__4x3}>
-              <Image
-                src="/assets/images/Rectangle 2.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
-
-          <div className={styles.images__container_tabletXl}>
-            <div className={styles.container__5x4}>
-              <Image
-                src="/assets/images/Rectangle 7.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-
-            <div className={styles.square}>
-              <Image
-                src="/assets/images/Rectangle 6.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
-
-          <div className={styles.images__container_tabletXl}>
-            <div className={styles.container__3x4}>
-              <Image
-                src="/assets/images/Rectangle 3.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-
-            <div className={styles.container__5x4}>
-              <Image
-                src="/assets/images/Rectangle 7.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.tablet__right}>
-        <div className={styles.container__4x3}>
-          <Image
-            src="/assets/images/Rectangle 2.png"
-            className={styles.image}
-            alt="rectangle"
-            fill
-          />
-        </div>
-        <Link href={"/gallery"} className={styles.button}>
+        <Image
+          src="/assets/hero_image.webp"
+          className={style.mobile__background}
+          alt="ukrainian art"
+          fill
+        />
+        <Link href={"/gallery"} className={style.mobile__button}>
           Explore
         </Link>
-
-        <div className={styles.container__2x3}>
-          <Image
-            src="/assets/images/Rectangle 3.png"
-            className={styles.image}
-            alt="rectangle"
-            fill
-          />
-        </div>
       </div>
-    </div>
-
-    <div className={styles.desktop}>
-      <div className={styles.top}>
-        <h1 className={styles.top__title}>
+      <div className={style.hero}>
+        <h1 className={style.title}>
           Buy Art
-          <br />
-          Help Ukraine
+          <br /> Help Ukraine
         </h1>
-        <div className={styles.top__container2x1}>
-          <Image
-            src="/assets/images/Rectangle 4.png"
-            className={styles.image}
-            alt="rectangle"
-            fill
-          />
-        </div>
-        <div className={styles.top__square}>
-          <Image
-            src="/assets/images/Rectangle 6.png"
-            className={styles.image}
-            alt="rectangle"
-            fill
-          />
-        </div>
-        <div className={styles.top__square}>
-          <Image
-            src="/assets/images/Rectangle 6.png"
-            className={styles.image}
-            alt="rectangle"
-            fill
-          />
-        </div>
-      </div>
-
-      <div className={styles.middle}>
-        <div className={styles.right}>
-          <Link href={"/gallery"} className={styles.button}>
-            Explore
+        <div className={`${style.first__image} ${style.images}`}>
+          <Link href={`/gallery/${firstImage2_0.prettyId}`}>
+            <Image
+              src={firstImage2_0.url}
+              alt={`painting ${firstImage2_0.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
           </Link>
-
-          <div className={styles.square}>
-            <Image
-              src="/assets/images/Rectangle 6.png"
-              className={styles.image}
-              alt="rectangle"
-              fill
-            />
-          </div>
-          <div className={styles.square}>
-            <Image
-              src="/assets/images/Rectangle 6.png"
-              className={styles.image}
-              alt="rectangle"
-              fill
-            />
-          </div>
-          <div className={styles.right__container2x1}>
-            <Image
-              src="/assets/images/Rectangle 4.png"
-              className={styles.image}
-              alt="rectangle"
-              fill
-            />
-          </div>
-          <div className={styles.right__container4x3}>
-            <Image
-              src="/assets/images/Rectangle 2.png"
-              className={styles.image}
-              alt="rectangle"
-              fill
-            />
-          </div>
         </div>
-
-        <div className={styles.left}>
-          <div className={styles.left__top}>
-            <div className={styles.container__3x4}>
-              <Image
-                src="/assets/images/Rectangle 3.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-            <div className={styles.container__5x4}>
-              <Image
-                src="/assets/images/Rectangle 7.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
-          <div className={styles.left__bottom}>
-            <div className={styles.bottom__container}>
-              <div className={styles.container__2x1}>
-                <Image
-                  src="/assets/images/Rectangle 4.png"
-                  className={styles.image}
-                  alt="rectangle"
-                  fill
-                />
-              </div>
-              <div className={styles.container__4x3_big}>
-                <Image
-                  src="/assets/images/Rectangle 4.png"
-                  className={styles.image}
-                  alt="rectangle"
-                  fill
-                />
-              </div>
-              <Link href={"/gallery"} className={styles.button}>
-                More artworks
-              </Link>
-            </div>
-            <div className={styles.container__5x4__laptop}>
-              <Image
-                src="/assets/images/Rectangle 7.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-            <div className={styles.container__3x4__desktop}>
-              <Image
-                src="/assets/images/Rectangle 5.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-            <div className={styles.container__square}>
-              <Image
-                src="/assets/images/Rectangle 6.png"
-                className={styles.image}
-                alt="rectangle"
-                fill
-              />
-            </div>
-          </div>
+        <div className={`${style.second__image} ${style.images}`}>
+          <Link href={`/gallery/${firstImage0_75.prettyId}`}>
+            <Image
+              src={firstImage0_75.url}
+              alt={`painting ${firstImage0_75.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
         </div>
+        <div className={`${style.third__image} ${style.images}`}>
+          <Link href={`/gallery/${firstImage1_25.prettyId}`}>
+            <Image
+              src={firstImage1_25.url}
+              alt={`painting ${firstImage1_25.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
+        </div>
+        <div className={`${style.fourth__image} ${style.images}`}>
+          <Link href={`/gallery/${secondImage2_0.prettyId}`}>
+            <Image
+              src={secondImage2_0.url}
+              alt={`painting ${secondImage2_0.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
+        </div>
+        <div className={`${style.fifth__image} ${style.images}`}>
+          <Link href={`/gallery/${secondImage0_75.prettyId}`}>
+            <Image
+              src={secondImage0_75.url}
+              alt={`painting ${secondImage0_75.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
+        </div>
+        <div className={`${style.sixth__image} ${style.images}`}>
+          <Link href={`/gallery/${firstImage1_0.prettyId}`}>
+            <Image
+              src={firstImage1_0.url}
+              alt={`painting ${firstImage1_0.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
+        </div>
+        <div className={`${style.seventh__image} ${style.images}`}>
+          <Link href={`/gallery/${secondImage1_0.prettyId}`}>
+            <Image
+              src={secondImage1_0.url}
+              alt={`painting ${secondImage1_0.prettyId}`}
+              fill
+              style={{ objectFit: "cover" }}
+              className={`${style.image} imageOpacityEffect`}
+              onLoadingComplete={(img) => (img.style.opacity = "1")}
+            />
+          </Link>
+        </div>
+        <Link href={"/gallery"} className={style.additionalButton}>
+          More artworks
+        </Link>
+        <Link href={"/gallery"} className={style.button}>
+          Explore
+        </Link>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
-export default Hero;
+export default HeroSection;

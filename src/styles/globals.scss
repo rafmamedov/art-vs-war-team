@@ -24,6 +24,7 @@ body {
   @include desktopHD {
     margin: 0 auto;
     max-width: 1600px;
+    scrollbar-gutter: stable;
   }
 
   background-color: $gray-100;
@@ -64,8 +65,9 @@ input[type="number"] {
 
 .imageOpacityEffect {
   transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 0.5);
-  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  // transition-timing-function: cubic-bezier(0.4, 0, 0.2, 0.5);
+  transition-duration: 0.5s;
   opacity: 0;
 }
 

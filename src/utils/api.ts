@@ -5,6 +5,19 @@ import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+export async function getHeroPaintings() {
+  const response = await fetch(`${BASE_URL}paintings/mainPage`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function getPaintings(params: string) {
   const response = await fetch(`${BASE_URL}paintings/search?${params}`, {
     cache: "no-store",
