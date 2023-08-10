@@ -237,8 +237,6 @@ export async function removeOrderPaintingFromServer(id: any, headers: object) {
 }
 
 export async function getOrderDataFromServer(headers: object) {
-  console.log(headers);
-
   const { data } = await axios.get(`${BASE_URL}cart`, {
     headers,
   });
