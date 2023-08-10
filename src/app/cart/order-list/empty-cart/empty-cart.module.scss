@@ -1,0 +1,155 @@
+@import "@styles/vars.scss";
+@import "@styles/mixins.scss";
+
+.emptyCart {
+  @include set-flex(column, center, center);
+
+  position: relative;
+  min-height: 150px;
+
+  @include tablet {
+    min-height: 200px;
+  }
+
+  @include tabletXL {
+    min-height: 300px;
+  }
+
+  @include laptop {
+    min-height: 350px;
+  }
+
+  @include desktop {
+    min-height: 400px;
+  }
+}
+
+.emptyCart__title {
+  margin-top: 48px;
+  color: $gray-5;
+  text-align: center;
+  font-size: $font-size-xxl;
+
+  @include laptop {
+    font-size: $font-size-xxxl;
+  }
+
+  @include desktopHD {
+    font-size: $font-size-4xl;
+  }
+}
+
+.emptyCart__subTitle {
+  margin-top: 24px;
+  color: $gray-10;
+  text-align: center;
+}
+
+.emptyCart__button {
+  @include set-flex(row, center, center);
+
+  margin: 34px 0 100px;
+  width: 100%;
+  height: 48px;
+  color: $gray-100;
+  background-color: $gray-5;
+  border-radius: 24px;
+
+  @include tablet {
+    @include set-square(144px);
+
+    border-radius: 50%;
+  }
+
+  @include desktop {
+    @include set-square(208px);
+
+    margin-top: 32px;
+    margin-bottom: 100px;
+  }
+
+  &:hover {
+    background-color: $gray-0;
+  }
+
+  &:active {
+    transition-duration: 0.3s;
+    transform: scale(0.9);
+  }
+}
+
+.imageTop {
+  position: absolute;
+  right: -5%;
+  top: -20%;
+  height: 80px;
+  width: 160px;
+
+  @include tablet {
+    height: 100px;
+    width: 220px;
+
+    right: -10%;
+    top: -15%;
+  }
+
+  @include tabletXL {
+    height: 120px;
+    width: 280px;
+
+    right: -5%;
+    top: -26%;
+  }
+
+  @include laptop {
+    height: 150px;
+    width: 350px;
+
+    right: -5%;
+    top: -26%;
+  }
+
+  @include desktop {
+    height: 216px;
+    width: 450px;
+    right: -10%;
+    top: -22%;
+  }
+}
+
+.imageBottom {
+  position: absolute;
+  height: 80px;
+  width: 160px;
+  bottom: -12%;
+  left: -5%;
+  transform: rotate(180deg);
+
+  @include tablet {
+    height: 100px;
+    width: 220px;
+    bottom: -9%;
+    left: -5%;
+  }
+
+  @include tabletXL {
+    height: 120px;
+    width: 280px;
+    bottom: -9%;
+    left: -5%;
+  }
+
+  @include laptop {
+    height: 150px;
+    width: 350px;
+    bottom: -9%;
+    left: -5%;
+  }
+
+  @include desktop {
+    height: 216px;
+    width: 450px;
+    bottom: -7%;
+    left: -10%;
+  }
+}
