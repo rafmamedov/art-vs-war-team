@@ -36,7 +36,7 @@ const OrderList = () => {
 
   return (
     <>
-      {paintings.length > 0 && (
+      {paintings.length > 0 ? (
         <>
           {paintings.map((painting: CartItem) => (
             <Fragment key={painting.id}>
@@ -87,6 +87,28 @@ const OrderList = () => {
           </div>
           <MightLike selectedPaintings={selectedPaintings} />
         </>
+      ) : (
+        <div className={style.emptyCart}>
+          <Image
+            className={style.imageTop}
+            src="/assets/cartOrnament.webp"
+            alt="author"
+            width={450}
+            height={216}
+          />
+          <p className={style.emptyCart__title}>Your Cart is Empty</p>
+          <p className={style.emptyCart__subTitle}>Explore Our Artworks</p>
+          <Link className={style.emptyCart__button} href="/gallery">
+            Gallery
+          </Link>
+          <Image
+            className={style.imageBottom}
+            src="/assets/cartOrnament.webp"
+            alt="author"
+            width={450}
+            height={216}
+          />
+        </div>
       )}
     </>
   );
