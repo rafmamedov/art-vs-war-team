@@ -25,7 +25,7 @@
   }
 
   @include laptop {
-    @include set-flex(row, space-between);
+    @include set-flex(row, space-evenly);
 
     gap: 20px;
   }
@@ -126,7 +126,11 @@
 }
 
 .more {
-  @include desktop {
+  @include laptop {
+    padding: 48px 0;
+  }
+
+  @include laptop {
     padding: 48px 130px;
   }
 }

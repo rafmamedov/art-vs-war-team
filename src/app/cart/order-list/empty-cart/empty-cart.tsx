@@ -3,14 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 import style from "./empty-cart.module.scss";
 
 const EmptyCartPage = () => {
   return (
     <div className={style.emptyCart}>
       <Image
-        className={style.imageTop}
+        className={`${style.imageTop} ${style.images}`}
         src="/assets/cartOrnament.webp"
         alt="author"
         width={450}
@@ -22,7 +21,7 @@ const EmptyCartPage = () => {
         Gallery
       </Link>
       <Image
-        className={style.imageBottom}
+        className={`${style.imageBottom} ${style.images}`}
         src="/assets/cartOrnament.webp"
         alt="author"
         width={450}
