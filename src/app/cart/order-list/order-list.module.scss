@@ -184,3 +184,21 @@
     width: 368px;
   }
 }
+
+.profile {
+  margin-top: 24px;
+  color: $gray-0;
+  @include tablet {
+    text-align: end;
+  }
+}
+
+.account {
+  color: $system-error;
+  font-size: $font-size-lg;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

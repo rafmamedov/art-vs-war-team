@@ -67,7 +67,12 @@ const Sort = () => {
 
   useEffect(() => {
     const handleCloseDropdown = (event: MouseEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) {
+      const body = document.querySelector("body");
+
+      if (
+        !menuRef.current?.contains(event.target as Node) &&
+        body?.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
       }
     };

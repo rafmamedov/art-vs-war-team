@@ -86,6 +86,17 @@ const OrderList = () => {
             <p className={style.totalPrice}>{`Total: ${totalPrice} €`}</p>
             <button className={style.button}>Checkout</button>
           </div>
+          {!user && (
+            <div className={style.profile}>
+              <p className={style.profile__text}>
+                To make a purchase you need to&nbsp;&nbsp;
+                <Link href={"/profile"} className={style.account}>
+                  Log in
+                </Link>
+              </p>
+              <p className={style.profile__login}></p>
+            </div>
+          )}
           <MightLike selectedPaintings={selectedPaintings} />
         </>
       ) : (
