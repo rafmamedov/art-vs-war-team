@@ -7,6 +7,7 @@ import InputArtistSearch from "./inputSearch/inputSearch";
 import MoreArtistsButton from "./more-artists-button/more-artists-button";
 
 import style from "./artistsList.module.scss";
+import EmptyArtistsPage from "./empty-page/empty-page";
 
 const ArtistsList = () => {
   const { foundArtists } = useAppSelector((state) => state.artists);
@@ -37,12 +38,7 @@ const ArtistsList = () => {
             <MoreArtistsButton />
           </>
         ) : (
-          <div className={style.noArtists}>
-            <p className={style.noArtists__title}>No such artist was found</p>
-            <a className={style.noArtists__button} href="/artists">
-              View All Artists
-            </a>
-          </div>
+          <EmptyArtistsPage />
         )}
       </>
     </section>

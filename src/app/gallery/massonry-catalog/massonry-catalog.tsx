@@ -2,8 +2,7 @@
 
 import { useAppSelector } from "@/types/ReduxHooks";
 import MasonryGallery from "@/app/components/masonry/masonry";
-
-import style from "./massonry-catalog.module.scss";
+import EmptyGalleryPage from "../empty-gallery-page/empty-gallery-page";
 
 const MasonryCatalog = () => {
   const { paintings } = useAppSelector((state) => state.paintings);
@@ -13,12 +12,7 @@ const MasonryCatalog = () => {
       {paintings.length !== 0 ? (
         <MasonryGallery paintingsList={paintings} />
       ) : (
-        <div className={style.noArts}>
-          <p className={style.title}>No arts match your filters</p>
-          <a className={style.button} href="/gallery">
-            View All Arts
-          </a>
-        </div>
+        <EmptyGalleryPage />
       )}
     </>
   );
