@@ -11,14 +11,6 @@ const EmptyGalleryPage = () => {
       <a className={style.button} href="/gallery">
         View All Arts
       </a>
-      <Image
-        src="/assets/emptyArtist.webp"
-        alt="Ukrainian gallery ornament"
-        width={800}
-        height={1000}
-        className={`${style.image} imageOpacityEffect`}
-        onLoadingComplete={(img) => (img.style.opacity = "1")}
-      />
     </div>
   );
 };

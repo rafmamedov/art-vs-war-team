@@ -64,39 +64,3 @@
     transform: scale(0.9);
   }
 }
-
-.image {
-  position: absolute;
-  bottom: -10%;
-  height: 165px;
-  width: 100%;
-  max-width: 500px;
-
-  @include tablet {
-    bottom: -8%;
-    height: 220px;
-    width: 450px;
-  }
-
-  @include tabletXL {
-    bottom: -7%;
-    height: 240px;
-    width: 500px;
-    max-width: 500px;
-  }
-
-  @include laptop {
-    bottom: -5%;
-  }
-
-  @include desktop {
-    bottom: -12%;
-    height: 260px;
-    width: 600px;
-    max-width: 700px;
-  }
-
-  @include desktopHD {
-    bottom: -11%;
-  }
-}
