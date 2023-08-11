@@ -5,23 +5,7 @@
   @include set-flex(column, center, center);
 
   position: relative;
-  min-height: 150px;
-
-  @include tablet {
-    min-height: 200px;
-  }
-
-  @include tabletXL {
-    min-height: 300px;
-  }
-
-  @include laptop {
-    min-height: 350px;
-  }
-
-  @include desktop {
-    min-height: 400px;
-  }
+  min-height: 70vh;
 }
 
 .emptyCart__title {
@@ -65,7 +49,6 @@
     @include set-square(208px);
 
     margin-top: 32px;
-    margin-bottom: 100px;
   }
 
   &:hover {
@@ -78,78 +61,69 @@
   }
 }
 
-.imageTop {
+.images {
+  @include set-size(160px, 90px);
+
   position: absolute;
-  right: -5%;
-  top: -20%;
-  height: 80px;
-  width: 160px;
 
   @include tablet {
-    height: 100px;
-    width: 220px;
-
-    right: -10%;
-    top: -15%;
+    @include set-size(230px, 120px);
   }
 
   @include tabletXL {
-    height: 120px;
-    width: 280px;
-
-    right: -5%;
-    top: -26%;
+    @include set-size(280px, 140px);
   }
 
   @include laptop {
-    height: 150px;
-    width: 350px;
-
-    right: -5%;
-    top: -26%;
+    @include set-size(350px, 160px);
   }
 
   @include desktop {
-    height: 216px;
-    width: 450px;
+    @include set-size(450px, 216px);
+  }
+}
+
+.imageTop {
+  right: -5%;
+  top: -10%;
+
+  @include tablet {
+    right: -3%;
+  }
+
+  @include tabletXL {
+    right: -2%;
+    top: -18%;
+  }
+
+  @include laptop {
+    right: -1%;
+  }
+
+  @include desktop {
+    top: -17%;
     right: -10%;
-    top: -22%;
   }
 }
 
 .imageBottom {
-  position: absolute;
-  height: 80px;
-  width: 160px;
-  bottom: -12%;
+  bottom: -6%;
   left: -5%;
   transform: rotate(180deg);
 
   @include tablet {
-    height: 100px;
-    width: 220px;
-    bottom: -9%;
-    left: -5%;
+    left: -3%;
   }
 
   @include tabletXL {
-    height: 120px;
-    width: 280px;
-    bottom: -9%;
-    left: -5%;
+    left: -2%;
   }
 
   @include laptop {
-    height: 150px;
-    width: 350px;
-    bottom: -9%;
-    left: -5%;
+    left: -1%;
   }
 
   @include desktop {
-    height: 216px;
-    width: 450px;
-    bottom: -7%;
     left: -10%;
   }
 }
