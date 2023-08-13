@@ -1,7 +1,3 @@
-"use client";
-
-import Image from "next/image";
-
 import style from "./empty-gallery-page.module.scss";
 
 const EmptyGalleryPage = () => {

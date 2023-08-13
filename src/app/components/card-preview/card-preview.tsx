@@ -77,11 +77,11 @@ const CardPreview: React.FC<Props> = ({ paintingDetails, className }) => {
           onLoadingComplete={(img) => (img.style.opacity = "1")}
         />
       </Link>
-      <Link href={`/gallery/${prettyId}`}>
-        <p className={style.title}>{title}</p>
+      <Link href={`/gallery/${prettyId}`} className={style.title}>
+        {title}
       </Link>
-      <Link href={`/artists/${authorPrettyId}`}>
-        <p className={style.artist}>{authorFullName}</p>
+      <Link href={`/artists/${authorPrettyId}`} className={style.artist}>
+        {authorFullName}
       </Link>
 
       <div className={style.buy}>

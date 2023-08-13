@@ -31,6 +31,8 @@ const OrderList = () => {
     }
   };
 
+  const nextCheckoutPath = user ? "/cart/checkout" : "/profile";
+
   const selectedPaintings = paintings
     .map((painting) => painting.prettyId)
     .join(",");
@@ -84,7 +86,9 @@ const OrderList = () => {
           ))}
           <div className={style.totalInfo}>
             <p className={style.totalPrice}>{`Total: ${totalPrice} €`}</p>
-            <button className={style.button}>Checkout</button>
+            <Link href={nextCheckoutPath} className={style.button}>
+              Checkout
+            </Link>
           </div>
           {!user && (
             <div className={style.profile}>
