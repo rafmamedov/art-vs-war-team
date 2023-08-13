@@ -243,3 +243,11 @@ export async function getOrderDataFromServer(headers: object) {
 
   return data;
 }
+
+export async function getOrder(headers: object, id: string) {
+  const { data } = await axios.get(`${BASE_URL}stripe/checkout/${id}`, {
+    headers,
+  });
+
+  return data;
+}

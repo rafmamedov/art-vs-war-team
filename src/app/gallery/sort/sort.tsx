@@ -12,6 +12,8 @@ import {
 import { useAppDispatch } from "@/types/ReduxHooks";
 import { SortPaintings } from "@/types/SortPaintings";
 import { getPaintings } from "@/utils/api";
+import { handleCloseDropdown } from "@/utils/checkClick";
+
 import style from "./sort.module.scss";
 
 const Sort = () => {
@@ -66,21 +68,14 @@ const Sort = () => {
   }, []);
 
   useEffect(() => {
-    const handleCloseDropdown = (event: MouseEvent) => {
-      const body = document.querySelector("body");
-
-      if (
-        !menuRef.current?.contains(event.target as Node) &&
-        body?.contains(event.target as Node)
-      ) {
-        setIsMenuOpen(false);
-      }
+    const handleMouseDown = (event: MouseEvent) => {
+      handleCloseDropdown(event, menuRef, setIsMenuOpen);
     };
 
-    document.addEventListener("mousedown", handleCloseDropdown);
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
-      document.removeEventListener("mousedown", handleCloseDropdown);
+      document.removeEventListener("mousedown", handleMouseDown);
     };
   });
 

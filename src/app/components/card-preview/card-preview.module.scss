@@ -40,11 +40,13 @@
 }
 
 .title {
+  width: fit-content;
   margin-top: 16px;
   font-family: $font-text;
 }
 
 .artist {
+  width: fit-content;
   margin-top: 5px;
   color: $gray-10;
 
