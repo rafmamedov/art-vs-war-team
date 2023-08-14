@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
 import { removeOrderPaintingFromServer } from "@/utils/api";
 import createHeaders from "@/utils/getAccessToken";
 import MightLike from "../might-like/might-like";
+import EmptyCartPage from "./empty-cart/empty-cart";
 
 import style from "./order-list.module.scss";
 
@@ -30,13 +31,15 @@ const OrderList = () => {
     }
   };
 
+  const nextCheckoutPath = user ? "/cart/checkout" : "/profile";
+
   const selectedPaintings = paintings
     .map((painting) => painting.prettyId)
     .join(",");
 
   return (
     <>
-      {paintings.length > 0 && (
+      {paintings.length > 0 && totalPrice > 0 ? (
         <>
           {paintings.map((painting: CartItem) => (
             <Fragment key={painting.id}>
@@ -83,10 +86,25 @@ const OrderList = () => {
           ))}
           <div className={style.totalInfo}>
             <p className={style.totalPrice}>{`Total: ${totalPrice} €`}</p>
-            <button className={style.button}>Checkout</button>
+            <Link href={nextCheckoutPath} className={style.button}>
+              Checkout
+            </Link>
           </div>
+          {!user && (
+            <div className={style.profile}>
+              <p className={style.profile__text}>
+                To make a purchase you need to&nbsp;&nbsp;
+                <Link href={"/profile"} className={style.account}>
+                  Log in
+                </Link>
+              </p>
+              <p className={style.profile__login}></p>
+            </div>
+          )}
           <MightLike selectedPaintings={selectedPaintings} />
         </>
+      ) : (
+        <EmptyCartPage />
       )}
     </>
   );

@@ -1,7 +1,8 @@
-import { PaintingData } from "@/types/Painting";
-import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
 import axios from "axios";
 import { notFound } from "next/navigation";
+
+import { PaintingData } from "@/types/Painting";
+import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -250,11 +251,20 @@ export async function removeOrderPaintingFromServer(id: any, headers: object) {
 }
 
 export async function getOrderDataFromServer(headers: object) {
-  console.log(headers);
-
   const { data } = await axios.get(`${BASE_URL}cart`, {
     headers,
   });
+
+  return data;
+}
+
+export async function getOrder(headers: object, id: string) {
+  const { data } = await axios.get(
+    `${BASE_URL}stripe/checkout?paintingIds=${id}`,
+    {
+      headers,
+    }
+  );
 
   return data;
 }

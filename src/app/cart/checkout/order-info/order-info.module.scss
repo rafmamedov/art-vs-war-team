@@ -1,7 +1,21 @@
 @import "@styles/vars.scss";
 @import "@styles/mixins.scss";
 
-.firstStep {
+.wrapper {
+  @include laptop {
+    @include set-flex(row);
+    gap: 16px;
+    position: relative;
+  }
+}
+
+.orderInfo {
+  @include laptop {
+    width: 65%;
+  }
+}
+
+.headerStep {
   @include set-flex(row, space-between, center);
 
   margin-top: 24px;
@@ -13,8 +27,12 @@
   &__text {
     color: $gray-0;
   }
+}
 
-  &__arrow {
+.arrow {
+  transition: 0.3s;
+
+  &__close {
     transform: rotate(180deg);
     transition: 0.3s;
   }
@@ -26,7 +44,6 @@
   @include tablet {
     @include set-flex(row);
 
-    position: relative;
     margin-top: 32px;
     gap: 16px;
   }
@@ -165,8 +182,6 @@
 }
 
 .button {
-  @include set-flex(row, center, center);
-
   margin-top: 24px;
   height: 48px;
   width: 100%;
@@ -220,5 +235,73 @@
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+.asidePanel {
+  display: none;
+
+  @include laptop {
+    @include set-flex(column);
+
+    position: sticky;
+    top: 20px;
+    padding: 24px;
+    margin-top: 24px;
+    width: 35%;
+    height: min-content;
+    border: 1px solid $gray-10;
+    border-radius: 24px;
+    color: $gray-0;
+
+    &__title {
+      color: $gray-0;
+      font-size: $font-size-xl;
+    }
+
+    &__totalPrice {
+      margin-top: 24px;
+      font-size: $font-size-xxl;
+      font-family: $font-title;
+    }
+  }
+}
+
+.orderItem {
+  &__paintingWrapper {
+    @include set-flex(row);
+
+    margin-top: 24px;
+    gap: 16px;
+  }
+
+  &__imageWrapper {
+    @include set-square(80px);
+
+    position: relative;
+
+    @include desktop {
+      @include set-square(100px);
+    }
+  }
+
+  &__paintingInfo {
+    @include set-flex(column, space-between);
+
+    flex: 1;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+  }
+
+  &__author {
+    font-size: $font-size-md;
+    color: $gray-10;
+  }
+
+  &__price {
+    @include set-flex(row, space-between);
   }
 }
