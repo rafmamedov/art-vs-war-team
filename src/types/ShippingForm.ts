@@ -1,4 +1,4 @@
-export interface ShippingForm {
+export interface ShippingFormTypes {
   firstName: string;
   lastName: string;
   country: string;

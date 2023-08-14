@@ -10,7 +10,7 @@ import { getOrder } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/types/ReduxHooks";
 import { CartSteps } from "@/types/cartSteps";
-import { ShippingForm } from "@/types/ShippingForm";
+import { ShippingFormTypes } from "@/types/ShippingForm";
 
 type Props = {
   headers: object;
@@ -24,7 +24,7 @@ const ShippingForm: React.FC<Props> = ({
   handleSectionClick,
 }) => {
   const router = useRouter();
-  const { paintings } = useAppSelector((state) => state.paintings);
+  const { paintings } = useAppSelector((state) => state.cart);
 
   const {
     register,
@@ -36,12 +36,14 @@ const ShippingForm: React.FC<Props> = ({
     defaultValues,
   });
 
-  const submit: SubmitHandler<ShippingForm> = async (data) => {
-    const stripePage = await getOrder(headers, "54");
+  const submit: SubmitHandler<ShippingFormTypes> = async (data) => {
+    const orderIds = paintings.map((painting) => painting.id).join(",");
+
+    const stripePage = await getOrder(headers, orderIds);
     router.push(stripePage);
   };
 
-  const error: SubmitErrorHandler<ShippingForm> = async (data) => {
+  const error: SubmitErrorHandler<ShippingFormTypes> = async (data) => {
     if (data && !isVisible) {
       handleSectionClick(CartSteps.secondStep);
     }
