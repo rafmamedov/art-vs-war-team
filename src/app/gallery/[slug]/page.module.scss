@@ -45,18 +45,13 @@
   @include laptop {
     @include set-flex(column, space-between);
 
-    height: 364.5px;
+    height: 405px;
     width: 310px;
   }
 
   @include desktop {
     min-width: 340px;
-    height: 405px;
-  }
-
-  @include desktopHD {
-    min-width: 450px;
-    height: 585px;
+    height: 450px;
   }
 }
 
