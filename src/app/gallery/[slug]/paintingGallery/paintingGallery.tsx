@@ -60,7 +60,10 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                         quality={90}
                         style={{
                           objectFit: "contain",
-                          cursor: `${isOpenFullScreen ? "zoom-out" : "zoom-in"}`,
+                          touchAction: "pinch-zoom",
+                          cursor: `${
+                            isOpenFullScreen ? "zoom-out" : "zoom-in"
+                          }`,
                         }}
                         className="imageOpacityEffect"
                         onLoadingComplete={(img) => (img.style.opacity = "1")}
