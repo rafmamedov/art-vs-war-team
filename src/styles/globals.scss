@@ -21,14 +21,15 @@ header {
 
 html,
 body {
+  background-color: $gray-100;
+  font-family: $font-text;
+  touch-action: pinch-zoom;
+
   @include desktopHD {
     margin: 0 auto;
     max-width: 1600px;
     scrollbar-gutter: stable;
   }
-
-  background-color: $gray-100;
-  font-family: $font-text;
 }
 
 h1,
