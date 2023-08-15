@@ -60,7 +60,6 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                         quality={90}
                         style={{
                           objectFit: "contain",
-                          touchAction: "pinch-zoom",
                           cursor: `${
                             isOpenFullScreen ? "zoom-out" : "zoom-in"
                           }`,
