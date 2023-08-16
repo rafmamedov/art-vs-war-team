@@ -12,7 +12,6 @@ import { Add } from "@/app/icons/icon-add";
 import { CountryType, countries } from "./countries";
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { Artist } from "@/types/Artist";
-import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 import { Action, CustomJwtPayload, ProfileForm, UserData, UserDataToSave } from "@/types/Profile";
 import { uploadImageToServer, validateDataOnServer } from "@/utils/profile";
 import { createProfile, updateProfile } from "@/utils/api";
@@ -22,14 +21,14 @@ const URL = 'authors/checkInputAndGet';
 
 type Props = {
   author: Artist | null;
-  setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
+  // setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
   setAuthor: Dispatch<SetStateAction<Artist | null>>;
 };
 
 const EditProfile: FC<Props> = ({
   author,
   setAuthor,
-  setOpenForm,
+  // setOpenForm,
 }) => {
   const {
     handleSubmit,
@@ -193,7 +192,7 @@ const EditProfile: FC<Props> = ({
           <button
             type="button"
             className={style.arrow}
-            onClick={() => setOpenForm(null)}
+            // onClick={() => setOpenForm(null)}
           >
             <ArrowLeft />
           </button>
@@ -365,7 +364,6 @@ const EditProfile: FC<Props> = ({
           <button
             type="reset"
             className={style.cancel}
-            onClick={() => setOpenForm(null)}
           >
             Cancel
           </button>
@@ -374,13 +372,6 @@ const EditProfile: FC<Props> = ({
             className={style.submit}
           >
             Submit
-          </button>
-          <button
-            type="submit"
-            className={style.signout}
-            onClick={signOut}
-          >
-            Sign Out
           </button>
         </div>
       </form>

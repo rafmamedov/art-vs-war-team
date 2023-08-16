@@ -7,29 +7,30 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import style from "./createPainting.module.scss";
+import { stylesSelect } from "./stylesSelect";
 
 import { Add } from "@/app/icons/icon-add";
 import { ArrowLeft } from "@/app/icons/icon-arrow-left";
+import { SubjectType, mediums, styles, subjects, supports } from "./subjects";
+import { uploadImageToServer } from "@/utils/profile";
+import { setArtistPaintings } from "../../redux/slices/artistPaintingsSlice";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
+import { useAppDispatch } from "@/types/ReduxHooks";
 import {
   Painting,
   PaintingData,
   PaintingDataToSave,
   PaintingForm,
 } from "@/types/Painting";
-import { SubjectType, mediums, styles, subjects, supports } from "./subjects";
-import { uploadImageToServer } from "@/utils/profile";
-import { stylesSelect } from "./stylesSelect";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = "paintings/checkInputAndGet";
 
 type Props = {
-  setPaintings: Dispatch<SetStateAction<Painting[]>>;
-  setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
+  // setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
-const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
+const CreatePainting: FC<Props> = () => {
   const {
     handleSubmit,
     register,
@@ -50,6 +51,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
   const [selectedMediums, setSelectedMediums] = useState<SubjectType[]>([]);
   const [selectedSupports, setSelectedSupports] = useState<SubjectType[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<SubjectType[]>([]);
+  const dispatch = useAppDispatch();
 
   const { user, route } = useAuthenticator((context) => [context.route]);
   const accessToken = user
@@ -87,24 +89,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
             image: imageData,
           };
 
-          axios
-            .post(BASE_URL + "paintings", paintingData, { headers })
-            .then(({ data }) => {
-              const uploadedPainting: Painting = {
-                id: data.id,
-                title: data.title,
-                price: data.price,
-                prettyId: data.prettyId,
-                imageUrl: data.image.imageUrl,
-                authorFullName: data.author.fullName,
-                authorPrettyId: data.author.prettyId,
-                width: data.width,
-                height: data.height,
-                depth: data.depth,
-              };
-
-              setPaintings((current) => [...current, uploadedPainting]);
-            })
+          axios.post(BASE_URL + "paintings", paintingData, { headers })
             .finally(() => {
               onReset();
             });
@@ -166,7 +151,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
         <button
           type="button"
           className={style.arrow}
-          onClick={() => setOpenForm(null)}
+          // onClick={() => setOpenForm(null)}
         >
           <ArrowLeft />
         </button>
@@ -555,7 +540,7 @@ const CreatePainting: FC<Props> = ({ setOpenForm, setPaintings }) => {
           <button
             type="reset"
             className={style.cancel}
-            onClick={() => setOpenForm(null)}
+            // onClick={() => setOpenForm(null)}
           >
             Cancel
           </button>

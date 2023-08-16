@@ -199,7 +199,7 @@ export async function uploadImage(formData: FormData, cloudName: string) {
 }
 
 export async function createProfile(userData: UserDataToSave, headers: object) {
-  const { data } = await axios.post(BASE_URL + "authors/", userData, {
+  const { data } = await axios.post(BASE_URL + "authors", userData, {
     headers,
   });
 
@@ -207,7 +207,7 @@ export async function createProfile(userData: UserDataToSave, headers: object) {
 }
 
 export async function updateProfile(userData: UserDataToSave, headers: object) {
-  const { data } = await axios.put(BASE_URL + "authors/", userData, {
+  const { data } = await axios.put(BASE_URL + "authors", userData, {
     headers,
   });
 
