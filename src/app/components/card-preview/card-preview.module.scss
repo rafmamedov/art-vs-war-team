@@ -6,7 +6,6 @@
   transition: transform 0.3s ease;
   cursor: default;
 
-  width: 100%;
   color: $gray-5;
 
   &:hover {
@@ -41,11 +40,13 @@
 }
 
 .title {
+  width: fit-content;
   margin-top: 16px;
   font-family: $font-text;
 }
 
 .artist {
+  width: fit-content;
   margin-top: 5px;
   color: $gray-10;
 

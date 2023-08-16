@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { MenuItems } from "../menuItems/menuItems";
 import SocialNetworkIcons from "../social-network/social-network";
 
@@ -16,7 +18,10 @@ const Footer = () => {
       </div>
       <div className={style.content}>
         <div className={style.wrapper}>
-          <button className={style.button}>Contact Us</button>
+          <Link href={"/contacts"} className={style.button}>
+            Contact Us
+          </Link>
+
           <MenuItems className={style.menuItems} />
           <div>
             <ul className={style.list}>

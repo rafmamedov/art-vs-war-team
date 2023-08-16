@@ -139,8 +139,8 @@
   position: fixed;
   z-index: $z-index-menu;
   background-color: $gray-100;
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  transition-duration: 500ms;
+  transition-timing-function: ease;
+  transition-duration: 0.3s;
 
   @include laptop {
     display: none;

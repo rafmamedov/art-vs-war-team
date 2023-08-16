@@ -18,18 +18,18 @@ type Props = {
 };
 
 const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
-  const [openPhotoSwipe, setOpenPhotoSwipe] = useState(false);
+  const [isOpenFullScreen, setIsOpenFullScreen] = useState(false);
   const [imagesNav, setImagesNav] = useState<SwiperClass | null>(null);
 
-  const handleImage = () => {
-    setOpenPhotoSwipe(!openPhotoSwipe);
+  const handleZoomPainting = () => {
+    setIsOpenFullScreen(!isOpenFullScreen);
   };
 
   return (
     <>
-      <div className="slider">
+      <div className="slider hideScroll">
         <div className="slider__flex">
-          <div className="slider__images">
+          <div className={isOpenFullScreen ? "fs" : "slider__images"}>
             <Swiper
               thumbs={{
                 swiper: imagesNav && !imagesNav.destroyed ? imagesNav : null,
@@ -53,16 +53,20 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
                       <Image
                         src={slide}
                         alt={`art ${title} by ${author}`}
-                        width={800}
-                        height={600}
+                        width={2000}
+                        height={1500}
                         priority
                         loading={"eager"}
+                        quality={90}
                         style={{
                           objectFit: "contain",
+                          cursor: `${
+                            isOpenFullScreen ? "zoom-out" : "zoom-in"
+                          }`,
                         }}
                         className="imageOpacityEffect"
                         onLoadingComplete={(img) => (img.style.opacity = "1")}
-                        onClick={handleImage}
+                        onClick={handleZoomPainting}
                       />
                     </div>
                   </SwiperSlide>

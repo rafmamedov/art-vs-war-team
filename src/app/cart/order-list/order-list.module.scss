@@ -1,6 +1,25 @@
 @import "@styles/vars.scss";
 @import "@styles/mixins.scss";
 
+.firstStep {
+  @include set-flex(row, space-between, center);
+
+  margin-top: 24px;
+  height: 48px;
+  width: 100%;
+  padding: 12px;
+  border-bottom: 1px solid $gray-50;
+
+  &__text {
+    color: $gray-0;
+  }
+
+  &__arrow {
+    transform: rotate(180deg);
+    transition: 0.3s;
+  }
+}
+
 .paintingWrapper {
   position: relative;
 
@@ -146,16 +165,17 @@
 }
 
 .button {
+  @include set-flex(row, center, center);
+
   margin-top: 24px;
   height: 48px;
   width: 100%;
   border-radius: 24px;
-  background-color: $gray-0;
+  background-color: $gray-5;
   font-size: $font-size-base;
-  border: 1px solid $gray-0;
   transition-duration: 0.3s;
-  cursor: pointer;
   color: $gray-100;
+  cursor: pointer;
 
   &:hover {
     background-color: $gray-0;
@@ -182,5 +202,23 @@
 
   @include desktopHD {
     width: 368px;
+  }
+}
+
+.profile {
+  margin-top: 24px;
+  color: $gray-0;
+  @include tablet {
+    text-align: end;
+  }
+}
+
+.account {
+  color: $system-error;
+  font-size: $font-size-lg;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }

@@ -7,6 +7,7 @@ import InputArtistSearch from "./inputSearch/inputSearch";
 import MoreArtistsButton from "./more-artists-button/more-artists-button";
 
 import style from "./artistsList.module.scss";
+import EmptyArtistsPage from "./empty-page/empty-page";
 
 const ArtistsList = () => {
   const { foundArtists } = useAppSelector((state) => state.artists);
@@ -18,20 +19,28 @@ const ArtistsList = () => {
         <InputArtistSearch />
       </div>
 
-      <div className={style.artistsCards}>
-        {foundArtists.map((artist: Artist, index: number) => (
-          <ArtistCard
-            artist={artist}
-            key={artist.cognitoSubject}
-            className={
-              index % 2 === 0
-                ? `${style.artistsCardOdd}`
-                : `${style.artistsCardEven}`
-            }
-          />
-        ))}
-      </div>
-      <MoreArtistsButton />
+      <>
+        {foundArtists.length !== 0 ? (
+          <>
+            <div className={style.artistsCards}>
+              {foundArtists.map((artist: Artist, index: number) => (
+                <ArtistCard
+                  artist={artist}
+                  key={artist.cognitoSubject}
+                  className={
+                    index % 2 === 0
+                      ? `${style.artistsCardOdd}`
+                      : `${style.artistsCardEven}`
+                  }
+                />
+              ))}
+            </div>
+            <MoreArtistsButton />
+          </>
+        ) : (
+          <EmptyArtistsPage />
+        )}
+      </>
     </section>
   );
 };

@@ -1,37 +1,51 @@
 "use client";
 
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 
 import { CloseIcon } from "@/app/icons/icon-close";
 import { MapPoint } from "@/app/icons/icon-map-point";
-import { removeItem } from "@/app/redux/slices/cartSlice";
+import { removePaintingFromCart } from "@/app/redux/slices/cartSlice";
 import { CartItem } from "@/types/CartItem";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
+import { removeOrderPaintingFromServer } from "@/utils/api";
+import createHeaders from "@/utils/getAccessToken";
 import MightLike from "../might-like/might-like";
+import EmptyCartPage from "./empty-cart/empty-cart";
 
 import style from "./order-list.module.scss";
 
 const OrderList = () => {
-  const { paintings, totalPrice } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  const { paintings, totalPrice } = useAppSelector((state) => state.cart);
+  const { user } = useAuthenticator((context) => [context.route]);
+  const headers = createHeaders(user);
 
-  const handleRemovePainting = (id: string) => {
-    dispatch(removeItem(id));
+  const handleRemovePainting = (id: number) => {
+    dispatch(removePaintingFromCart(id));
+
+    if (user) {
+      removeOrderPaintingFromServer(id, headers);
+    }
   };
 
-  const selectedPaintings = paintings.map((painting) => painting.id).join(",");
+  const nextCheckoutPath = user ? "/cart/checkout" : "/profile";
+
+  const selectedPaintings = paintings
+    .map((painting) => painting.prettyId)
+    .join(",");
 
   return (
     <>
-      {paintings.length > 0 && (
-        <div>
+      {paintings.length > 0 && totalPrice > 0 ? (
+        <>
           {paintings.map((painting: CartItem) => (
             <Fragment key={painting.id}>
               <div className={style.paintingWrapper}>
                 <div className={style.imageWrapper}>
-                  <Link href={`/gallery/${painting.id}`}>
+                  <Link href={`/gallery/${painting.prettyId}`}>
                     <Image
                       className={style.image}
                       src={painting.image}
@@ -50,7 +64,7 @@ const OrderList = () => {
                 </div>
                 <div className={style.paintingInfo}>
                   <div className={style.paintingInfo}>
-                    <Link href={`/gallery/${painting.id}`}>
+                    <Link href={`/gallery/${painting.prettyId}`}>
                       <p className={style.title}>{painting.title}</p>
                     </Link>
                     <Link href={`/artists/${painting.authorId}`}>
@@ -72,10 +86,25 @@ const OrderList = () => {
           ))}
           <div className={style.totalInfo}>
             <p className={style.totalPrice}>{`Total: ${totalPrice} €`}</p>
-            <button className={style.button}>Checkout</button>
+            <Link href={nextCheckoutPath} className={style.button}>
+              Checkout
+            </Link>
           </div>
+          {!user && (
+            <div className={style.profile}>
+              <p className={style.profile__text}>
+                To make a purchase you need to&nbsp;&nbsp;
+                <Link href={"/profile"} className={style.account}>
+                  Log in
+                </Link>
+              </p>
+              <p className={style.profile__login}></p>
+            </div>
+          )}
           <MightLike selectedPaintings={selectedPaintings} />
-        </div>
+        </>
+      ) : (
+        <EmptyCartPage />
       )}
     </>
   );

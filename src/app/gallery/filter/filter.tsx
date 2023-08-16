@@ -1,9 +1,7 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-import style from "./filter.module.scss";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 import {
   resetGalleryPageCount,
@@ -12,12 +10,15 @@ import {
 import { useAppDispatch } from "@/types/ReduxHooks";
 import { getPaintings } from "@/utils/api";
 
-import { FilterIcon } from "@/app/icons/icon-filter";
 import { CloseIcon } from "@/app/icons/icon-close";
-import RangeSlider from "./rangeSlider/rangeSlider";
-import StylesCheckBox from "./stylesCheckbox/stylesCheckbox";
-import SizesSection from "./sizesSection/sizesSection";
+import { FilterIcon } from "@/app/icons/icon-filter";
 import { PaintingFilterParams } from "@/types/Painting";
+import { handleCloseDropdown } from "@/utils/checkClick";
+import RangeSlider from "./rangeSlider/rangeSlider";
+import SizesSection from "./sizesSection/sizesSection";
+import StylesCheckBox from "./stylesCheckbox/stylesCheckbox";
+
+import style from "./filter.module.scss";
 
 type Props = {
   filtersData: PaintingFilterParams;
@@ -198,16 +199,14 @@ const Filter: React.FC<Props> = ({ filtersData }) => {
   }, []);
 
   useEffect(() => {
-    const handleCloseDropdown = (event: MouseEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) {
-        setIsMenuOpen(false);
-      }
+    const handleMouseDown = (event: MouseEvent) => {
+      handleCloseDropdown(event, menuRef, setIsMenuOpen);
     };
 
-    document.addEventListener("mousedown", handleCloseDropdown);
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
-      document.removeEventListener("mousedown", handleCloseDropdown);
+      document.removeEventListener("mousedown", handleMouseDown);
     };
   });
 

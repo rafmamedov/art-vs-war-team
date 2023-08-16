@@ -132,6 +132,7 @@
 
 .button {
   @include set-size(90%, 48px);
+  @include set-flex(row, center, center);
 
   margin: 0 22px;
   align-self: center;
@@ -142,7 +143,7 @@
   border-color: $gray-5;
   border-width: 1px;
   border-style: solid;
-  cursor: pointer;
+  z-index: 1;
 
   @include tabletXL {
     width: 456px;
@@ -168,5 +169,16 @@
   @include desktopHD {
     @include set-square(240px);
     font-size: $font-size-xl;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transition-duration: 0.3s;
+    transform: translateY(-50%) scale(0.9);
+    background-color: $gray-0;
+    color: $gray-100;
   }
 }

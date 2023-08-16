@@ -1,5 +1,5 @@
-@import '@styles/mixins.scss';
-@import '@styles/vars.scss';
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
 
 .about {
   @include laptop {
@@ -55,6 +55,8 @@
 
       &:active {
         background-color: $gray-90;
+        transition-duration: 0.3s;
+        transform: scale(0.9);
       }
     }
   }
@@ -108,11 +110,12 @@
     }
 
     .ornament {
+      @include set-flex(row, center, center);
+      @include set-square(600px);
+
       position: relative;
       bottom: 208px;
       margin: 0 auto;
-      @include set-square(600px);
-      @include set-flex(row, center, center);
       z-index: 0;
 
       @include tabletXL {
@@ -132,6 +135,11 @@
       &:hover {
         cursor: pointer;
         background-color: $gray-0;
+      }
+
+      &:active {
+        transition-duration: 0.3s;
+        transform: scale(0.9);
       }
     }
   }
@@ -264,6 +272,11 @@
       &:hover {
         cursor: pointer;
         background-color: $gray-0;
+      }
+
+      &:active {
+        transition-duration: 0.3s;
+        transform: scale(0.9);
       }
     }
   }

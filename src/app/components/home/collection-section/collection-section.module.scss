@@ -1,8 +1,8 @@
-@import '@styles/mixins.scss';
-@import '@styles/vars.scss';
+@import "@styles/mixins.scss";
+@import "@styles/vars.scss";
 
 .collection {
-  margin: 72px auto 0;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -11,7 +11,7 @@
 
   @include tablet {
     @include set-flex(column, center, center);
-      gap: 12px;
+    gap: 12px;
   }
 
   @include laptop {
@@ -23,13 +23,13 @@
     width: 100%;
     background-color: $gray-5;
 
-      &:nth-child(1) {
-        height: 12px;
-      }
+    &:nth-child(1) {
+      height: 12px;
+    }
 
-      &:nth-child(2) {
+    &:nth-child(2) {
       height: 24px;
-      }
+    }
 
     &:last-child {
       margin-bottom: 12px;
@@ -90,6 +90,7 @@
   .button {
     @include set-square(140px);
     @include set-flex(row, center, center);
+
     border-radius: 50%;
     background-color: $gray-90;
     font-size: $font-size-base;
@@ -105,6 +106,11 @@
       cursor: pointer;
       background-color: $gray-100;
     }
+
+    &:active {
+      transition-duration: 0.3s;
+      transform: scale(0.9);
+    }
   }
 }
 
@@ -116,33 +122,33 @@
     gap: 12px;
   }
 
-    @include laptop {
-      gap: 24px;
-    }
+  @include laptop {
+    gap: 24px;
+  }
 
-    .line {
-      width: 100%;
-      background-color: $gray-5;
+  .line {
+    width: 100%;
+    background-color: $gray-5;
 
-      &:first-child {
-        margin-top: 12px;
-        height: 48px;
+    &:first-child {
+      margin-top: 12px;
+      height: 48px;
 
-        @include laptop {
-          margin-top: 0;
-        }
-
-        @include desktop {
-          margin-top: 24px;
-        }
+      @include laptop {
+        margin-top: 0;
       }
 
-      &:nth-child(2) {
-        height: 24px;
-      }
-
-      &:nth-child(3) {
-        height: 12px;
+      @include desktop {
+        margin-top: 24px;
       }
     }
+
+    &:nth-child(2) {
+      height: 24px;
+    }
+
+    &:nth-child(3) {
+      height: 12px;
+    }
+  }
 }
