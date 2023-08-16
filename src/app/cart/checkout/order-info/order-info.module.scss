@@ -23,9 +23,18 @@
   width: 100%;
   padding: 12px;
   border-bottom: 1px solid $gray-50;
+  transition: 0.3s;
+  color: $gray-0;
 
-  &__text {
-    color: $gray-0;
+  &:hover {
+    cursor: pointer;
+    border-bottom: 1px solid $gray-30;
+    transition: 0.3s;
+    color: $gray-10;
+
+    path {
+      fill: $gray-10;
+    }
   }
 }
 
