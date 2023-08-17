@@ -4,11 +4,35 @@
 .card {
   @include set-flex(column);
 
-  min-width: 240px;
+  min-width: 148px;
+  max-width: 289px;
   transition: transform 0.3s ease;
   cursor: default;
-
   color: $gray-5;
+
+  @include tablet {
+    min-width: 185px;
+    max-width: 228px;
+  }
+
+  @include tabletXL {
+    min-width: 218px;
+    max-width: 304px;
+  }
+
+  @include laptop {
+    min-width: 304px;
+    max-width: 422px;
+  }
+
+  @include desktop {
+    min-width: 312px;
+    max-width: 370px;
+  }
+
+  @include desktop {
+    min-width: 370px;
+  }
 
   &:hover {
     transform: scale(1.01);
