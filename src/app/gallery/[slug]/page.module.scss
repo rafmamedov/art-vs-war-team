@@ -125,7 +125,7 @@
     padding: 48px 0;
   }
 
-  @include laptop {
+  @include desktop {
     padding: 48px 130px;
   }
 }
@@ -212,6 +212,10 @@
 
   &__help {
     color: $system-info;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -227,6 +231,9 @@
 }
 
 .link {
-  text-decoration: underline;
   text-transform: uppercase;
+
+  &:hover {
+    color: $gray-10;
+  }
 }

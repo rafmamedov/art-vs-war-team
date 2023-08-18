@@ -27,8 +27,10 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
     const viewportWidth = window.innerWidth;
     if (viewportWidth < 640) {
       setPaintingsQuantity(2);
-    } else if (viewportWidth < 1366) {
+    } else if (viewportWidth < 768) {
       setPaintingsQuantity(3);
+    } else if (viewportWidth < 1366) {
+      setPaintingsQuantity(4);
     } else {
       setPaintingsQuantity(5);
     }
