@@ -45,7 +45,6 @@
     @include set-flex(row, center, center);
     @include set-square(144px);
 
-    // margin-top: 150px;
     border-radius: 50%;
     z-index: 2;
 
@@ -99,8 +98,24 @@
   }
 }
 
+.imageMap {
+  position: absolute;
+  top: 15%;
+  left: 23%;
+  opacity: 0;
+  transition: all 5s ease-out;
+}
+
+.visible {
+  opacity: 1;
+  transition: all 3s ease-out;
+}
+
 .title {
+  position: relative;
+
   @include tablet {
+    text-align: end;
     grid-column: 1 / 5;
     grid-row: 2 / 7;
     color: $gray-0;
@@ -115,7 +130,6 @@
   }
 
   @include laptop {
-    text-align: end;
     grid-column: 1 / 7;
     grid-row: 3 / 9;
   }
