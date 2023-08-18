@@ -11,27 +11,28 @@
   color: $gray-5;
 
   @include tablet {
-    min-width: 185px;
+    min-width: 182px;
     max-width: 228px;
   }
 
   @include tabletXL {
-    min-width: 218px;
-    max-width: 304px;
+    min-width: 160px;
+    max-width: 250px;
   }
 
   @include laptop {
-    min-width: 304px;
-    max-width: 422px;
+    min-width: 200px;
+    max-width: 350px;
   }
 
   @include desktop {
-    min-width: 312px;
-    max-width: 370px;
+    min-width: 180px;
+    max-width: 360px;
   }
 
-  @include desktop {
-    min-width: 370px;
+  @include desktopHD {
+    min-width: 220px;
+    max-width: 360px;
   }
 
   &:hover {

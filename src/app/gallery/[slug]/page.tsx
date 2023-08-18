@@ -148,7 +148,7 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
           {`MORE FROM `}
           <span>
             <Link href={`/artists/${author.prettyId}`} className={style.link}>
-              {`${author.fullName}:`}
+              {`${author.fullName}`}
             </Link>
           </span>
         </p>
@@ -204,9 +204,14 @@ const PaintingCard = async ({ params }: { params: { slug: string } }) => {
           HAVE ADDITIONAL QUESTION?
         </p>
         <p className={style.question__info}>
-          Please visit our
-          <span className={style.question__help}> help section</span> or
-          <span className={style.question__help}> contact us</span>
+          Please visit our{" "}
+          <Link href="/contacts" className={style.question__help}>
+            help section
+          </Link>{" "}
+          or{" "}
+          <Link href="/contacts" className={style.question__help}>
+            contact us
+          </Link>
         </p>
       </div>
     </section>
