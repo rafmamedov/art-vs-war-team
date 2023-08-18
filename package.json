@@ -18,7 +18,7 @@
     "aws-amplify": "^5.2.5",
     "axios": "^1.4.0",
     "eslint": "8.40.0",
-    "eslint-config-next": "13.4.3",
+    "eslint-config-next": "^13.4.12",
     "jwt-decode": "^3.1.2",
     "next": "^13.4.12",
     "next-cloudinary": "^4.12.0",
