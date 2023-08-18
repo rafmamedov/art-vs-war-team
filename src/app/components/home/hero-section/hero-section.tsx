@@ -74,7 +74,7 @@ const HeroSection = ({ paintings }: HeroSectionProps) => {
       </div>
       <div className={style.hero}>
         <div className={style.title}>
-          <h1 className={style.title}>
+          <h1 className={style.title__text}>
             Buy Art
             <br /> Help Ukraine
           </h1>
