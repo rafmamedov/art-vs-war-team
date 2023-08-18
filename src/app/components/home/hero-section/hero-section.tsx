@@ -79,7 +79,7 @@ const HeroSection = ({ paintings }: HeroSectionProps) => {
             <br /> Help Ukraine
           </h1>
           <Image
-            src="/assets/white.png"
+            src="/assets/map.webp"
             alt="map of Ukraine"
             width={145}
             height={80}
