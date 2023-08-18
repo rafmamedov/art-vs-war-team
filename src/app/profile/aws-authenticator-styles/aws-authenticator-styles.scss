@@ -1,0 +1,27 @@
+@import "@styles/vars.scss";
+
+.wrapper33 {
+  position: relative;
+  // overflow: hidden;
+  // height: 200px;
+}
+
+.imageMobile3 {
+  position: absolute;
+  // top: 18%;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // transform: translateY(-50%);
+  top: -50%;
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.amplify-button[data-variation="primary"] {
+  border-radius: 24px;
+  background-color: $gray-90;
+}
+
+// .amplify-tabs {
+//   display: none;
+// }

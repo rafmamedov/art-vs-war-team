@@ -29,7 +29,11 @@ const PaintingGallery: React.FC<Props> = ({ paintings, title, author }) => {
     <>
       <div className="slider hideScroll">
         <div className="slider__flex">
-          <div className={isOpenFullScreen ? "fs" : "slider__images"}>
+          <div
+            className={`slider__images ${
+              isOpenFullScreen && "fullScreenPainting"
+            }`}
+          >
             <Swiper
               thumbs={{
                 swiper: imagesNav && !imagesNav.destroyed ? imagesNav : null,
