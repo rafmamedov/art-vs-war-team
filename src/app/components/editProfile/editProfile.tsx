@@ -21,14 +21,12 @@ const URL = 'authors/checkInputAndGet';
 
 type Props = {
   author: Artist | null;
-  // setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
   setAuthor: Dispatch<SetStateAction<Artist | null>>;
 };
 
 const EditProfile: FC<Props> = ({
   author,
   setAuthor,
-  // setOpenForm,
 }) => {
   const {
     handleSubmit,
@@ -186,196 +184,200 @@ const EditProfile: FC<Props> = ({
   };
 
   return (
-    <section className={style.editProfile}>
-      <div className={style.titleContainer}>
-        {author && (
-          <button
-            type="button"
-            className={style.arrow}
-            // onClick={() => setOpenForm(null)}
-          >
-            <ArrowLeft />
-          </button>
-        )}
+    author && (
+      <section className={style.editProfile}>
+        <div className={style.titleContainer}>
+          {author && (
+            <button
+              type="button"
+              className={style.arrow}
+            >
+              <ArrowLeft />
+            </button>
+          )}
 
-        <h2 className={style.title}>
-          {author
-            ? 'Edit your profile'
-            : 'Welcome to Art Vs War'
-          }
-        </h2>
-      </div>
+          <h2 className={style.title}>
+            {author
+              ? 'Edit your profile'
+              : 'Welcome to Art Vs War'
+            }
+          </h2>
+        </div>
 
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className={style.container}>
-          <div className={style.fileContainer}>
-            <label className={style.file}>
-              <input
-                type="file"
-                className={style.file__input}
-                {...register("image", author
-                  ? { onChange: handleFileChange }
-                  : {
-                      onChange: handleFileChange,
-                      required: "Image is required!"
-                    }
-                )}
-              />
-              {imagePreview ? (
-                <div className={style.preview}>
-                  <Image
-                    src={imagePreview}
-                    alt="Preview"
-                    className={style.image}
-                    fill
-                  />
-                </div>
-              ) : (
-                typeof errors?.image?.message === 'string' ? (
-                  <div className={`${style.error} ${style.error__file}`}>
-                    {errors.image.message}
-                  </div>
-                ) : (
-                  <>
-                    <Add className={style.file__icon}/>
-                    <span className={style.file__label}>Choose a file</span>
-                  </>
-                )
-            )}
-            </label>
-            <div className={style.recomendations}>
-              **Please add a photo with a large resolution (!!!!!!!!!!!!!)
-              and proportions close to 3:4. we want art connoisseurs to be closer
-              to artists and we are sure that people who create masterpieces deserve
-              to be shown vividly. Don’t be shy!
-            </div>
-          </div>
-          <div className={style.inputsContainer}>
-            <label className={style.label}>
-              <div>
-                Full Name
-                <span className={style.star}>*</span>
-              </div>
-              <div className={style.input}>
+        <form
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className={style.container}>
+            <div className={style.fileContainer}>
+              <label className={style.file}>
                 <input
-                  type="text"
-                  className={style.text}
-                  placeholder="Enter your full name"
-                  {...register("fullName", { required: 'This field is required!' })}
-                />
-
-                {typeof errors?.fullName?.message === 'string' && (
-                  <div className={style.error}>{errors.fullName.message}</div>
-                )}
-              </div>
-            </label>
-            <label className={style.label}>
-              <div>
-                City
-                <span className={style.star}>*</span>
-              </div>
-              <div className={style.input}>
-                <input
-                  type="text"
-                  className={style.text}
-                  placeholder="Enter a city of your current stay"
-                  {...register("city", { required: 'This field is required!' })}
-                />
-
-                {typeof errors?.city?.message === 'string' && (
-                  <div className={style.error}>{errors.city.message}</div>
-                )}
-              </div>
-            </label>
-            <label className={style.label}>
-              <div>
-                Country
-                <span className={style.star}>*</span>
-              </div>
-              <div className={style.input}>
-                <Controller
-                  name="country"
-                  control={control}
-                  rules={{ required: 'This field is required!' }}
-                  render={({ field: { onChange, value } }) => (
-                    <Select
-                      options={countries}
-                      value={getValue(value)}
-                      onChange={newValue => onChange((newValue as CountryType).value)}
-                      isSearchable={false}
-                      className={style.select}
-                      placeholder="A country of your current stay"
-                      styles={styles}
-                    />
+                  type="file"
+                  className={style.file__input}
+                  {...register("image", author
+                    ? { onChange: handleFileChange }
+                    : {
+                        onChange: handleFileChange,
+                        required: "Image is required!"
+                      }
                   )}
                 />
+                {imagePreview ? (
+                  <div className={style.preview}>
+                    <Image
+                      src={imagePreview}
+                      alt="Preview"
+                      className={style.image}
+                      fill
+                    />
+                  </div>
+                ) : (
+                  typeof errors?.image?.message === 'string' ? (
+                    <div className={`${style.error} ${style.error__file}`}>
+                      {errors.image.message}
+                    </div>
+                  ) : (
+                    author.imageUrl
+                      ? (
+                        <Image
+                          src={author.imageUrl}
+                          alt="Preview"
+                          className={style.image}
+                          fill
+                        />
+                      ) : (
+                      <>
+                        <Add className={style.file__icon}/>
+                        <span className={style.file__label}>Choose a file</span>
+                      </>
+                    )
+                  )
+              )}
+              </label>
+              <div className={style.recomendations}>
+                **Please add a photo with a large resolution (!!!!!!!!!!!!!)
+                and proportions close to 3:4. we want art connoisseurs to be closer
+                to artists and we are sure that people who create masterpieces deserve
+                to be shown vividly. Don’t be shy!
+              </div>
+            </div>
+            <div className={style.inputsContainer}>
+              <label className={style.label}>
+                <div>
+                  Full Name
+                  <span className={style.star}>*</span>
+                </div>
+                <div className={style.input}>
+                  <input
+                    type="text"
+                    className={style.text}
+                    placeholder="Enter your full name"
+                    {...register("fullName", { required: 'This field is required!' })}
+                  />
 
-                {typeof errors?.country?.message === 'string' && (
-                  <div className={style.error}>{errors.country.message}</div>
-                )}
-              </div>
-            </label>
-            <label className={style.label}>
-              <div>
-                About Me
-                <span className={style.star}>*</span>
-              </div>
-              <div className={style.input}>
-                <textarea
-                  className={style.about}
-                  placeholder="Tell us about yourself. Don't be shy!"
-                  {...register("aboutMe", { required: 'This field is required!' })}
-                />
+                  {typeof errors?.fullName?.message === 'string' && (
+                    <div className={style.error}>{errors.fullName.message}</div>
+                  )}
+                </div>
+              </label>
+              <label className={style.label}>
+                <div>
+                  City
+                  <span className={style.star}>*</span>
+                </div>
+                <div className={style.input}>
+                  <input
+                    type="text"
+                    className={style.text}
+                    placeholder="Enter a city of your current stay"
+                    {...register("city", { required: 'This field is required!' })}
+                  />
 
-                {typeof errors?.aboutMe?.message === 'string' && (
-                  <div className={style.error__about}>{errors.aboutMe.message}</div>
-                )}
+                  {typeof errors?.city?.message === 'string' && (
+                    <div className={style.error}>{errors.city.message}</div>
+                  )}
+                </div>
+              </label>
+              <label className={style.label}>
+                <div>
+                  Country
+                  <span className={style.star}>*</span>
+                </div>
+                <div className={style.input}>
+                  <Controller
+                    name="country"
+                    control={control}
+                    rules={{ required: 'This field is required!' }}
+                    render={({ field: { onChange, value } }) => (
+                      <Select
+                        options={countries}
+                        value={getValue(value)}
+                        onChange={newValue => onChange((newValue as CountryType).value)}
+                        isSearchable={false}
+                        className={style.select}
+                        placeholder="A country of your current stay"
+                        styles={styles}
+                      />
+                    )}
+                  />
+
+                  {typeof errors?.country?.message === 'string' && (
+                    <div className={style.error}>{errors.country.message}</div>
+                  )}
+                </div>
+              </label>
+              <label className={style.label}>
+                <div>
+                  About Me
+                  <span className={style.star}>*</span>
+                </div>
+                <div className={style.input}>
+                  <textarea
+                    className={style.about}
+                    placeholder="Tell us about yourself. Don't be shy!"
+                    {...register("aboutMe", { required: 'This field is required!' })}
+                  />
+
+                  {typeof errors?.aboutMe?.message === 'string' && (
+                    <div className={style.error__about}>{errors.aboutMe.message}</div>
+                  )}
+                </div>
+              </label>
+              <div className={style.buttonContainerLaptop}>
+                <button
+                  type="reset"
+                  className={style.cancel}
+                  onClick={onReset}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className={style.submit}
+                >
+                  Submit
+                </button>
               </div>
-            </label>
-            <div className={style.buttonContainerLaptop}>
-              <button
-                type="reset"
-                className={style.cancel}
-                onClick={onReset}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={style.submit}
-              >
-                Submit
-              </button>
-              <button
-                type="submit"
-                className={style.signout}
-                onClick={signOut}
-              >
-                Sign Out
-              </button>
             </div>
           </div>
-        </div>
-        <div className={style.buttonContainer}>
-          <button
-            type="reset"
-            className={style.cancel}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className={style.submit}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </section>
+          <div className={style.buttonContainer}>
+            <button
+              type="reset"
+              className={style.cancel}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.submit}
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </section>
+    )
   );
 };
 

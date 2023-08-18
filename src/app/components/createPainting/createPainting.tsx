@@ -10,27 +10,28 @@ import style from "./createPainting.module.scss";
 import { stylesSelect } from "./stylesSelect";
 
 import { Add } from "@/app/icons/icon-add";
-import { ArrowLeft } from "@/app/icons/icon-arrow-left";
 import { SubjectType, mediums, styles, subjects, supports } from "./subjects";
 import { uploadImageToServer } from "@/utils/profile";
-import { setArtistPaintings } from "../../redux/slices/artistPaintingsSlice";
-import { ArtistTabOptions } from "@/types/ArtistTabOptions";
-import { useAppDispatch } from "@/types/ReduxHooks";
+
 import {
-  Painting,
   PaintingData,
   PaintingDataToSave,
   PaintingForm,
+  UploadedPaintingData,
 } from "@/types/Painting";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL = "paintings/checkInputAndGet";
 
 type Props = {
-  // setOpenForm: Dispatch<SetStateAction<ArtistTabOptions | null>>;
+  setNextStep: Dispatch<SetStateAction<boolean>>;
+  setUploaded: Dispatch<SetStateAction<UploadedPaintingData | null>>;
 };
 
-const CreatePainting: FC<Props> = () => {
+const CreatePainting: FC<Props> = ({
+  setNextStep,
+  setUploaded,
+}) => {
   const {
     handleSubmit,
     register,
@@ -51,7 +52,6 @@ const CreatePainting: FC<Props> = () => {
   const [selectedMediums, setSelectedMediums] = useState<SubjectType[]>([]);
   const [selectedSupports, setSelectedSupports] = useState<SubjectType[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<SubjectType[]>([]);
-  const dispatch = useAppDispatch();
 
   const { user, route } = useAuthenticator((context) => [context.route]);
   const accessToken = user
@@ -82,31 +82,34 @@ const CreatePainting: FC<Props> = () => {
 
   const handleCreatePainting = async (data: PaintingData) => {
     if (data.image instanceof File) {
-      await toast.promise(
-        uploadImageToServer(data, URL, headers).then((imageData) => {
-          const paintingData: PaintingDataToSave = {
-            ...data,
-            image: imageData,
-          };
-
+      await uploadImageToServer(data, URL, headers).then((imageData) => {
+        const paintingData: PaintingDataToSave = {
+          ...data,
+          image: imageData,
+        };
+        toast.promise(
           axios.post(BASE_URL + "paintings", paintingData, { headers })
-            .finally(() => {
-              onReset();
-            });
-        }),
-        {
-          loading: "Creating...",
-          success: <b>Painting created!</b>,
-          error: <b>Could not create.</b>,
-        },
-        {
-          style: {
-            borderRadius: "10px",
-            background: "#1c1d1d",
-            color: "#b3b4b5",
+          .then(({ data }) => {
+            setUploaded(data);
+            setNextStep(true);
+          })
+          .finally(() => {
+            onReset();
+          }),
+          {
+            loading: "Creating...",
+            success: <b>Painting created!</b>,
+            error: <b>Could not create.</b>,
           },
-        }
-      );
+          {
+            style: {
+              borderRadius: "10px",
+              background: "#1c1d1d",
+              color: "#b3b4b5",
+            },
+          }
+        );
+      })
     }
   };
 
@@ -148,13 +151,13 @@ const CreatePainting: FC<Props> = () => {
   return (
     <section className={style.createPainting}>
       <div className={style.navigationContainer}>
-        <button
+        {/* <button
           type="button"
           className={style.arrow}
           // onClick={() => setOpenForm(null)}
         >
           <ArrowLeft />
-        </button>
+        </button> */}
 
         <div className={`${style.page} ${style.current}`}>
           General Information

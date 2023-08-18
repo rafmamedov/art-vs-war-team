@@ -200,12 +200,35 @@ export async function getSignature(
   return data;
 }
 
+export async function createFolder (
+  headers: HeadersInit,
+  paintingId: string,
+) {
+  const response = await fetch(BASE_URL + `additionalPaintingImage/folder/${paintingId}`, {
+    method: "GET",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function uploadImage(formData: FormData, cloudName: string) {
   const { data } = await axios.post(
     `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
     formData,
     { headers: { "Content-Type": "multipart/form-data" } }
   );
+
+  console.log(data);
 
   return data;
 }

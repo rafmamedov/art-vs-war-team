@@ -6,13 +6,11 @@ import style from "./artistInfo.module.scss";
 import { MapPoint } from "@/app/icons/icon-map-point";
 import { Add } from "@/app/icons/icon-add";
 import { Artist } from "@/types/Artist";
-// import { ArtistTabOptions } from "@/types/ArtistTabOptions";
 
 type Props = {
   artistInfo: Artist;
   isProfile?: boolean;
   signOut?: () => void;
-  // setOpenForm?: Dispatch<SetStateAction<ArtistTabOptions | null>>;
 };
 
 const ArtistInfo: FC<Props> = ({
@@ -26,7 +24,7 @@ const ArtistInfo: FC<Props> = ({
     city,
     aboutMe,
     imageUrl,
-    styles = ['Contemporary'],
+    styles,
   } = artistInfo;
 
   return (
@@ -85,7 +83,7 @@ const ArtistInfo: FC<Props> = ({
                 Edit profile
               </Link>
               <button
-                type="submit"
+                type="button"
                 className={style.signout}
                 onClick={signOut}
               >

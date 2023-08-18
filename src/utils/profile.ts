@@ -1,6 +1,7 @@
 import { ImageData, UserData } from "@/types/Profile";
 import { PaintingData } from "@/types/Painting";
-import { getSignature, uploadImage, validateData } from "./api";
+import { createFolder, getSignature, uploadImage, validateData } from "./api";
+import axios from "axios";
 
 const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET;
 const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -111,3 +112,59 @@ export const uploadImageToServer = async (
     }
   }
 };
+
+export const uploadAdditionalImages = async (
+  headers: HeadersInit,
+  paintingId: string,
+  images: File[],
+) => {
+  if (!upload_preset) return;
+
+  const folder = await createFolder(headers, paintingId);
+
+  const requestParams = {
+    upload_preset,
+    folder,
+  };
+
+  const { signature, timestamp } = await getSignature(requestParams, headers);
+
+  if (!upload_preset || !cloudinaryApiKey || !cloudName) return;
+
+  const formData = new FormData();
+
+  images.forEach((file) => {
+    formData.append('file', file);
+    formData.append("folder", folder);
+    formData.append("signature", signature);
+    formData.append("timestamp", timestamp);
+    formData.append("upload_preset", upload_preset);
+    formData.append("api_key", cloudinaryApiKey);
+  });
+
+  try {
+    const {
+      public_id,
+      version,
+      signature,
+      width,
+      height,
+    } = await uploadImage(formData, cloudName);
+
+    const imageData: ImageData = {
+      version,
+      signature,
+      publicId: public_id,
+      moderationStatus: 'APPROVED',
+      width,
+      height,
+    };
+
+    console.log('imageData', imageData);
+
+    return imageData;
+  } catch (error) {
+    console.error('Error uploading images to Cloudinary:', error);
+    return [];
+  }
+}

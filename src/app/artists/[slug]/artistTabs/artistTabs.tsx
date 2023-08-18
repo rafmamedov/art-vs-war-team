@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
+import Link from "next/link";
 
 import MasonryGallery from "@/app/components/masonry/masonry";
 import { Add } from "@/app/icons/icon-add";
@@ -50,14 +51,13 @@ const ArtistTabs: React.FC<Props> = ({ setOpenForm }) => {
         </div>
 
         {isProfile && setOpenForm && (
-          <button
-            type="button"
+          <Link
+            href="/profile/createPainting"
             className={style.add}
-            onClick={() => setOpenForm(selectedTab)}
           >
             <Add />
             {selectedTab}
-          </button>
+          </Link>
         )}
 
         <div className={style.tabsFooter} />
