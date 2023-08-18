@@ -28,7 +28,6 @@ import {
   setArtistPaintings,
 } from "../redux/slices/artistPaintingsSlice";
 
-import { authenticatorStylesComponents } from "./aws-authenticator-styles/aws-authenticator-styles";
 import style from "./page.module.scss";
 
 const Profile = () => {
