@@ -81,7 +81,7 @@ const Profile = () => {
       ) : (
         <Authenticator
           className={style.auth}
-          components={authenticatorStylesComponents}
+          // components={authenticatorStylesComponents}
         >
           {!openForm && author && (
             <>

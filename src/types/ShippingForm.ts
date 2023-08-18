@@ -3,10 +3,10 @@ export interface ShippingFormTypes {
   lastName: string;
   country: string;
   city: string;
-  state_region?: string;
+  state_region: string | undefined;
   postcode: string;
   addressMain: string;
-  addressFirstAdditional?: string;
-  addressSecondAdditional?: string;
+  addressFirstAdditional: string | undefined;
+  addressSecondAdditional: string | undefined;
   phoneNumber: string;
 }
