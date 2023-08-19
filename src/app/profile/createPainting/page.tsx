@@ -15,7 +15,6 @@ const EditProfilePage = () => {
 
 return (
   <Authenticator className={style.auth}>
-    {/* <AdditionalInfo /> */}
     {(isNextStepVisible && uploaded)
       ? <AdditionalInfo uploaded={uploaded} />
       : (
