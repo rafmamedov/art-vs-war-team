@@ -6,7 +6,7 @@ import { Cart } from "@/app/icons/icon-cart";
 import { CheckProduct } from "@/app/icons/icon-check-product";
 import { addPaintingToCart } from "@/app/redux/slices/cartSlice";
 import { CartItem } from "@/types/CartItem";
-import { Painting } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 import { useAppDispatch, useAppSelector } from "@/types/ReduxHooks";
 import { saveOrderPaintingToServer } from "@/utils/api";
 import createHeaders from "@/utils/getAccessToken";
@@ -15,7 +15,7 @@ import "@styles/globals.scss";
 import style from "./card-preview.module.scss";
 
 type Props = {
-  paintingDetails: Painting;
+  paintingDetails: PaintingData;
   className?: string;
 };
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Painting } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 import { getMightLikePaintings } from "@/utils/api";
 import CardPreview from "@components/card-preview/card-preview";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const MightLike: React.FC<Props> = ({ selectedPaintings }) => {
-  const [paintings, setPaintings] = useState<Painting[]>([]);
+  const [paintings, setPaintings] = useState<PaintingData[]>([]);
   const [paintingsQuantity, setPaintingsQuantity] = useState<number | null>(
     null
   );
@@ -56,7 +56,7 @@ const MightLike: React.FC<Props> = ({ selectedPaintings }) => {
 
       <div className={style.title}>YOU ALSO MIGHT LIKE</div>
       <div className={style.more__painting}>
-        {paintings.map((painting: Painting) => (
+        {paintings.map((painting: PaintingData) => (
           <CardPreview
             paintingDetails={painting}
             key={painting.id}

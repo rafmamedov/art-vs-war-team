@@ -27,7 +27,7 @@ import SocialNetworkIcons from "../social-network/social-network";
 import LoginButton from "./navigation/login-button/login-button";
 
 import style from "./header.module.scss";
-import { Painting } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const Header = () => {
 
     const getDataFromCart = async () => {
       const dataFromServer = await getOrderDataFromServer(headers);
-      const orderData = dataFromServer.paintings.map((item: Painting) => {
+      const orderData = dataFromServer.paintings.map((item: PaintingData) => {
         const orderData: CartItem = {
           id: item.id,
           prettyId: item.prettyId,
