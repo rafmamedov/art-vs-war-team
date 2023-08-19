@@ -42,10 +42,7 @@ export default function RootLayout({ children }: Props) {
       >
         <ReduxProvider>
           <AuthenticatorProvider>
-            <Toaster
-              position="top-center"
-              reverseOrder={false}
-            />
+            <Toaster position="top-center" reverseOrder={false} />
             <Header />
             {children}
             <Footer />
