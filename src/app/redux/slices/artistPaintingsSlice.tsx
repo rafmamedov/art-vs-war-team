@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { ArtCollection, Painting } from "@/types/Painting";
+import { ArtCollection, PaintingData } from "@/types/Painting";
 
 export interface PaintingsState {
-  artistPaintings: Painting[];
+  artistPaintings: PaintingData[];
   artistId: string;
   totalSize: number;
   pagesCount: number;
