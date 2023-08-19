@@ -1,7 +1,6 @@
 import { ImageData, UserData } from "@/types/Profile";
 import { PaintingData } from "@/types/Painting";
 import { createFolder, getSignature, uploadImage, validateData } from "./api";
-import axios from "axios";
 
 const upload_preset = process.env.NEXT_APP_CLOUDINARY_UPLOAD_PRESET;
 const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;

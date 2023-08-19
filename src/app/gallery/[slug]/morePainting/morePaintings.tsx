@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Painting } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 import { getMorePaintings } from "@/utils/api";
 import CardPreview from "@components/card-preview/card-preview";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const MorePaintings: React.FC<Props> = ({ prettyId }) => {
-  const [paintings, setPaintings] = useState<Painting[]>([]);
+  const [paintings, setPaintings] = useState<PaintingData[]>([]);
   const [paintingsQuantity, setPaintingsQuantity] = useState<number | null>(
     null
   );
@@ -54,7 +54,7 @@ const MorePaintings: React.FC<Props> = ({ prettyId }) => {
 
   return (
     <div className={style.more__painting}>
-      {paintings.map((painting: Painting) => (
+      {paintings.map((painting: PaintingData) => (
         <CardPreview
           paintingDetails={painting}
           key={painting.id}

@@ -2,13 +2,13 @@
 
 import Masonry from "react-masonry-css";
 
-import { Painting } from "@/types/Painting";
+import { PaintingData } from "@/types/Painting";
 import CardPreview from "../card-preview/card-preview";
 
 import "@styles/masonry.scss";
 
 type Props = {
-  paintingsList: Painting[];
+  paintingsList: PaintingData[];
 };
 
 const MasonryGallery: React.FC<Props> = ({ paintingsList }) => {
@@ -24,7 +24,7 @@ const MasonryGallery: React.FC<Props> = ({ paintingsList }) => {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {paintingsList.map((painting: Painting) => (
+      {paintingsList.map((painting: PaintingData) => (
         <CardPreview paintingDetails={painting} key={painting.id} />
       ))}
     </Masonry>
