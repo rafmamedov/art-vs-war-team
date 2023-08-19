@@ -7,6 +7,9 @@ import { Add } from "@/app/icons/icon-add";
 import { UploadedPaintingData } from "@/types/Painting";
 import { uploadAdditionalImages } from "@/utils/profile";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { AdditionalImageData } from "@/types/Profile";
+import { saveAdditionalPhotos } from "@/utils/api";
+import createHeaders from "@/utils/getAccessToken";
 
 type Props = {
   uploaded: UploadedPaintingData;
@@ -16,17 +19,12 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
   const [imagePreviews, setImagePreviews] = useState<(string | null)[]>([null, null, null]);
   const [images, setImages] = useState<File[]>([]);
 
-  const { user, route } = useAuthenticator((context) => [context.route]);
-  const accessToken = user
-    .getSignInUserSession()
-    ?.getAccessToken()
-    .getJwtToken();
+  console.log(images);
 
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
+  const { user } = useAuthenticator((context) => [context.user]);
 
   const {
+    id,
     image,
     title,
     price,
@@ -38,7 +36,6 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
     mediums,
     supports,
     subjects,
-    prettyId,
     collection,
     description,
     yearOfCreation,
@@ -65,11 +62,40 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
   
   const resetFileInputs = () => {
     setImagePreviews([null, null, null]);
+  };
+
+  const handleSaveImages = async (
+    images: File[],
+    paintingId: number,
+    headers: { Authorization?: string },
+  ) => {
+    const uploaded = await uploadAdditionalImages(headers, paintingId, images);
+
+    const imagesToSave: AdditionalImageData = {};
+
+    uploaded?.forEach((image, index) => {
+      switch (index) {
+        case 0:
+          imagesToSave.image1 = image;
+
+        case 1:
+          imagesToSave.image2 = image;
+
+        case 2:
+          imagesToSave.image3 = image;
+
+        default: return;
+      }
+    });
+
+    await saveAdditionalPhotos(imagesToSave, headers, paintingId)
   }
 
-  const onSubmit = () => {
-    uploadAdditionalImages(headers, prettyId, images);
-  }
+  const onSubmit = async () => {
+    const headers = createHeaders(user);
+
+    await handleSaveImages(images, id, headers);
+  };
 
   return (
     <section className={style.additionalInfo}>
@@ -81,9 +107,9 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
         <div className={`${style.page} ${style.current}`}>Additional information</div>
       </div>
 
-      {/* <h2 className={style.title}>
+      <h2 className={style.title}>
         {title}
-      </h2> */}
+      </h2>
 
       <p className={style.links}>
         To sell your paintings you need to create a
@@ -91,7 +117,7 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
         <span className={style.link}> address data.</span>
       </p>
 
-      {/* <div className={style.painting}>
+      <div className={style.painting}>
         <div className={style.imageContainer}>
           <Image
             src={image.imageUrl}
@@ -157,16 +183,16 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
             <div className={style.value}>{`$ ${price}`}</div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className={style.deviderWrapper}>
         <div className={style.devider}/>
       </div>
 
-      {/* <div className={style.aboutContainer}>
+      <div className={style.aboutContainer}>
         <div className={style.aboutTitle}>About</div>
         <div className={style.aboutDescription}>{description}</div>
-      </div> */}
+      </div>
 
       <div className={style.deviderWrapper}>
         <div className={style.devider}/>
@@ -205,14 +231,11 @@ const AdditionalInfo: FC<Props> = ({ uploaded }) => {
       </div>
 
       <div className={style.buttons}>
-        <button className={style.submit}>
+        <button className={style.submit} onClick={onSubmit}>
           Submit
         </button>
 
-        <button
-          className={style.cancel}
-          onClick={resetFileInputs}
-        >
+        <button className={style.cancel} onClick={resetFileInputs}>
             Cancel
         </button>
       </div>

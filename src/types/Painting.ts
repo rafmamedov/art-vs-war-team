@@ -43,6 +43,13 @@ export interface PaintingData extends PaintingBaseUpload {
 
 export interface PaintingForm extends PaintingBaseUpload {
   image: FileList;
+  weight: number;
+  styleIds: number[];
+  mediumIds: number[];
+  supportIds: number[];
+  subjectIds: number[];
+  description: string;
+  yearOfCreation: number;
 };
 
 export interface PaintingDataToSave extends PaintingBaseUpload {

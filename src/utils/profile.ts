@@ -114,11 +114,11 @@ export const uploadImageToServer = async (
 };
 
 export const uploadAdditionalImages = async (
-  headers: HeadersInit,
-  paintingId: string,
+  headers: { Authorization?: string },
+  paintingId: number,
   images: File[],
 ) => {
-  if (!upload_preset) return;
+  if (!upload_preset || !cloudinaryApiKey || !cloudName) return;
 
   const folder = await createFolder(headers, paintingId);
 
@@ -127,44 +127,45 @@ export const uploadAdditionalImages = async (
     folder,
   };
 
-  const { signature, timestamp } = await getSignature(requestParams, headers);
-
-  if (!upload_preset || !cloudinaryApiKey || !cloudName) return;
-
   const formData = new FormData();
+  const upladedData: ImageData[] = [];
 
-  images.forEach((file) => {
-    formData.append('file', file);
-    formData.append("folder", folder);
-    formData.append("signature", signature);
-    formData.append("timestamp", timestamp);
-    formData.append("upload_preset", upload_preset);
-    formData.append("api_key", cloudinaryApiKey);
-  });
+  images.forEach( async (file) => {
+    if (file) {
+      const { signature, timestamp } = await getSignature(requestParams, headers);
 
-  try {
-    const {
-      public_id,
-      version,
-      signature,
-      width,
-      height,
-    } = await uploadImage(formData, cloudName);
+      formData.append('file', file);
+      formData.append("folder", folder);
+      formData.append("signature", signature);
+      formData.append("timestamp", timestamp);
+      formData.append("upload_preset", upload_preset);
+      formData.append("api_key", cloudinaryApiKey);
 
-    const imageData: ImageData = {
-      version,
-      signature,
-      publicId: public_id,
-      moderationStatus: 'APPROVED',
-      width,
-      height,
-    };
+      try {
+        const {
+          public_id,
+          version,
+          signature,
+          width,
+          height,
+        } = await uploadImage(formData, cloudName);
+    
+        const imageData: ImageData = {
+          version,
+          signature,
+          publicId: public_id,
+          moderationStatus: 'APPROVED',
+          width,
+          height,
+        };
 
-    console.log('imageData', imageData);
+        upladedData.push(imageData);
+      } catch (error) {
+        console.error('Error uploading images to Cloudinary:', error);
+        return [];
+      }
+    }
+  })
 
-    return imageData;
-  } catch (error) {
-    console.error('Error uploading images to Cloudinary:', error);
-    return [];
-  }
+  return upladedData;
 }

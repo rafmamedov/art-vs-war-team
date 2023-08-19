@@ -1,23 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
-
-import style from "./page.module.scss";
+import {
+  Authenticator,
+  Button,
+  Heading,
+  Text,
+  View,
+  useAuthenticator,
+  useTheme,
+} from "@aws-amplify/ui-react";
+import { useEffect, useState } from "react";
 
 import { Artist } from "@/types/Artist";
 import { ArtistTabOptions } from "@/types/ArtistTabOptions";
-import EditProfile from "../components/editProfile/editProfile";
+import { useAppDispatch } from "@/types/ReduxHooks";
+import { getAllPaintingsByArtist, getProfile } from "@/utils/api";
 import ArtistInfo from "../artists/[slug]/artistInfo/artistInfo";
 import ArtistTabs from "../artists/[slug]/artistTabs/artistTabs";
-import { getAllPaintingsByArtist, getProfile } from "@/utils/api";
+import EditProfile from "../components/editProfile/editProfile";
 import Loading from "../loading";
-import { useAppDispatch } from "@/types/ReduxHooks";
 import {
   resetArtistGalleryPageCount,
   setArtistId,
   setArtistPaintings,
 } from "../redux/slices/artistPaintingsSlice";
+
+import { authenticatorStylesComponents } from "./aws-authenticator-styles/aws-authenticator-styles";
+import style from "./page.module.scss";
 
 const Profile = () => {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
@@ -65,7 +74,10 @@ const Profile = () => {
       {isFetching ? (
         <Loading />
       ) : (
-        <Authenticator className={style.auth}>
+        <Authenticator
+          className={style.auth}
+          components={authenticatorStylesComponents}
+        >
           {author ? (
             <>
               <ArtistInfo isProfile artistInfo={author} signOut={signOut} />

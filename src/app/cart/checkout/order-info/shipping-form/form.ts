@@ -20,13 +20,13 @@ export const validation = yup.object({
   firstName: yup
     .string()
     .required("This field is required!")
-    .matches(/^[A-Za-z]+$/i, "The first name should contain only Latin letters")
+    .matches(/^[A-Za-z-]+$/i, "The first name should contain only Latin letters")
     .max(30, "Max 30 characters")
     .min(2, "Min 2 characters"),
   lastName: yup
     .string()
     .required("This field is required!")
-    .matches(/^[A-Za-z]+$/i, "The last name should contain only Latin letters")
+    .matches(/^[A-Za-z-]+$/i, "The last name should contain only Latin letters")
     .max(30, "Max 30 characters")
     .min(2, "Min 2 characters"),
   country: yup

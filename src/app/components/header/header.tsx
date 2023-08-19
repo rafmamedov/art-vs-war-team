@@ -121,9 +121,11 @@ const Header = () => {
           <Link href={`/cart`}>
             <div className={style.cart} onClick={handleCloseMobileMenu}>
               <Cart />
+
               {paintings.length > 0 && (
                 <div className={style.cart__circle}>{paintings.length}</div>
               )}
+              <div className={style.cart__background} />
             </div>
           </Link>
           <div className={style.price}>

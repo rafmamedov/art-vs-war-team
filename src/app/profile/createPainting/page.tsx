@@ -15,15 +15,15 @@ const EditProfilePage = () => {
 
 return (
   <Authenticator className={style.auth}>
-    <AdditionalInfo />
-    {/* {(isNextStepVisible && uploaded)
+    {/* <AdditionalInfo /> */}
+    {(isNextStepVisible && uploaded)
       ? <AdditionalInfo uploaded={uploaded} />
       : (
         <CreatePainting
           setNextStep={setIsNextStepVisible} 
           setUploaded={setUploaded}
         />
-    )} */}
+    )}
   </Authenticator>
   );
 };

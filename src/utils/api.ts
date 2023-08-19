@@ -2,7 +2,7 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 
 import { PaintingData } from "@/types/Painting";
-import { RequestParams, UserData, UserDataToSave } from "@/types/Profile";
+import { AdditionalImageData, RequestParams, UserData, UserDataToSave } from "@/types/Profile";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -202,7 +202,7 @@ export async function getSignature(
 
 export async function createFolder (
   headers: HeadersInit,
-  paintingId: string,
+  paintingId: number,
 ) {
   const response = await fetch(BASE_URL + `additionalPaintingImage/folder/${paintingId}`, {
     method: "GET",
@@ -216,9 +216,9 @@ export async function createFolder (
     throw new Error("Failed to fetch data");
   }
 
-  const data = await response.json();
+  const { folder } = await response.json();
 
-  return data;
+  return folder;
 }
 
 export async function uploadImage(formData: FormData, cloudName: string) {
@@ -228,7 +228,19 @@ export async function uploadImage(formData: FormData, cloudName: string) {
     { headers: { "Content-Type": "multipart/form-data" } }
   );
 
-  console.log(data);
+  return data;
+}
+
+export async function saveAdditionalPhotos(
+  images: AdditionalImageData,
+  headers: { Authorization?: string },
+  paintingId: number,
+) {
+  const { data } = await axios.post(
+    BASE_URL + `additionalPaintingImage/${paintingId}`,
+    images,
+    { headers },
+  );
 
   return data;
 }

@@ -37,6 +37,12 @@ export interface ImageData {
   height?: number;
 }
 
+export interface AdditionalImageData {
+  image1?: ImageData;
+  image2?: ImageData;
+  image3?: ImageData;
+}
+
 export interface RequestParams {
   upload_preset: string;
   folder: string;
