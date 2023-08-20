@@ -1,25 +1,15 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-artvswarteam-dev-125718-authRole",
-      "UnauthRoleArn": "arn:aws:iam::902614570104:role/amplify-artvswarteam-dev-125718-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::902614570104:role/amplify-artvswarteam-dev-125718-authRole",
+      "AuthRoleName": "amplify-amplify4df053caaba94-staging-111346-authRole",
+      "UnauthRoleArn": "arn:aws:iam::902614570104:role/amplify-amplify4df053caaba94-staging-111346-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::902614570104:role/amplify-amplify4df053caaba94-staging-111346-authRole",
       "Region": "eu-west-3",
-      "DeploymentBucketName": "amplify-artvswarteam-dev-125718-deployment",
-      "UnauthRoleName": "amplify-artvswarteam-dev-125718-unauthRole",
-      "StackName": "amplify-artvswarteam-dev-125718",
-      "StackId": "arn:aws:cloudformation:eu-west-3:902614570104:stack/amplify-artvswarteam-dev-125718/f3fda540-3f3f-11ee-81e1-065cadd8f024",
-      "AmplifyAppId": "d3dl78xhh7gbje"
-    },
-    "categories": {
-      "auth": {
-        "artvswarteam": {
-          "userPoolId": "eu-west-3_YVtTMfIf9",
-          "userPoolName": "artvswar-userpool",
-          "webClientId": "47pn7cv0415t605kff2lilahj",
-          "nativeClientId": "47pn7cv0415t605kff2lilahj"
-        }
-      }
+      "DeploymentBucketName": "amplify-amplify4df053caaba94-staging-111346-deployment",
+      "UnauthRoleName": "amplify-amplify4df053caaba94-staging-111346-unauthRole",
+      "StackName": "amplify-amplify4df053caaba94-staging-111346",
+      "StackId": "arn:aws:cloudformation:eu-west-3:902614570104:stack/amplify-amplify4df053caaba94-staging-111346/a1f34ab0-3f4a-11ee-8c2d-0ab3ba5cd42c",
+      "AmplifyAppId": "d3gjofzkh416ri"
     }
   }
 }
