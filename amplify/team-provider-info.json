@@ -10,6 +10,16 @@
       "StackName": "amplify-amplify4df053caaba94-staging-111346",
       "StackId": "arn:aws:cloudformation:eu-west-3:902614570104:stack/amplify-amplify4df053caaba94-staging-111346/a1f34ab0-3f4a-11ee-8c2d-0ab3ba5cd42c",
       "AmplifyAppId": "d3gjofzkh416ri"
+    },
+    "categories": {
+      "auth": {
+        "artvswarteam": {
+          "nativeClientId": "47pn7cv0415t605kff2lilahj",
+          "userPoolId": "eu-west-3_YVtTMfIf9",
+          "userPoolName": "artvswar-userpool",
+          "webClientId": "47pn7cv0415t605kff2lilahj"
+        }
+      }
     }
   }
 }
