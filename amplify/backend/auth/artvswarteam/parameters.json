@@ -26,5 +26,8 @@
   ],
   "mfaTypes": [
     "TOTP"
-  ]
+  ],
+  "userPoolId": "eu-west-3_YVtTMfIf9",
+  "webClientId": "47pn7cv0415t605kff2lilahj",
+  "nativeClientId": "47pn7cv0415t605kff2lilahj"
 }
