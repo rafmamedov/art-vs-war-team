@@ -1,6 +1,6 @@
 {
   "authSelections": "userPoolOnly",
-  "resourceName": "art-vs-war-team",
+  "resourceName": "artvswarteam",
   "serviceType": "imported",
   "region": "eu-west-3",
   "usernameAttributes": [

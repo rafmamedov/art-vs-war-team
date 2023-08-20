@@ -13,7 +13,7 @@
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "art-vs-war-team"
+          "resourceName": "artvswarteam"
         }
       ]
     },
@@ -21,7 +21,7 @@
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "art-vs-war-team"
+          "resourceName": "artvswarteam"
         }
       ]
     },
@@ -29,7 +29,7 @@
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "art-vs-war-team"
+          "resourceName": "artvswarteam"
         }
       ]
     },
@@ -37,7 +37,7 @@
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "art-vs-war-team"
+          "resourceName": "artvswarteam"
         }
       ]
     }
